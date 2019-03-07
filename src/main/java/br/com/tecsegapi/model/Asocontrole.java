@@ -39,6 +39,8 @@ public class Asocontrole implements Serializable {
     @Column(name = "datavencimento")
     @Temporal(TemporalType.DATE)
     private Date datavencimento;
+    @Column(name = "finalizado")
+    private boolean finalizado;
     @Lob
     @Column(name = "observaao")
     private String observaao;
@@ -49,7 +51,7 @@ public class Asocontrole implements Serializable {
     private Asotipo asotipo;
     @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
-    private Usuario usuarioo;
+    private Usuario usuario;
     @JoinColumn(name = "funcionario_idfuncionario", referencedColumnName = "idfuncionario")
     @ManyToOne(optional = false)
     private Funcionario funcionario;
@@ -111,11 +113,11 @@ public class Asocontrole implements Serializable {
     }
 
     public Usuario getUsuarioo() {
-        return usuarioo;
+        return usuario;
     }
 
-    public void setUsuarioo(Usuario usuarioo) {
-        this.usuarioo = usuarioo;
+    public void setUsuarioo(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Funcionario getFuncionario() {

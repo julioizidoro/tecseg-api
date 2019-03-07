@@ -43,8 +43,50 @@ public class FuncionarioController {
 	}
 	
 	@GetMapping("id/{id}")
-	public ResponseEntity<Optional<Funcionario>> cnsultar(@PathVariable("id") int id) {
+	public ResponseEntity<Optional<Funcionario>> consultar(@PathVariable("id") int id) {
 		Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
+		if (funcionario==null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(funcionario);
+	}
+	
+	@GetMapping("funcao/{idfuncao}/{nome}")
+	@Cacheable("consultaFuncionarioFuncao")
+	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncionarioFuncao(@PathVariable("idfuncao") int idfuncao, @PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
+		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioFuncao(idfuncao, nome);
+		if (funcionario==null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(funcionario);
+	}
+	
+	@GetMapping("loja/{idloja}/{nome}")
+	@Cacheable("consultaFuncionarioLoja")
+	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncinarioLoja(@PathVariable("idloja") int idloja, @PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
+		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioLoja(idloja, nome);
+		if (funcionario==null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(funcionario);
+	}
+	
+	@GetMapping("{idloja}/{idfuncao}/{nome}")
+	@Cacheable("consultaFuncionarioFuncaoLoja")
+	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncionarioLoja(
+			@PathVariable("idloja") int idloja, 
+			@PathVariable("idfuncao") int idfuncao, 
+			@PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
+		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioFuncaoLoja(idloja, idfuncao, nome);
 		if (funcionario==null) {
 			return ResponseEntity.notFound().build();
 		}

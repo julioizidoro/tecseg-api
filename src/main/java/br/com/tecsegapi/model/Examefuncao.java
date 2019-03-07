@@ -31,11 +31,21 @@ public class Examefuncao implements Serializable {
     @Column(name = "idexamefuncao")
     private Integer idexamefuncao;
     @Basic(optional = false)
-    @Column(name = "exametipo_idexametipo")
-    private int exametipo;
+    @Column(name = "asotipo_idasotipo")
+    private Asotipo asoTipo;
     @JoinColumn(name = "funcao_idfuncao", referencedColumnName = "idfuncao")
     @ManyToOne(optional = false)
     private Funcao funcao;
+    
+    public Asotipo getAsoTipo() {
+		return asoTipo;
+	}
+
+	public void setAsoTipo(Asotipo asoTipo) {
+		this.asoTipo = asoTipo;
+	}
+
+	
    
 
     public Examefuncao() {
@@ -55,13 +65,7 @@ public class Examefuncao implements Serializable {
         this.idexamefuncao = idexamefuncao;
     }
 
-    public int getExametipo() {
-        return exametipo;
-    }
-
-    public void setExametipo(int exametipo) {
-        this.exametipo = exametipo;
-    }
+   
 
     public Funcao getFuncao() {
         return funcao;
