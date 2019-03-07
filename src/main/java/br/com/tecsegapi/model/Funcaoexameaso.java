@@ -21,43 +21,43 @@ import javax.persistence.Table;
  * @author Wolverine
  */
 @Entity
-@Table(name = "exame")
-public class Exame implements Serializable {
+@Table(name = "funcaoexameaso")
+public class Funcaoexameaso implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idexame")
-    private Integer idexame;
-    @JoinColumn(name = "asocontrole_idasocontrole", referencedColumnName = "idasocontrole")
+    @Column(name = "idfuncaoexameaso")
+    private Integer idfuncaoexameaso;
+    @JoinColumn(name = "asotipo_idasotipo", referencedColumnName = "idasotipo")
     @ManyToOne(optional = false)
-    private Asocontrole asocontroleIdasocontrole;
+    private Asotipo asotipo;
     @JoinColumn(name = "examefuncao_idexamefuncao", referencedColumnName = "idexamefuncao")
     @ManyToOne(optional = false)
     private Examefuncao examefuncao;
-    
-    public Exame() {
+
+    public Funcaoexameaso() {
     }
 
-    public Exame(Integer idexame) {
-        this.idexame = idexame;
+    public Funcaoexameaso(Integer idfuncaoexameaso) {
+        this.idfuncaoexameaso = idfuncaoexameaso;
     }
 
-    public Integer getIdexame() {
-        return idexame;
+    public Integer getIdfuncaoexameaso() {
+        return idfuncaoexameaso;
     }
 
-    public void setIdexame(Integer idexame) {
-        this.idexame = idexame;
+    public void setIdfuncaoexameaso(Integer idfuncaoexameaso) {
+        this.idfuncaoexameaso = idfuncaoexameaso;
     }
 
-    public Asocontrole getAsocontroleIdasocontrole() {
-        return asocontroleIdasocontrole;
+    public Asotipo getAsotipo() {
+        return asotipo;
     }
 
-    public void setAsocontroleIdasocontrole(Asocontrole asocontroleIdasocontrole) {
-        this.asocontroleIdasocontrole = asocontroleIdasocontrole;
+    public void setAsotipo(Asotipo asotipo) {
+        this.asotipo = asotipo;
     }
 
     public Examefuncao getExamefuncao() {
@@ -68,22 +68,23 @@ public class Exame implements Serializable {
         this.examefuncao = examefuncao;
     }
 
+    
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idexame != null ? idexame.hashCode() : 0);
+        hash += (idfuncaoexameaso != null ? idfuncaoexameaso.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Exame)) {
+        if (!(object instanceof Funcaoexameaso)) {
             return false;
         }
-        Exame other = (Exame) object;
-        if ((this.idexame == null && other.idexame != null) || (this.idexame != null && !this.idexame.equals(other.idexame))) {
+        Funcaoexameaso other = (Funcaoexameaso) object;
+        if ((this.idfuncaoexameaso == null && other.idfuncaoexameaso != null) || (this.idfuncaoexameaso != null && !this.idfuncaoexameaso.equals(other.idfuncaoexameaso))) {
             return false;
         }
         return true;
@@ -91,7 +92,7 @@ public class Exame implements Serializable {
 
     @Override
     public String toString() {
-        return "tecsegcriacao.model.Exame[ idexame=" + idexame + " ]";
+        return "tecsegcriacao.model.Funcaoexameaso[ idfuncaoexameaso=" + idfuncaoexameaso + " ]";
     }
     
 }

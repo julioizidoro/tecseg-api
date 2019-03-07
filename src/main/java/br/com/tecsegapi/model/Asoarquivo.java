@@ -21,69 +21,69 @@ import javax.persistence.Table;
  * @author Wolverine
  */
 @Entity
-@Table(name = "exame")
-public class Exame implements Serializable {
+@Table(name = "asoarquivo")
+public class Asoarquivo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idexame")
-    private Integer idexame;
+    @Column(name = "idasoarquivo")
+    private Integer idasoarquivo;
+    @Column(name = "nome")
+    private String nome;
     @JoinColumn(name = "asocontrole_idasocontrole", referencedColumnName = "idasocontrole")
     @ManyToOne(optional = false)
-    private Asocontrole asocontroleIdasocontrole;
-    @JoinColumn(name = "examefuncao_idexamefuncao", referencedColumnName = "idexamefuncao")
-    @ManyToOne(optional = false)
-    private Examefuncao examefuncao;
-    
-    public Exame() {
+    private Asocontrole asocontrole;
+
+    public Asoarquivo() {
     }
 
-    public Exame(Integer idexame) {
-        this.idexame = idexame;
+    public Asoarquivo(Integer idasoarquivo) {
+        this.idasoarquivo = idasoarquivo;
     }
 
-    public Integer getIdexame() {
-        return idexame;
+    public Integer getIdasoarquivo() {
+        return idasoarquivo;
     }
 
-    public void setIdexame(Integer idexame) {
-        this.idexame = idexame;
+    public void setIdasoarquivo(Integer idasoarquivo) {
+        this.idasoarquivo = idasoarquivo;
     }
 
-    public Asocontrole getAsocontroleIdasocontrole() {
-        return asocontroleIdasocontrole;
+    public String getNome() {
+        return nome;
     }
 
-    public void setAsocontroleIdasocontrole(Asocontrole asocontroleIdasocontrole) {
-        this.asocontroleIdasocontrole = asocontroleIdasocontrole;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Examefuncao getExamefuncao() {
-        return examefuncao;
+    public Asocontrole getAsocontrole() {
+        return asocontrole;
     }
 
-    public void setExamefuncao(Examefuncao examefuncao) {
-        this.examefuncao = examefuncao;
+    public void setAsocontrole(Asocontrole asocontrole) {
+        this.asocontrole = asocontrole;
     }
 
+   
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idexame != null ? idexame.hashCode() : 0);
+        hash += (idasoarquivo != null ? idasoarquivo.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Exame)) {
+        if (!(object instanceof Asoarquivo)) {
             return false;
         }
-        Exame other = (Exame) object;
-        if ((this.idexame == null && other.idexame != null) || (this.idexame != null && !this.idexame.equals(other.idexame))) {
+        Asoarquivo other = (Asoarquivo) object;
+        if ((this.idasoarquivo == null && other.idasoarquivo != null) || (this.idasoarquivo != null && !this.idasoarquivo.equals(other.idasoarquivo))) {
             return false;
         }
         return true;
@@ -91,7 +91,7 @@ public class Exame implements Serializable {
 
     @Override
     public String toString() {
-        return "tecsegcriacao.model.Exame[ idexame=" + idexame + " ]";
+        return "tecsegcriacao.model.Asoarquivo[ idasoarquivo=" + idasoarquivo + " ]";
     }
     
 }

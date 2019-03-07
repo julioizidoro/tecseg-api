@@ -5,10 +5,10 @@
  */
 package br.com.tecsegapi.model;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,26 +18,25 @@ import javax.persistence.Table;
 
 /**
  *
- * @author julioizidoro
+ * @author Wolverine
  */
 @Entity
 @Table(name = "examefuncao")
-public class Examefuncao  {
+public class Examefuncao implements Serializable {
 
-    
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idexamefuncao")
     private Integer idexamefuncao;
-    @Column(name = "periodo")
-    private Integer periodo;
+    @Basic(optional = false)
+    @Column(name = "exametipo_idexametipo")
+    private int exametipo;
     @JoinColumn(name = "funcao_idfuncao", referencedColumnName = "idfuncao")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Funcao funcaoIdfuncao;
-    @JoinColumn(name = "tipocomplementar_idtipocomplementar", referencedColumnName = "idtipocomplementar")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Tipocomplementar tipocomplementarIdtipocomplementar;
+    @ManyToOne(optional = false)
+    private Funcao funcao;
+   
 
     public Examefuncao() {
     }
@@ -45,6 +44,8 @@ public class Examefuncao  {
     public Examefuncao(Integer idexamefuncao) {
         this.idexamefuncao = idexamefuncao;
     }
+
+   
 
     public Integer getIdexamefuncao() {
         return idexamefuncao;
@@ -54,29 +55,23 @@ public class Examefuncao  {
         this.idexamefuncao = idexamefuncao;
     }
 
-    public Integer getPeriodo() {
-        return periodo;
+    public int getExametipo() {
+        return exametipo;
     }
 
-    public void setPeriodo(Integer periodo) {
-        this.periodo = periodo;
+    public void setExametipo(int exametipo) {
+        this.exametipo = exametipo;
     }
 
-    public Funcao getFuncaoIdfuncao() {
-        return funcaoIdfuncao;
+    public Funcao getFuncao() {
+        return funcao;
     }
 
-    public void setFuncaoIdfuncao(Funcao funcaoIdfuncao) {
-        this.funcaoIdfuncao = funcaoIdfuncao;
+    public void setFuncao(Funcao funcao) {
+        this.funcao = funcao;
     }
 
-    public Tipocomplementar getTipocomplementarIdtipocomplementar() {
-        return tipocomplementarIdtipocomplementar;
-    }
-
-    public void setTipocomplementarIdtipocomplementar(Tipocomplementar tipocomplementarIdtipocomplementar) {
-        this.tipocomplementarIdtipocomplementar = tipocomplementarIdtipocomplementar;
-    }
+    
 
     @Override
     public int hashCode() {
@@ -100,7 +95,7 @@ public class Examefuncao  {
 
     @Override
     public String toString() {
-        return "br.com.tecseg.model.Examefuncao[ idexamefuncao=" + idexamefuncao + " ]";
+        return "tecsegcriacao.model.Examefuncao[ idexamefuncao=" + idexamefuncao + " ]";
     }
     
 }

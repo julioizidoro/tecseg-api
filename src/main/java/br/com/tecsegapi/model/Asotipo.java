@@ -5,6 +5,7 @@
  */
 package br.com.tecsegapi.model;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,41 +13,41 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 /**
  *
- * @author julioizidoro
+ * @author Wolverine
  */
 @Entity
-@Table(name = "tipoatestado")
-public class Tipoatestado {
+@Table(name = "asotipo")
 
-    
+public class Asotipo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idtipoatestado")
-    private Integer idtipoatestado;
-    @Size(max = 45)
+    @Column(name = "idasotipo")
+    private Integer idasotipo;
     @Column(name = "nome")
     private String nome;
-   
+    @Column(name = "tipo")
+    private String tipo;
     
 
-    public Tipoatestado() {
+    public Asotipo() {
     }
 
-    public Tipoatestado(Integer idtipoatestado) {
-        this.idtipoatestado = idtipoatestado;
+    public Asotipo(Integer idasotipo) {
+        this.idasotipo = idasotipo;
     }
 
-    public Integer getIdtipoatestado() {
-        return idtipoatestado;
+    public Integer getIdasotipo() {
+        return idasotipo;
     }
 
-    public void setIdtipoatestado(Integer idtipoatestado) {
-        this.idtipoatestado = idtipoatestado;
+    public void setIdasotipo(Integer idasotipo) {
+        this.idasotipo = idasotipo;
     }
 
     public String getNome() {
@@ -57,21 +58,29 @@ public class Tipoatestado {
         this.nome = nome;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idtipoatestado != null ? idtipoatestado.hashCode() : 0);
+        hash += (idasotipo != null ? idasotipo.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tipoatestado)) {
+        if (!(object instanceof Asotipo)) {
             return false;
         }
-        Tipoatestado other = (Tipoatestado) object;
-        if ((this.idtipoatestado == null && other.idtipoatestado != null) || (this.idtipoatestado != null && !this.idtipoatestado.equals(other.idtipoatestado))) {
+        Asotipo other = (Asotipo) object;
+        if ((this.idasotipo == null && other.idasotipo != null) || (this.idasotipo != null && !this.idasotipo.equals(other.idasotipo))) {
             return false;
         }
         return true;
@@ -79,7 +88,7 @@ public class Tipoatestado {
 
     @Override
     public String toString() {
-        return "br.com.tecseg.model.Tipoatestado[ idtipoatestado=" + idtipoatestado + " ]";
+        return "tecsegcriacao.model.Asotipo[ idasotipo=" + idasotipo + " ]";
     }
     
 }

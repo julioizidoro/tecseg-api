@@ -34,6 +34,8 @@ public class Funcao {
     @Size(max = 45)
     @Column(name = "cbo")
     private String cbo;
+    @Column(name = "exame")
+    private boolean exame;
     
 
     public Funcao() {
@@ -67,7 +69,15 @@ public class Funcao {
         this.cbo = cbo;
     }
 
-    @Override
+    public boolean isExame() {
+		return exame;
+	}
+
+	public void setExame(boolean exame) {
+		this.exame = exame;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idfuncao != null ? idfuncao.hashCode() : 0);
