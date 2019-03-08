@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,17 @@ public class AsoTipoController {
 	
 	@Autowired
 	private AsoTipoRepository asoTipoRepository;
+	
+	@GetMapping
+	public ResponseEntity<List<Asotipo>> listar() {
+		Sort sort = new Sort(Sort.Direction.ASC, "Nome");
+		List<Asotipo> asotipo = asoTipoRepository.findAll(sort);
+		if (asotipo==null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		return ResponseEntity.ok(asotipo);
+	}
 	
 	@GetMapping("/{nome}")
 	public ResponseEntity<Optional<List<Asotipo>>> listar(@PathVariable("nome") String nome) {
