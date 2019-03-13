@@ -51,42 +51,66 @@ public class FuncionarioController {
 		return ResponseEntity.ok(funcionario);
 	}
 	
-	@GetMapping("funcao/{idfuncao}/{nome}")
+	@GetMapping("funcao/{idfuncao}/{nome}/{sit}")
 	@Cacheable("consultaFuncionarioFuncao")
-	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncionarioFuncao(@PathVariable("idfuncao") int idfuncao, @PathVariable("nome") String nome) {
+	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncionarioFuncao(@PathVariable("idfuncao") int idfuncao, 
+			@PathVariable("nome") String nome, @PathVariable("sit") String sit1) {
 		if (nome.equalsIgnoreCase("@")) {
 			nome = " ";
 		}
-		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioFuncao(idfuncao, nome);
+		String sit2;
+		if (sit1.equalsIgnoreCase("@")) {
+			sit1 = "Ativo";
+			sit2 = "Afastado";
+		}else {
+			sit2 = sit1;
+		}
+		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioFuncao(idfuncao, nome, sit1, sit2);
 		if (funcionario==null) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(funcionario);
 	}
 	
-	@GetMapping("loja/{idloja}/{nome}")
+	@GetMapping("loja/{idloja}/{nome}/{sit}")
 	@Cacheable("consultaFuncionarioLoja")
-	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncinarioLoja(@PathVariable("idloja") int idloja, @PathVariable("nome") String nome) {
+	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncinarioLoja(@PathVariable("idloja") int idloja, 
+			@PathVariable("nome") String nome, @PathVariable("sit") String sit1) {
 		if (nome.equalsIgnoreCase("@")) {
 			nome = " ";
 		}
-		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioLoja(idloja, nome);
+		String sit2;
+		if (sit1.equalsIgnoreCase("@")) {
+			sit1 = "Ativo";
+			sit2 = "Afastado";
+		}else {
+			sit2 = sit1;
+		}
+		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioLoja(idloja, nome, sit1, sit2);
 		if (funcionario==null) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(funcionario);
 	}
 	
-	@GetMapping("{idloja}/{idfuncao}/{nome}")
+	@GetMapping("{idloja}/{idfuncao}/{nome}/{sit}")
 	@Cacheable("consultaFuncionarioFuncaoLoja")
 	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncionarioLoja(
 			@PathVariable("idloja") int idloja, 
 			@PathVariable("idfuncao") int idfuncao, 
-			@PathVariable("nome") String nome) {
+			@PathVariable("nome") String nome,
+			@PathVariable("sit") String sit1) {
 		if (nome.equalsIgnoreCase("@")) {
 			nome = " ";
 		}
-		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioFuncaoLoja(idloja, idfuncao, nome);
+		String sit2;
+		if (sit1.equalsIgnoreCase("@")) {
+			sit1 = "Ativo";
+			sit2 = "Afastado";
+		}else {
+			sit2 = sit1;
+		}
+		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioFuncaoLoja(idloja, idfuncao, nome, sit1, sit2);
 		if (funcionario==null) {
 			return ResponseEntity.notFound().build();
 		}

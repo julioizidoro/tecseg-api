@@ -7,10 +7,12 @@ package br.com.tecsegapi.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -19,6 +21,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -30,7 +33,7 @@ public class Asocontrole implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idasocontrole")
     private Integer idasocontrole;
     @Column(name = "dataexame")
@@ -42,16 +45,16 @@ public class Asocontrole implements Serializable {
     @Column(name = "finalizado")
     private boolean finalizado;
     @Lob
-    @Column(name = "observaao")
-    private String observaao;
+    @Column(name = "observacao")
+    private String observacao;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "asocontroleIdasocontrole")
     private Exame exame;
     @JoinColumn(name = "asotipo_idasotipo", referencedColumnName = "idasotipo")
     @ManyToOne(optional = false)
     private Asotipo asotipo;
-    @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
-    @ManyToOne(optional = false)
-    private Usuario usuario;
+    @Transient
+    private String situacao;
+    
     @JoinColumn(name = "funcionario_idfuncionario", referencedColumnName = "idfuncionario")
     @ManyToOne(optional = false)
     private Funcionario funcionario;
@@ -88,15 +91,25 @@ public class Asocontrole implements Serializable {
         this.datavencimento = datavencimento;
     }
 
-    public String getObservaao() {
-        return observaao;
-    }
+   
 
-    public void setObservaao(String observaao) {
-        this.observaao = observaao;
-    }
+    public boolean isFinalizado() {
+		return finalizado;
+	}
 
-    public Exame getExame() {
+	public void setFinalizado(boolean finalizado) {
+		this.finalizado = finalizado;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+	public Exame getExame() {
         return exame;
     }
 
@@ -112,14 +125,6 @@ public class Asocontrole implements Serializable {
         this.asotipo = asotipo;
     }
 
-    public Usuario getUsuarioo() {
-        return usuario;
-    }
-
-    public void setUsuarioo(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public Funcionario getFuncionario() {
         return funcionario;
     }
@@ -130,7 +135,17 @@ public class Asocontrole implements Serializable {
 
     
 
-    @Override
+    
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idasocontrole != null ? idasocontrole.hashCode() : 0);
