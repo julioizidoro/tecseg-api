@@ -42,7 +42,7 @@ public class Funcionario  {
     @Temporal(TemporalType.DATE)
     private Date dataadmissao;
     @Column(name = "situacao")
-    private String situacao;
+    private Short situacao;
     @JoinColumn(name = "funcao_idfuncao", referencedColumnName = "idfuncao")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Funcao funcao;
@@ -81,17 +81,15 @@ public class Funcionario  {
         this.dataadmissao = dataadmissao;
     }
 
-    
+    public Short getSituacao() {
+        return situacao;
+    }
 
-    public String getSituacao() {
-		return situacao;
-	}
+    public void setSituacao(Short situacao) {
+        this.situacao = situacao;
+    }
 
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
-
-	public Funcao getFuncao() {
+    public Funcao getFuncao() {
         return funcao;
     }
 
