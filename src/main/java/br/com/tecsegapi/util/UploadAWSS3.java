@@ -31,9 +31,8 @@ public class UploadAWSS3 {
 	private String bucket;
 	private AWSPropertie awsPropertie;
 	
-	public UploadAWSS3(String tipo, String caminho) {
+	public UploadAWSS3(String tipo) {
 		awsPropertie = new AWSPropertie();
-		awsPropertie.carregarInformacoes(caminho);
 		if (tipo.equalsIgnoreCase("local")) {
 				bucket = awsPropertie.getBucketLocal();
 		}

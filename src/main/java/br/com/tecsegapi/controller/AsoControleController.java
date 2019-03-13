@@ -75,8 +75,7 @@ public class AsoControleController {
 	@ResponseStatus(HttpStatus.CREATED)
 	//@CachePut("consultaFuncionario")
 	public void upload(@RequestParam MultipartFile file) {
-		String caminho = ("/resources/aws.properties");
-		UploadAWSS3 s3 = new UploadAWSS3("local", caminho);
+		UploadAWSS3 s3 = new UploadAWSS3("local");
 		s3.uploadFile(file, "tecseg/aso");
 	}
 	
