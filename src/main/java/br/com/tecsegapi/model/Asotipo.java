@@ -33,6 +33,8 @@ public class Asotipo implements Serializable {
     private String nome;
     @Column(name = "tipo")
     private String tipo;
+    @Column(name = "periodicidade")
+    private int periodicidade;
     
 
     public Asotipo() {
@@ -66,7 +68,15 @@ public class Asotipo implements Serializable {
         this.tipo = tipo;
     }
 
-    @Override
+    public int getPeriodicidade() {
+		return periodicidade;
+	}
+
+	public void setPeriodicidade(int periodicidade) {
+		this.periodicidade = periodicidade;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idasotipo != null ? idasotipo.hashCode() : 0);
