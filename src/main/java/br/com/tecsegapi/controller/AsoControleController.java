@@ -51,6 +51,9 @@ public class AsoControleController {
 		Conversor c = new Conversor();
 		Date dataStart = c.ConvercaoStringData(datavencimentostart);
 		Date dataEnd = c.ConvercaoStringData(datavencimentoend);
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findAllDataVencimento(dataStart, dataEnd, nome);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
@@ -65,6 +68,9 @@ public class AsoControleController {
 		Conversor c = new Conversor();
 		Date dataStart = c.ConvercaoStringData(datavencimentostart);
 		Date dataEnd = c.ConvercaoStringData(datavencimentoend);
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findAllDataVencimentoFuncao(dataStart, dataEnd, nome, idfuncao);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
@@ -79,6 +85,9 @@ public class AsoControleController {
 		Conversor c = new Conversor();
 		Date dataStart = c.ConvercaoStringData(datavencimentostart);
 		Date dataEnd = c.ConvercaoStringData(datavencimentoend);
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findAllDataVencimentoLoja(dataStart, dataEnd, nome, idloja);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
@@ -93,6 +102,9 @@ public class AsoControleController {
 		Conversor c = new Conversor();
 		Date dataStart = c.ConvercaoStringData(datavencimentostart);
 		Date dataEnd = c.ConvercaoStringData(datavencimentoend);
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findAllDataVencimentoTipo(dataStart, dataEnd, nome, idasotipo);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
@@ -104,6 +116,9 @@ public class AsoControleController {
 	@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllFuncaoTipo(@PathVariable("idfuncao") int idfuncao, 
 			@PathVariable("idtipo") int idtipo, @PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findAllFuncaoTipo(idfuncao, nome, idtipo);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
@@ -115,6 +130,9 @@ public class AsoControleController {
 	@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllFuncaoLoja(@PathVariable("idfuncao") int idfuncao, 
 			@PathVariable("idtipo") int idtipo, @PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findAllFuncaoTipo(idfuncao, nome, idtipo);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
@@ -126,6 +144,9 @@ public class AsoControleController {
 	@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllLojaTipo(@PathVariable("idloja") int idloja, 
 			@PathVariable("idtipo") int idtipo, @PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findAllLojaTipo(idtipo, nome, idloja);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
@@ -137,6 +158,9 @@ public class AsoControleController {
 	@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllLoja(@PathVariable("idloja") int idloja, 
 			 @PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findAllLoja(idloja, nome);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
@@ -148,6 +172,9 @@ public class AsoControleController {
 	@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllFuncao(@PathVariable("idfuncao") int idfuncao, 
 			@PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findAllFuncao(idfuncao, nome);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
@@ -159,6 +186,9 @@ public class AsoControleController {
 	@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllTipo(@PathVariable("idtipo") int idtipo, 
 			@PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findAllTipo(idtipo, nome);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
@@ -170,6 +200,9 @@ public class AsoControleController {
 	@GetMapping("/nome/{nome}")
 	@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllNome(@PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findAllNome(nome);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
@@ -185,6 +218,9 @@ public class AsoControleController {
 		Conversor c = new Conversor();
 		Date dataStart = c.ConvercaoStringData(datavencimentostart);
 		Date dataEnd = c.ConvercaoStringData(datavencimentoend);
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findAll(dataStart, dataEnd, nome, idloja, idfuncao, idtipo);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
