@@ -26,3 +26,5 @@
 src/main/resources/aws.properties
 src/main/resources/aws.properties
 src/main/java/br/com/tecsegapi/util/teste.java
+src/main/resources/application.properties
+*.properties

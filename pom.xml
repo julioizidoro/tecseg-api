@@ -12,7 +12,7 @@
 	<groupId>br.com.tecseg</groupId>
 	<artifactId>tecseg-api</artifactId>
 	<version>0.0.1</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>tecseg-api</name>
 	<description>Projeto Tecnico Seguraca</description>
 
