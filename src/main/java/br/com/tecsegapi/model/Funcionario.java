@@ -41,6 +41,11 @@ public class Funcionario  {
     @Column(name = "dataadmissao")
     @Temporal(TemporalType.DATE)
     private Date dataadmissao;
+    
+    @Column(name = "dataexame")
+    @Temporal(TemporalType.DATE)
+    private Date dataexame;
+    
     @Column(name = "situacao")
     private String situacao;
     @JoinColumn(name = "funcao_idfuncao", referencedColumnName = "idfuncao")
@@ -107,7 +112,15 @@ public class Funcionario  {
         this.loja = loja;
     }
 
-    @Override
+    public Date getDataexame() {
+		return dataexame;
+	}
+
+	public void setDataexame(Date dataexame) {
+		this.dataexame = dataexame;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idfuncionario != null ? idfuncionario.hashCode() : 0);

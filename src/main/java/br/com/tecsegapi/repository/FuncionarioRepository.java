@@ -13,6 +13,7 @@ import br.com.tecsegapi.model.Funcionario;
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer>{
 	
 	Optional<List<Funcionario>> findByNomeContainingOrderByNome(String Nome);
+	List<Funcionario> findAll();
 	Optional<Funcionario> findById(int Id);
 	
 	@Query("select f from Funcionario f where f.funcao.idfuncao= :idfuncao and f.loja.idloja= :idloja and (f.situacao= :sit1 or f.situacao= :sit2)   and  f.nome like CONCAT('%', :nome, '%') order by f.nome")
