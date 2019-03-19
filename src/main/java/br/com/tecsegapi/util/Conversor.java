@@ -50,22 +50,22 @@ public class Conversor {
 		Date dataHoje = ConvercaoStringData(data);
 		//vencida
 		if (asoControle.getDatavencimento().before(dataHoje)) {
-			return "../../../assets/img/atestadovencido.png";
+			return "../../tecseg/assets/img/atestadovencido.png";
 		}else {
 			//vencer 30 dias
 			Date data30 = SomarDiasData(dataHoje, 30);
 			data30 = ConvercaoStringData(ConvercaoData(data30));
 			if (asoControle.getDatavencimento().before(data30)) {
-				return "../../../assets/img/atestadovencer1.png";
+				return "../../tecseg/assets/img/atestadovencer1.png";
 			}else {
 				Date data45 = SomarDiasData(dataHoje, 45);
 				data45 = ConvercaoStringData(ConvercaoData(data45));
 				if (asoControle.getDatavencimento().before(data45)) {
-					return "../../../assets/img/atestadovencer2.png";
+					return "../../tecseg/assets/img/atestadovencer2.png";
 				}
 			}
 		}
-		return "../../../assets/img/atestadodia.png";
+		return "../../tecseg/assets/img/atestadodia.png";
 	}
 
 }
