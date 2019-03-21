@@ -228,6 +228,15 @@ public class AsoControleController {
 		return ResponseEntity.ok(asoControle);
 	}	
 	
+	@GetMapping("/last/{idfuncionario}")
+	public ResponseEntity<Optional<Asocontrole>> findLast(@PathVariable("idfuncionario") int idfuncionario) {
+		Optional<Asocontrole> asoControle = asoControleRepository.findLast(idfuncionario);
+		if (asoControle==null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(asoControle);
+	}	
+	
 	
 	
 	

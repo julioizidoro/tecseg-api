@@ -69,3 +69,11 @@ public class Conversor {
 	}
 
 }
+
+
+/*
+ * spring.datasource.url=jdbc:mysql://tmmysql.cxjytqucztmb.us-east-1.rds.
+ * amazonaws.com:3306/tecseg?Timezone=true&serverTimezone=UTC
+ * spring.datasource.username=master spring.datasource.password=Travel2018#
+ * spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQLDialect
+ */
