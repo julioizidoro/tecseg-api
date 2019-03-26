@@ -269,6 +269,16 @@ public class AsoControleController {
 		return ResponseEntity.ok(dataVencimento);
 	}
 	
+	@GetMapping("/id/{idfuncionario}")
+	public ResponseEntity<Optional<List<Asocontrole>>>  ListarIdFuncionario(@PathVariable("idfuncionario") int idfuncionario) {
+		Optional<List<Asocontrole>> asoControle = asoControleRepository.findFuncionario(idfuncionario);
+		if (asoControle==null) {
+			return ResponseEntity.notFound().build();
+		}
+		asoControle = gerarSituacao(asoControle);
+		return ResponseEntity.ok(asoControle);
+	}
+	
 	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
 	@CachePut("consultaAsoControle")
