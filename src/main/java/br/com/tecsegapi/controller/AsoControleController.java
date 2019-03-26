@@ -265,7 +265,6 @@ public class AsoControleController {
 			@PathVariable("dias") int dias) {
 		Conversor c = new Conversor();
 		Date dataVencimento = c.ConvercaoStringData(dataExame);
-		dias = dias * 30;
 		dataVencimento = c.SomarDiasData(dataVencimento, dias);
 		return ResponseEntity.ok(dataVencimento);
 	}
@@ -308,7 +307,6 @@ public class AsoControleController {
 				aso.setAsotipo(tipo.get());
 				aso.setDataexame(listaf.get(i).getDataexame());
 				int dias = tipo.get().getPeriodicidade();
-				dias = dias * 30;
 				Date data = c.SomarDiasData(listaf.get(i).getDataexame(), dias);
 				aso.setDatavencimento(data);
 				aso.setFinalizado(false);
