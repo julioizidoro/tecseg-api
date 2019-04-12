@@ -58,6 +58,7 @@ public class AsoControleController {
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}
+		asoControle = gerarSituacao(asoControle);
 		return ResponseEntity.ok(asoControle);
 	}
 	
@@ -75,6 +76,7 @@ public class AsoControleController {
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}
+		asoControle = gerarSituacao(asoControle);
 		return ResponseEntity.ok(asoControle);
 	}
 	
@@ -92,6 +94,7 @@ public class AsoControleController {
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}
+		asoControle = gerarSituacao(asoControle);
 		return ResponseEntity.ok(asoControle);
 	}
 	
@@ -109,6 +112,7 @@ public class AsoControleController {
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}
+		asoControle = gerarSituacao(asoControle);
 		return ResponseEntity.ok(asoControle);
 	}
 	
@@ -123,6 +127,7 @@ public class AsoControleController {
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}
+		asoControle = gerarSituacao(asoControle);
 		return ResponseEntity.ok(asoControle);
 	}
 	
@@ -137,6 +142,7 @@ public class AsoControleController {
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}
+		asoControle = gerarSituacao(asoControle);
 		return ResponseEntity.ok(asoControle);
 	}
 	
@@ -151,6 +157,7 @@ public class AsoControleController {
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}
+		asoControle = gerarSituacao(asoControle);
 		return ResponseEntity.ok(asoControle);
 	}
 	
@@ -165,6 +172,7 @@ public class AsoControleController {
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}
+		asoControle = gerarSituacao(asoControle);
 		return ResponseEntity.ok(asoControle);
 	}
 		
@@ -179,6 +187,7 @@ public class AsoControleController {
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}
+		asoControle = gerarSituacao(asoControle);
 		return ResponseEntity.ok(asoControle);
 	}
 	
@@ -193,6 +202,7 @@ public class AsoControleController {
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}
+		asoControle = gerarSituacao(asoControle);
 		return ResponseEntity.ok(asoControle);
 	}
 	
@@ -207,6 +217,7 @@ public class AsoControleController {
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}
+		asoControle = gerarSituacao(asoControle);
 		return ResponseEntity.ok(asoControle);
 	}
 	
@@ -225,6 +236,7 @@ public class AsoControleController {
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}
+		asoControle = gerarSituacao(asoControle);
 		return ResponseEntity.ok(asoControle);
 	}	
 	
