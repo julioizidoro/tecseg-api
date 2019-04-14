@@ -312,9 +312,11 @@ public class AsoControleController {
 	
 	public  Optional<List<Asocontrole>> gerarSituacao(Optional<List<Asocontrole>> optional) {
 		Conversor c = new Conversor();
+		if (optional.isPresent()) {
 		for (int i=0;i<optional.get().size();i++) {
 			String sit = c.verficarSituacaoAtestado(optional.get().get(i));
 			optional.get().get(i).setSituacao(sit);
+		}
 		}
 		return optional;
 	}
