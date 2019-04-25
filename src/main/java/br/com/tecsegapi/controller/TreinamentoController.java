@@ -50,7 +50,4 @@ public class TreinamentoController {
 		}
 		return ResponseEntity.ok(treinamentos);
 	}
-	
-	
-
 }

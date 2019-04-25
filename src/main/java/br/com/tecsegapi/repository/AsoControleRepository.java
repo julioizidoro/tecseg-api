@@ -17,7 +17,7 @@ public interface AsoControleRepository extends JpaRepository<Asocontrole, Intege
 	
 	Optional<Asocontrole> findById(int Id);
 	
-	@Query("select a from Asocontrole a where a.finalizado=0 and  a.datavencimento<= :data order by a.datavencimento")
+	@Query("select a from Asocontrole a where a.finalizado=0 and  a.datavencimento<= :data and a.funcionario.situacao='Ativo' order by a.datavencimento")
 	Optional<List<Asocontrole>> findAll(
 	@Param("data") Date data);
 	
