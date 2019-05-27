@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -32,9 +32,19 @@ public class FuncionarioController {
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
 	
-	@GetMapping("/{nome}")
-	public ResponseEntity<Optional<List<Funcionario>>> listar(@PathVariable("nome") String nome) {
-		Optional<List<Funcionario>> funcionarios = funcionarioRepository.findByNomeContainingOrderByNome(nome);
+	@GetMapping("/{nome}/{sit}")
+	public ResponseEntity<Optional<List<Funcionario>>> listar(@PathVariable("nome") String nome, @PathVariable("sit") String sit1) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
+		String sit2= sit1;
+		if (sit1.equalsIgnoreCase("@")) {
+			sit1 = "Ativo";
+			sit2 = "Afastado";
+		}else {
+			sit2 = sit1;
+		}
+		Optional<List<Funcionario>> funcionarios = funcionarioRepository.findAllNome(nome, sit1, sit2);
 		if (funcionarios==null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -117,23 +127,17 @@ public class FuncionarioController {
 		return ResponseEntity.ok(funcionario);
 	}
 	
-	
-	@GetMapping
-	@Cacheable("consultaFuncionario")
-	public ResponseEntity<List<Funcionario>> listar() {
-		Sort sort = new Sort(Sort.Direction.ASC, "Nome");
-		List<Funcionario> funcionarios = funcionarioRepository.findAll(sort);
-		if (funcionarios==null) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		return ResponseEntity.ok(funcionarios);
-	}
-	
 	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
 	@CachePut("consultaFuncionario")
 	public Funcionario salvar(@Valid @RequestBody Funcionario funcionario) {
+		return funcionarioRepository.save(funcionario);
+	}
+
+	@PutMapping("/atualizar")
+	@ResponseStatus(HttpStatus.CREATED)
+	@CachePut("consultaFuncionario")
+	public Funcionario atualizar(@Valid @RequestBody Funcionario funcionario) {
 		return funcionarioRepository.save(funcionario);
 	}
 

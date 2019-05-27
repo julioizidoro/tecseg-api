@@ -23,6 +23,7 @@
 /nbdist/
 /.nb-gradle/
 /build/
+bin/src/main/java/br/com/tecsegapi/util/UploadAWSS3.class
 src/main/resources/aws.properties
 src/main/resources/aws.properties
 src/main/java/br/com/tecsegapi/util/teste.java

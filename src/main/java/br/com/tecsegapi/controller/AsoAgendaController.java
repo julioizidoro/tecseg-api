@@ -26,37 +26,86 @@ import br.com.tecsegapi.repository.AsoAgendaRepository;
 @RestController
 @RequestMapping("/asoagenda")
 public class AsoAgendaController {
-	
+
 	@Autowired
 	private AsoAgendaRepository asoAgendaRepository;
-	
+
 	@GetMapping
 	@Cacheable("consultaAsoAgenda")
 	public ResponseEntity<Optional<List<Asoagenda>>> listar() {
 		Optional<List<Asoagenda>> agendas = asoAgendaRepository.findAllAsoAgenda();
-		if (agendas==null) {
+		if (agendas == null) {
 			return ResponseEntity.notFound().build();
 		}
-		
+
 		return ResponseEntity.ok(agendas);
 	}
-	
+
+	// Somente Loja
+	@GetMapping("/loja/{idloja}/{nome}")
+	@Cacheable("consultaAsoAgenda")
+	public ResponseEntity<Optional<List<Asoagenda>>> findAllLoja(@PathVariable("idloja") int idloja,
+			@PathVariable("nome") String nome) {
+		Optional<List<Asoagenda>> agendas = asoAgendaRepository.findAllLoja(idloja, nome);
+		if (agendas == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok(agendas);
+	}
+
+	// Somente Situacao
+	@GetMapping("/situacao/{situacao}/{nome}")
+	@Cacheable("consultaAsoAgenda")
+	public ResponseEntity<Optional<List<Asoagenda>>> findAllSituacao(@PathVariable("situacao") String situacao,
+			@PathVariable("nome") String nome) {
+		Optional<List<Asoagenda>> agendas = asoAgendaRepository.findAllSituacao(situacao, nome);
+		if (agendas == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok(agendas);
+	}
+
+	// Somente Nome
+	@GetMapping("/nome/{nome}")
+	@Cacheable("consultaAsoAgenda")
+	public ResponseEntity<Optional<List<Asoagenda>>> findAllNome(@PathVariable("nome") String nome) {
+		Optional<List<Asoagenda>> agendas = asoAgendaRepository.findAllNome(nome);
+		if (agendas == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok(agendas);
+	}
+
+	// tudo
+	@GetMapping("{idloja}/{nome}/{situacao}")
+	@Cacheable("consultaAsoAgenda")
+	public ResponseEntity<Optional<List<Asoagenda>>> findAll(@PathVariable("idloja") int idloja,
+			@PathVariable("nome") String nome, @PathVariable("situacao") String situacao) {
+		Optional<List<Asoagenda>> agendas = asoAgendaRepository.findAll(idloja, nome, situacao);
+		if (agendas == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok(agendas);
+	}
+
 	@GetMapping("id/{id}")
 	public ResponseEntity<Optional<Asoagenda>> consultar(@PathVariable("id") int id) {
 		Optional<Asoagenda> agenda = asoAgendaRepository.findById(id);
-		if (agenda==null) {
+		if (agenda == null) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(agenda);
 	}
-	
+
 	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
 	@CachePut("consultaAsoAgenda")
 	public Asoagenda salvar(@Valid @RequestBody Asoagenda asoAgenda) {
 		return asoAgendaRepository.save(asoAgenda);
 	}
-	
-	
 
 }

@@ -11,27 +11,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.tecsegapi.model.Funcao;
-import br.com.tecsegapi.repository.FuncaoRepository;
+import br.com.tecsegapi.model.Setor;
+import br.com.tecsegapi.repository.SetorRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/funcao")
-public class FuncaoController {
+@RequestMapping("/setor")
+public class SetorController {
 	
 	@Autowired
-	private FuncaoRepository funcaoRepository;
+	private SetorRepository setorRepository;
 	
 	@GetMapping
-	@Cacheable("consultaFuncao")
-	public ResponseEntity<List<Funcao>> listar() {
+	@Cacheable("consultaSetor")
+	public ResponseEntity<List<Setor>> listar() {
 		Sort sort = new Sort(Sort.Direction.ASC, "Nome");
-		List<Funcao> funcao = funcaoRepository.findAll(sort);
-		if (funcao==null) {
+		List<Setor> setor = setorRepository.findAll(sort);
+		if (setor==null) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		return ResponseEntity.ok(funcao);
+		return ResponseEntity.ok(setor);
 	}
 
 }

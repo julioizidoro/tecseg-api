@@ -30,6 +30,10 @@ public class Loja  {
     @Size(max = 100)
     @Column(name = "nome")
     private String nome;
+    @Column(name = "razaosocial")
+    private String razaosicual;
+    @Column(name = "cnpj")
+    private String cnpj;
     
 
     public Loja() {
@@ -55,7 +59,23 @@ public class Loja  {
         this.nome = nome;
     }
 
-    @Override
+    public String getRazaosicual() {
+		return razaosicual;
+	}
+
+	public void setRazaosicual(String razaosicual) {
+		this.razaosicual = razaosicual;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idloja != null ? idloja.hashCode() : 0);

@@ -32,4 +32,16 @@
 		maxEntriesLocalHeap="200"
 		timeToLiveSeconds="3600">
 	</cache>
+	<cache name="consultaFuncao" 
+		maxEntriesLocalHeap="200"
+		timeToLiveSeconds="3600">
+	</cache>
+	<cache name="consultaSetor" 
+		maxEntriesLocalHeap="200"
+		timeToLiveSeconds="3600">
+	</cache>
+	<cache name="consultaLoja" 
+		maxEntriesLocalHeap="200"
+		timeToLiveSeconds="3600">
+	</cache>
 </ehcache>

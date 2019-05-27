@@ -41,11 +41,10 @@ public class Funcionario  {
     @Column(name = "dataadmissao")
     @Temporal(TemporalType.DATE)
     private Date dataadmissao;
-    
     @Column(name = "dataexame")
     @Temporal(TemporalType.DATE)
     private Date dataexame;
-    
+    @Size(max = 15)
     @Column(name = "situacao")
     private String situacao;
     @JoinColumn(name = "funcao_idfuncao", referencedColumnName = "idfuncao")
@@ -54,6 +53,33 @@ public class Funcionario  {
     @JoinColumn(name = "loja_idloja", referencedColumnName = "idloja")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Loja loja;
+    @Size(max = 14)
+    @Column(name = "cpf")
+    private String cpf;
+    @Size(max = 30)
+    @Column(name = "rg")
+    private String rg;
+    @Size(max = 2)
+    @Column(name = "uf")
+    private String uf;
+    @Column(name = "datanascimento")
+    @Temporal(TemporalType.DATE)
+    private Date datanascimento;
+    @Size(max = 14)
+    @Column(name = "pis")
+    private String pis;
+    @Size(max = 15)
+    @Column(name = "ctps")
+    private String ctps;
+    
+
+	@Size(max = 10)
+    @Column(name = "serie")
+    private String serie;
+    @JoinColumn(name = "setor_idsetor", referencedColumnName = "idsetor")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Setor setor;
+    
     
     public Funcionario() {
     }
@@ -86,7 +112,13 @@ public class Funcionario  {
         this.dataadmissao = dataadmissao;
     }
 
-    
+    public String getPis() {
+		return pis;
+	}
+
+	public void setPis(String pis) {
+		this.pis = pis;
+	}
 
     public String getSituacao() {
 		return situacao;
@@ -118,6 +150,64 @@ public class Funcionario  {
 
 	public void setDataexame(Date dataexame) {
 		this.dataexame = dataexame;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	
+
+	public Date getDatanascimento() {
+		return datanascimento;
+	}
+
+	public void setDatanascimento(Date datanascimento) {
+		this.datanascimento = datanascimento;
+	}
+
+	public String getCtps() {
+		return ctps;
+	}
+
+	public void setCtps(String ctps) {
+		this.ctps = ctps;
+	}
+
+	public String getSerie() {
+		return serie;
+	}
+
+	public void setSerie(String serie) {
+		this.serie = serie;
+	}
+
+	public Setor getSetor() {
+		return setor;
+	}
+
+	public void setSetor(Setor setor) {
+		this.setor = setor;
 	}
 
 	@Override

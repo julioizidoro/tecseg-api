@@ -4,4 +4,32 @@
 		maxEntriesLocalHeap="200"
 		timeToLiveSeconds="3600">
 	</cache>
+	<cache name="consultaFuncionarioFuncao" 
+		maxEntriesLocalHeap="200"
+		timeToLiveSeconds="3600">
+	</cache>
+	<cache name="consultaFuncionarioLoja" 
+		maxEntriesLocalHeap="200"
+		timeToLiveSeconds="3600">
+	</cache>
+	<cache name="consultaFuncionarioFuncaoLoja" 
+		maxEntriesLocalHeap="200"
+		timeToLiveSeconds="3600">
+	</cache>
+	<cache name="consultaAsoControle" 
+		maxEntriesLocalHeap="200"
+		timeToLiveSeconds="3600">
+	</cache>
+	<cache name="consultaTreinamento" 
+		maxEntriesLocalHeap="200"
+		timeToLiveSeconds="3600">
+	</cache>
+	<cache name="consultaClinica" 
+		maxEntriesLocalHeap="200"
+		timeToLiveSeconds="3600">
+	</cache>
+	<cache name="consultaAsoAgenda" 
+		maxEntriesLocalHeap="200"
+		timeToLiveSeconds="3600">
+	</cache>
 </ehcache>

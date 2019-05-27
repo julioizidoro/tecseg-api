@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,6 +35,7 @@ public class LojaController {
 	}
 	
 	@GetMapping
+	@Cacheable("consultaLoja")
 	public ResponseEntity<List<Loja>> listar() {
 		Sort sort = new Sort(Sort.Direction.ASC, "Nome");
 		List<Loja> lojas = lojaRepository.findAll(sort);

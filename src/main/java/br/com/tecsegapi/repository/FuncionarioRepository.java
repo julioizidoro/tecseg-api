@@ -12,10 +12,13 @@ import br.com.tecsegapi.model.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer>{
 	
-	Optional<List<Funcionario>> findByNomeContainingOrderByNome(String Nome);
-	List<Funcionario> findAll();
+	@Query("select f from Funcionario f where (f.situacao= :sit1 or f.situacao= :sit2)   and  f.nome like CONCAT('%', :nome, '%') order by f.nome")
+	Optional<List<Funcionario>> findAllNome(@Param("nome") String nome,
+			@Param("sit1") String sit1, @Param("sit2") String sit2);
+	
 	Optional<Funcionario> findById(int Id);
 	
+	//Pesquiar Função Loja
 	@Query("select f from Funcionario f where f.funcao.idfuncao= :idfuncao and f.loja.idloja= :idloja and (f.situacao= :sit1 or f.situacao= :sit2)   and  f.nome like CONCAT('%', :nome, '%') order by f.nome")
 	Optional<List<Funcionario>> findAllFuncionarioFuncaoLoja( 
 	@Param("idloja") int idloja, 
@@ -33,6 +36,8 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 	@Param("sit1") String sit1,
 	@Param("sit2") String sit2);
 	
+	
+	//Pesquiar Função
 	@Query("select f from Funcionario f where f.funcao.idfuncao= :idfuncao and (f.situacao= :sit1 or f.situacao= :sit2)  and f.nome like CONCAT('%', :nome, '%') order by f.nome")
 	Optional<List<Funcionario>> findAllFuncionarioFuncao(
 	@Param("idfuncao") int idfuncao, 
