@@ -54,6 +54,8 @@ public class Asocontrole implements Serializable {
     private Asotipo asotipo;
     @Transient
     private String situacao;
+    @Column(name = "agendado")
+    private boolean agendado;
     
     @JoinColumn(name = "funcionario_idfuncionario", referencedColumnName = "idfuncionario")
     @ManyToOne(optional = false)
@@ -93,7 +95,15 @@ public class Asocontrole implements Serializable {
 
    
 
-    public boolean isFinalizado() {
+    public boolean isAgendado() {
+		return agendado;
+	}
+
+	public void setAgendado(boolean agendado) {
+		this.agendado = agendado;
+	}
+
+	public boolean isFinalizado() {
 		return finalizado;
 	}
 

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import br.com.tecsegapi.model.Asoagenda;
 import br.com.tecsegapi.model.Asocontrole;
 import br.com.tecsegapi.model.Asotipo;
 import br.com.tecsegapi.model.Funcionario;
@@ -250,7 +252,14 @@ public class AsoControleController {
 	}	
 	
 	
-	
+	@GetMapping("id/{id}")
+	public ResponseEntity<Optional<Asocontrole>> consultar(@PathVariable("id") int id) {
+		Optional<Asocontrole> asoControle = asoControleRepository.findById(id);
+		if (asoControle == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(asoControle);
+	}
 	
 	
 	
@@ -281,7 +290,7 @@ public class AsoControleController {
 		return ResponseEntity.ok(dataVencimento);
 	}
 	
-	@GetMapping("/id/{idfuncionario}")
+	@GetMapping("/funcionario/{idfuncionario}")
 	public ResponseEntity<Optional<List<Asocontrole>>>  ListarIdFuncionario(@PathVariable("idfuncionario") int idfuncionario) {
 		Optional<List<Asocontrole>> asoControle = asoControleRepository.findFuncionario(idfuncionario);
 		if (asoControle==null) {
@@ -295,6 +304,13 @@ public class AsoControleController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@CachePut("consultaAsoControle")
 	public Asocontrole salvar(@Valid @RequestBody Asocontrole asoControle) {
+		return asoControleRepository.save(asoControle);
+	}
+	
+	@PostMapping("/atualizar")
+	@ResponseStatus(HttpStatus.CREATED)
+	@CachePut("consultaAsoControle")
+	public Asocontrole atualizar(@Valid @RequestBody Asocontrole asoControle) {
 		return asoControleRepository.save(asoControle);
 	}
 	

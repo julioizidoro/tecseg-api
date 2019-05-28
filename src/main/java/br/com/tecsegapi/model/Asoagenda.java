@@ -90,6 +90,14 @@ public class Asoagenda {
 	public void setFuncao(Funcao funcao) {
 		this.funcao = funcao;
 	}
+	
+	
+	public Clinica getClinica() {
+		return clinica;
+	}
+	public void setClinica(Clinica clinica) {
+		this.clinica = clinica;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

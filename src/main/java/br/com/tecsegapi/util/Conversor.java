@@ -46,26 +46,29 @@ public class Conversor {
 	
 	public String verficarSituacaoAtestado(Asocontrole asoControle) {
 		String data = ConvercaoData(new Date());
-		
-		Date dataHoje = ConvercaoStringData(data);
-		//vencida
-		if (asoControle.getDatavencimento().before(dataHoje)) {
-			return "../../tecseg/assets/img/atestadovencido.png";
-		}else {
-			//vencer 30 dias
-			Date data30 = SomarDiasData(dataHoje, 30);
-			data30 = ConvercaoStringData(ConvercaoData(data30));
-			if (asoControle.getDatavencimento().before(data30)) {
-				return "../../tecseg/assets/img/atestadovencer1.png";
-			}else {
-				Date data45 = SomarDiasData(dataHoje, 45);
-				data45 = ConvercaoStringData(ConvercaoData(data45));
-				if (asoControle.getDatavencimento().before(data45)) {
-					return "../../tecseg/assets/img/atestadovencer2.png";
+		if (!asoControle.isAgendado()) {
+			Date dataHoje = ConvercaoStringData(data);
+			// vencida
+			if (asoControle.getDatavencimento().before(dataHoje)) {
+				return "../../tecseg/assets/img/atestadovencido.png";
+			} else {
+				// vencer 30 dias
+				Date data30 = SomarDiasData(dataHoje, 30);
+				data30 = ConvercaoStringData(ConvercaoData(data30));
+				if (asoControle.getDatavencimento().before(data30)) {
+					return "../../tecseg/assets/img/atestadovencer1.png";
+				} else {
+					Date data45 = SomarDiasData(dataHoje, 45);
+					data45 = ConvercaoStringData(ConvercaoData(data45));
+					if (asoControle.getDatavencimento().before(data45)) {
+						return "../../tecseg/assets/img/atestadovencer2.png";
+					}
 				}
 			}
+			return "../../tecseg/assets/img/atestadodia.png";
+		} else {
+			return "../../tecseg/assets/img/agendado.png";
 		}
-		return "../../tecseg/assets/img/atestadodia.png";
 	}
 
 }
