@@ -28,7 +28,6 @@ public class Conversor {
     }
 	
 	public Date SomarDiasData(Date data, int dias) {
-        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = new GregorianCalendar();
         c.setTime(data);
         if (dias != 0) {

@@ -9,9 +9,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import br.com.tecsegapi.model.Asocontrole;
+import net.bytebuddy.implementation.Implementation;
 
 
-public interface AsoControleRepository extends JpaRepository<Asocontrole, Integer>{
+public interface AsoControleRepository  extends JpaRepository<Asocontrole, Integer>{
 	
 	
 	

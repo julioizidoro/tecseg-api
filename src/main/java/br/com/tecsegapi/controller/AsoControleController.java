@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.tecsegapi.model.Asoagenda;
 import br.com.tecsegapi.model.Asocontrole;
 import br.com.tecsegapi.model.Asotipo;
 import br.com.tecsegapi.model.Funcionario;
@@ -286,7 +286,7 @@ public class AsoControleController {
 			@PathVariable("dias") int dias) {
 		Conversor c = new Conversor();
 		Date dataVencimento = c.ConvercaoStringData(dataExame);
-		dataVencimento = c.SomarDiasData(dataVencimento, dias);
+		dataVencimento = c.SomarDiasData(dataVencimento, (dias+2));
 		return ResponseEntity.ok(dataVencimento);
 	}
 	
@@ -302,14 +302,14 @@ public class AsoControleController {
 	
 	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
-	@CachePut("consultaAsoControle")
+	@CachePut(value="consultaAsoControle", key="#asoControle.idasocontrole")
 	public Asocontrole salvar(@Valid @RequestBody Asocontrole asoControle) {
 		return asoControleRepository.save(asoControle);
 	}
 	
 	@PostMapping("/atualizar")
 	@ResponseStatus(HttpStatus.CREATED)
-	@CachePut("consultaAsoControle")
+	@CacheEvict(value="consultaAsoControle", key="#asoControle.idasocontrole")
 	public Asocontrole atualizar(@Valid @RequestBody Asocontrole asoControle) {
 		return asoControleRepository.save(asoControle);
 	}
