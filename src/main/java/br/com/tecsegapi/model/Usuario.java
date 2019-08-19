@@ -1,22 +1,34 @@
 package br.com.tecsegapi.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-@Entity
-public class Usuario {
 
+
+@Entity
+public class Usuario implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idusuario")
 	private int idusuario;
 	@NotEmpty
 	@Size(max = 100)
@@ -47,6 +59,9 @@ public class Usuario {
 	private String fonecelular;
 	@Column(name = "situacao")
 	private boolean situacao;
+	@JoinColumn(name = "acesso_idacesso", referencedColumnName = "idacesso")
+	@OneToOne(optional = false, fetch = FetchType.EAGER)
+	private Acesso acesso;
 	
 	public Usuario() {
 		
@@ -122,6 +137,14 @@ public class Usuario {
 
 	public void setSituacao(boolean situacao) {
 		this.situacao = situacao;
+	}
+
+	public Acesso getAcesso() {
+		return acesso;
+	}
+
+	public void setAcesso(Acesso acesso) {
+		this.acesso = acesso;
 	}
 
 	@Override

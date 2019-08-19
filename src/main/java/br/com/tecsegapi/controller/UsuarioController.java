@@ -51,18 +51,18 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Usuario> buscar(@PathVariable Integer id) {
+	public ResponseEntity<Optional<Usuario>> buscar(@PathVariable Integer id) {
 		Optional<Usuario> usuario = usuarioRepository.findById(id);
 		
 		if (usuario==null) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		return ResponseEntity.ok(usuario.get());
+		return ResponseEntity.ok(usuario);
 	}
 	
 	@GetMapping("/{login}/{senha}")
-	public ResponseEntity<Usuario> buscar(@PathVariable("login") String login, @PathVariable("senha") String senha) {
+	public ResponseEntity<Optional<Usuario>> buscar(@PathVariable("login") String login, @PathVariable("senha") String senha) {
 		Criptografia criptografia = new Criptografia();
 		senha = (criptografia.encript(senha));
 		Optional<Usuario> usuario = usuarioRepository.findByLoginAndSenhaAndSituacao(login, senha,true);
@@ -71,7 +71,7 @@ public class UsuarioController {
 			return ResponseEntity.notFound().build();
 		}
 		
-		return ResponseEntity.ok(usuario.get());
+		return ResponseEntity.ok(usuario);
 	}
 	
 	@GetMapping("buscarnome/{nome}")
