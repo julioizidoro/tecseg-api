@@ -13,8 +13,8 @@ import org.springframework.cache.annotation.EnableCaching;
 public class TecsegApiApplication {
 	
 	@PostConstruct
-    void started() {
-      TimeZone.setDefault(TimeZone.getTimeZone("TimeZone"));
+    public void init() {
+		TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
     }
 	
 	public static void main(String[] args) {
