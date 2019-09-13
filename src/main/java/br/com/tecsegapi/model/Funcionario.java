@@ -68,15 +68,14 @@ public class Funcionario  {
     @Size(max = 14)
     @Column(name = "pis")
     private String pis;
-    @Size(max = 15)
+    @Size(max = 40)
     @Column(name = "ctps")
     private String ctps;
-    
-
-	@Size(max = 10)
-    @Column(name = "serie")
-    private String serie;
-    @JoinColumn(name = "setor_idsetor", referencedColumnName = "idsetor")
+    @Column(name = "sexo")
+    private String sexo;
+    @Column(name = "possuiaso")
+    private boolean possuiaso;
+	@JoinColumn(name = "setor_idsetor", referencedColumnName = "idsetor")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Setor setor;
     
@@ -120,7 +119,15 @@ public class Funcionario  {
 		this.pis = pis;
 	}
 
-    public String getSituacao() {
+    public boolean isPossuiaso() {
+		return possuiaso;
+	}
+
+	public void setPossuiaso(boolean possuiaso) {
+		this.possuiaso = possuiaso;
+	}
+
+	public String getSituacao() {
 		return situacao;
 	}
 
@@ -194,12 +201,14 @@ public class Funcionario  {
 		this.ctps = ctps;
 	}
 
-	public String getSerie() {
-		return serie;
+	
+
+	public String getSexo() {
+		return sexo;
 	}
 
-	public void setSerie(String serie) {
-		this.serie = serie;
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 	public Setor getSetor() {

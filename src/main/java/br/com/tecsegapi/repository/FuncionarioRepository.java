@@ -46,5 +46,10 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 	@Param("sit1") String sit1,
 	@Param("sit2") String sit2);
 	
+	@Query("select f from Funcionario f where  f.nome = :nome ")
+	Funcionario getNome(@Param("nome") String nome);
+	
+	
+	
 
 }

@@ -359,5 +359,22 @@ public class AsoControleController {
 	}
 	
 	
+	@GetMapping("/verificarasos")
+	public ResponseEntity<String> verificarAsos() {
+		List<Funcionario> listaf = funcionarioRepository.findAll();
+		for (int i = 0; i < listaf.size(); i++) {
+			if (!listaf.get(i).getSituacao().equalsIgnoreCase("Inativo")) {
+				List<Asocontrole> asoControle = asoControleRepository
+						.findFuncionarioLista(listaf.get(i).getIdfuncionario());
+				if (asoControle != null) {
+					if (asoControle.size() > 0) {
+						listaf.get(i).setPossuiaso(true);
+						funcionarioRepository.save(listaf.get(i));
+					}
+				}
+			}
 
+		}
+		return ResponseEntity.ok("Terminou");
+	}
 }

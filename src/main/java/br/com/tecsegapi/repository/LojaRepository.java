@@ -13,6 +13,8 @@ public interface LojaRepository extends JpaRepository<Loja, Integer>{
 	
 	Optional<List<Loja>> findByNomeContainingOrderByNome(String Nome);
 	
+	Loja findById(int idLoja);
+	
 	
 	
 

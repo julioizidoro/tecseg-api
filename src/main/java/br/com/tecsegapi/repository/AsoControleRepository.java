@@ -131,6 +131,11 @@ public interface AsoControleRepository  extends JpaRepository<Asocontrole, Integ
 		@Query("select a from Asocontrole a where a.funcionario.idfuncionario= :idfuncionario order by a.dataexame")
 		Optional<List<Asocontrole>> findFuncionario(
 		@Param("idfuncionario") int idfuncionario);
+		
+		//Consulta pelo id do funcionario
+				@Query("select a from Asocontrole a where a.funcionario.idfuncionario= :idfuncionario order by a.dataexame")
+				List<Asocontrole> findFuncionarioLista(
+				@Param("idfuncionario") int idfuncionario);
 
 	
 }
