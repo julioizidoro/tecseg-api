@@ -13,7 +13,7 @@ import br.com.tecsegapi.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	
-	Optional<Usuario> findByLoginAndSenhaAndSituacao(String Login, String Senha, boolean Situacao);
+	Usuario findByLoginAndSenhaAndSituacao(String Login, String Senha, Boolean Situacao);
 	Optional<List<Usuario>> findByNomeContainingOrderByNome(String Nome);
 	Optional<List<Usuario>> findBySituacaoOrderByNome(boolean Situacao);
 	
