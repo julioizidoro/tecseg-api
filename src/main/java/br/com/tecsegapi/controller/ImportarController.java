@@ -43,7 +43,6 @@ public class ImportarController {
 	
 	
 	
-	@SuppressWarnings("null")
 	@GetMapping("")
 	public ResponseEntity<String> importar() {
 		List<Planilha> lista = planilhaRepository.findAll();
