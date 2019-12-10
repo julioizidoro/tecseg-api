@@ -25,11 +25,6 @@ public class S3Service {
 	@Value("${bucketpictureuser}")
 	private String bucketpictureuser;
 	
-	@Value("${bucketcontaspagar}")
-	private String bucketcontaspagar;
-	
-	@Value("${bucketcontasreceber}")
-	private String bucketcontasreceber;
 	
 
 	public URI uploadFilePictureUser(MultipartFile multipartFile) {
@@ -59,58 +54,5 @@ public class S3Service {
 		}
 	}
 	
-	public URI uploadFileCP(MultipartFile multipartFile) {
-		try {
-			String fileName = multipartFile.getOriginalFilename();
-			InputStream is = multipartFile.getInputStream();
-			String contentType = multipartFile.getContentType();
-			return uploadFileCP(is, fileName, contentType);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException("Erro IO: " + e.getMessage());
-		}
-
-	}
-
-	public URI uploadFileCP(InputStream is, String fileName, String contentType) {
-		try {
-			ObjectMetadata meta = new ObjectMetadata();
-			meta.setContentType(contentType);
-			LOG.info("Iniciando Upload");
-			s3Client.putObject(bucketcontaspagar, fileName, is, meta);
-			LOG.info("Upload Finalizado");
-			return s3Client.getUrl(bucketcontaspagar, fileName).toURI();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException("Erro converter URI");
-		}
-	}
 	
-	public URI uploadFileCR(MultipartFile multipartFile) {
-		try {
-			String fileName = multipartFile.getOriginalFilename();
-			InputStream is = multipartFile.getInputStream();
-			String contentType = multipartFile.getContentType();
-			return uploadFileCR(is, fileName, contentType);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException("Erro IO: " + e.getMessage());
-		}
-
-	}
-
-	public URI uploadFileCR(InputStream is, String fileName, String contentType) {
-		try {
-			ObjectMetadata meta = new ObjectMetadata();
-			meta.setContentType(contentType);
-			LOG.info("Iniciando Upload");
-			s3Client.putObject(bucketcontasreceber, fileName, is, meta);
-			LOG.info("Upload Finalizado");
-			return s3Client.getUrl(bucketcontasreceber, fileName).toURI();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException("Erro converter URI");
-		}
-	}
-
 }

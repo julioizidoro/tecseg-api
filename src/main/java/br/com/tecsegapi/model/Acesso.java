@@ -23,6 +23,8 @@ public class Acesso implements Serializable{
     @Basic(optional = false)
     @Column(name = "idacesso")
     private Integer idaacesso;
+	@Column(name = "nome")
+    private String nome;
 	@Column(name = "cadastro")
     private Boolean cadastro;
 	@Column(name = "aso")
@@ -49,6 +51,14 @@ public class Acesso implements Serializable{
 
 	public void setIdaacesso(Integer idaacesso) {
 		this.idaacesso = idaacesso;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Boolean getCadastro() {
