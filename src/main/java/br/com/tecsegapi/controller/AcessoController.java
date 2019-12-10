@@ -23,7 +23,7 @@ import br.com.tecsegapi.repository.AcessoRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/acessos")
+@RequestMapping("/acessos")
 public class AcessoController {
 	
 	@Autowired

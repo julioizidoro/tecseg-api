@@ -29,7 +29,7 @@ import br.com.tecsegapi.util.Criptografia;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 	
 	@Autowired

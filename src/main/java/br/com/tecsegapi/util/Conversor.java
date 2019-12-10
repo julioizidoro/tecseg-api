@@ -49,24 +49,24 @@ public class Conversor {
 			Date dataHoje = ConvercaoStringData(data);
 			// vencida
 			if (asoControle.getDatavencimento().before(dataHoje)) {
-				return "../../tecseg/assets/img/atestadovencido.png";
+				return "https://tecseg-img.s3.us-east-2.amazonaws.com/atestadovencido.png";
 			} else {
 				// vencer 30 dias
 				Date data30 = SomarDiasData(dataHoje, 30);
 				data30 = ConvercaoStringData(ConvercaoData(data30));
 				if (asoControle.getDatavencimento().before(data30)) {
-					return "../../tecseg/assets/img/atestadovencer1.png";
+					return "https://tecseg-img.s3.us-east-2.amazonaws.com/atestadovencer1.png";
 				} else {
 					Date data45 = SomarDiasData(dataHoje, 45);
 					data45 = ConvercaoStringData(ConvercaoData(data45));
 					if (asoControle.getDatavencimento().before(data45)) {
-						return "../../tecseg/assets/img/atestadovencer2.png";
+						return "https://tecseg-img.s3.us-east-2.amazonaws.com/atestadovencer2.png";
 					}
 				}
 			}
-			return "../../tecseg/assets/img/atestadodia.png";
+			return "https://tecseg-img.s3.us-east-2.amazonaws.com/atestadodia.png";
 		} else {
-			return "../../tecseg/assets/img/agendado.png";
+			return "https://tecseg-img.s3.us-east-2.amazonaws.com/agendado.png";
 		}
 	}
 
