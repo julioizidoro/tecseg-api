@@ -43,6 +43,13 @@ public class Conversor {
     }
 	
 	
+	public String ConvercaoDataBR(Date data) {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = df.format(data);
+        return dataFormatada;
+    }
+	
+	
 	public String verficarSituacaoAtestado(Asocontrole asoControle) {
 		String data = ConvercaoData(new Date());
 		if (!asoControle.isAgendado()) {

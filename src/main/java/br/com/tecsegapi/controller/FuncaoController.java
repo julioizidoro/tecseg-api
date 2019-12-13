@@ -41,6 +41,30 @@ public class FuncaoController {
 		return ResponseEntity.ok(funcao);
 	}
 	
+	
+	@GetMapping("/nome/{nome")
+	public ResponseEntity<List<Funcao>> getNome() {
+		Sort sort = new Sort(Sort.Direction.ASC, "Nome");
+		List<Funcao> funcao = funcaoRepository.findAll(sort);
+		if (funcao==null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		return ResponseEntity.ok(funcao);
+	}
+	
+	
+	@GetMapping("/cbo/{cbo")
+	public ResponseEntity<List<Funcao>> getCBO() {
+		Sort sort = new Sort(Sort.Direction.ASC, "Nome");
+		List<Funcao> funcao = funcaoRepository.findAll(sort);
+		if (funcao==null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		return ResponseEntity.ok(funcao);
+	}
+	
 	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
 	@CachePut(value="consultaFuncao", key="#funcao.idfuncao")

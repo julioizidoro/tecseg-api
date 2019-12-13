@@ -34,6 +34,8 @@ public class Loja  {
     private String razaosicual;
     @Column(name = "cnpj")
     private String cnpj;
+    @Column(name = "codigosalutar")
+    private int codigosalutar;
     
 
     public Loja() {
@@ -73,6 +75,14 @@ public class Loja  {
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
+	}
+
+	public int getCodigosalutar() {
+		return codigosalutar;
+	}
+
+	public void setCodigosalutar(int codigosalutar) {
+		this.codigosalutar = codigosalutar;
 	}
 
 	@Override

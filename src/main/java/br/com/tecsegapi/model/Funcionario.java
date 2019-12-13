@@ -75,6 +75,8 @@ public class Funcionario  {
     private String sexo;
     @Column(name = "possuiaso")
     private boolean possuiaso;
+    @Column(name = "matricula")
+    private int matricula;
 	@JoinColumn(name = "setor_idsetor", referencedColumnName = "idsetor")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Setor setor;
@@ -217,6 +219,14 @@ public class Funcionario  {
 
 	public void setSetor(Setor setor) {
 		this.setor = setor;
+	}
+
+	public int getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(int matricula) {
+		this.matricula = matricula;
 	}
 
 	@Override

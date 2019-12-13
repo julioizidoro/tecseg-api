@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tecsegapi.model.Funcionario;
 import br.com.tecsegapi.repository.FuncionarioRepository;
+import br.com.tecsegapi.util.GerarExcel;
 
 @CrossOrigin
 @RestController
@@ -148,6 +149,17 @@ public class FuncionarioController {
 	@CachePut("consultaFuncionario")
 	public Funcionario atualizar(@Valid @RequestBody Funcionario funcionario) {
 		return funcionarioRepository.save(funcionario);
+	}
+	
+	@GetMapping("salutar")
+	public ResponseEntity<String> consultar() {
+		Optional<List<Funcionario>> funcionarios = funcionarioRepository.findAllNome("", "Ativo", "Ativo");
+		if (funcionarios==null) {
+			return ResponseEntity.notFound().build();
+		}
+		GerarExcel gerar = new GerarExcel();
+		gerar.excelSalutar(funcionarios.get());
+		return ResponseEntity.ok("Gerado");
 	}
 
 }
