@@ -71,10 +71,10 @@ public class Funcionario  {
     @Size(max = 40)
     @Column(name = "ctps")
     private String ctps;
+    @Column(name = "serie")
+    private String serie;
     @Column(name = "sexo")
     private String sexo;
-    @Column(name = "possuiaso")
-    private boolean possuiaso;
     @Column(name = "matricula")
     private int matricula;
 	@JoinColumn(name = "setor_idsetor", referencedColumnName = "idsetor")
@@ -121,13 +121,6 @@ public class Funcionario  {
 		this.pis = pis;
 	}
 
-    public boolean isPossuiaso() {
-		return possuiaso;
-	}
-
-	public void setPossuiaso(boolean possuiaso) {
-		this.possuiaso = possuiaso;
-	}
 
 	public String getSituacao() {
 		return situacao;
@@ -227,6 +220,14 @@ public class Funcionario  {
 
 	public void setMatricula(int matricula) {
 		this.matricula = matricula;
+	}
+
+	public String getSerie() {
+		return serie;
+	}
+
+	public void setSerie(String serie) {
+		this.serie = serie;
 	}
 
 	@Override

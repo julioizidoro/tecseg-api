@@ -153,13 +153,35 @@ public class FuncionarioController {
 	
 	@GetMapping("salutar")
 	public ResponseEntity<String> consultar() {
-		Optional<List<Funcionario>> funcionarios = funcionarioRepository.findAllNome("", "Ativo", "Ativo");
+		Optional<List<Funcionario>> funcionarios = funcionarioRepository.findAllNome("", "Ativo", "Afastado");
 		if (funcionarios==null) {
 			return ResponseEntity.notFound().build();
 		}
 		GerarExcel gerar = new GerarExcel();
 		gerar.excelSalutar(funcionarios.get());
 		return ResponseEntity.ok("Gerado");
+	}
+	
+	public void ctps() {
+		List<Funcionario> lista = funcionarioRepository.findAll();
+		for (int i=0;i<lista.size();i++) {
+			Funcionario f = lista.get(i);
+			String dados="";
+			if ((f.getSerie()==null) && (f.getCtps()!=null)) {
+			for (int n=0;n<f.getCtps().length()-1;n++) {
+				if (f.getCtps().charAt(n)!= '/') {
+					dados = dados + f.getCtps().charAt(n); 
+				}else {
+					f.setSerie(f.getCtps().substring(n+1, f.getCtps().length()));
+					f.setCtps(dados);
+					funcionarioRepository.save(f);
+					System.out.println(dados);
+				}
+			}
+			}
+			 
+			
+		}
 	}
 
 }

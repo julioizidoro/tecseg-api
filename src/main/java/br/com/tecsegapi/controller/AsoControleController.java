@@ -359,7 +359,7 @@ public class AsoControleController {
 	}
 	
 	
-	@GetMapping("/verificarasos")
+	/*@GetMapping("/verificarasos")
 	public ResponseEntity<String> verificarAsos() {
 		List<Funcionario> listaf = funcionarioRepository.findAll();
 		for (int i = 0; i < listaf.size(); i++) {
@@ -376,5 +376,5 @@ public class AsoControleController {
 
 		}
 		return ResponseEntity.ok("Terminou");
-	}
+	}*/
 }
