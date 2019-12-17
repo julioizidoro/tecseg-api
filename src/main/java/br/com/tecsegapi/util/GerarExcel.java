@@ -76,12 +76,12 @@ public class GerarExcel {
 					row.createCell(6).setCellValue(c.ConvercaoDataBR(f.getDatanascimento()));
 				} else row.createCell(6).setCellValue("");
 				row.createCell(7).setCellValue(f.getSexo());
-				row.createCell(8).setCellValue(f.getSituacao());
+				row.createCell(8).setCellValue(codgioSituacao(f.getSituacao()));
 				if (f.getDataadmissao()!=null) {
 					row.createCell(9).setCellValue(c.ConvercaoDataBR(f.getDataadmissao()));
 				}else row.createCell(9).setCellValue("");
 				row.createCell(10).setCellValue(f.getPis());
-				row.createCell(11).setCellValue("");
+				row.createCell(11).setCellValue("1");
 				row.createCell(12).setCellValue(f.getRg());
 				row.createCell(13).setCellValue(f.getUf());
 				row.createCell(14).setCellValue(f.getCpf());
@@ -123,6 +123,14 @@ public class GerarExcel {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public String codgioSituacao(String situacao) {
+		if (situacao.equalsIgnoreCase("Inativo")) {
+			return "N";
+		} else if (situacao.equalsIgnoreCase("Afastado")) {
+			return "A";
+		}else return "S";
 	}
 
 }
