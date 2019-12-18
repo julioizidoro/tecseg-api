@@ -13,6 +13,18 @@ import br.com.tecsegapi.model.Funcionario;
 
 public class GerarExcel {
 	
+	private File file;
+	
+	
+	
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
 	public void excelSalutar(List<Funcionario> lista) {
 		
 		HSSFWorkbook workbook = new HSSFWorkbook();
@@ -20,7 +32,8 @@ public class GerarExcel {
 		FileOutputStream fos = null;
 		
 		try {
-			fos = new FileOutputStream(new File("c:\\logs\\Formulario Funcionarios.xls"));
+			file = new File("Formulario Funcionarios.xls");
+			fos = new FileOutputStream(file);
 			int i = 0;
 			HSSFRow row = firstSheet.createRow(i);
 			row.createCell(0).setCellValue("Cod.Unid");
@@ -69,27 +82,26 @@ public class GerarExcel {
 				row.createCell(1).setCellValue(f.getLoja().getNome());
 				row.createCell(2).setCellValue(f.getSetor().getIdsetor());
 				row.createCell(3).setCellValue(f.getSetor().getNome());
-				row.createCell(3).setCellValue(f.getFuncao().getNome());
-				row.createCell(4).setCellValue(f.getIdfuncionario());
-				row.createCell(5).setCellValue(f.getNome());
+				row.createCell(4).setCellValue(f.getFuncao().getNome());
+				row.createCell(5).setCellValue(f.getIdfuncionario());
+				row.createCell(6).setCellValue(f.getNome());
 				if (f.getDatanascimento()!=null) {
-					row.createCell(6).setCellValue(c.ConvercaoDataBR(f.getDatanascimento()));
-				} else row.createCell(6).setCellValue("");
-				row.createCell(7).setCellValue(f.getSexo());
-				row.createCell(8).setCellValue(codgioSituacao(f.getSituacao()));
+					row.createCell(7).setCellValue(c.ConvercaoDataBR(f.getDatanascimento()));
+				} else row.createCell(7).setCellValue("");
+				row.createCell(8).setCellValue(f.getSexo());
+				row.createCell(9).setCellValue(codgioSituacao(f.getSituacao()));
 				if (f.getDataadmissao()!=null) {
-					row.createCell(9).setCellValue(c.ConvercaoDataBR(f.getDataadmissao()));
-				}else row.createCell(9).setCellValue("");
-				row.createCell(10).setCellValue(f.getPis());
-				row.createCell(11).setCellValue("1");
-				row.createCell(12).setCellValue(f.getRg());
-				row.createCell(13).setCellValue(f.getUf());
-				row.createCell(14).setCellValue(f.getCpf());
-				row.createCell(15).setCellValue(f.getCtps());
-				row.createCell(16).setCellValue(f.getFuncao().getCbo());
-				row.createCell(17).setCellValue("");
-				row.createCell(18).setCellValue(f.getSerie());
-				row.createCell(19).setCellValue("");
+					row.createCell(10).setCellValue(c.ConvercaoDataBR(f.getDataadmissao()));
+				}else row.createCell(10).setCellValue("");
+				row.createCell(11).setCellValue(f.getPis());
+				row.createCell(12).setCellValue("1");
+				row.createCell(13).setCellValue(f.getRg());
+				row.createCell(14).setCellValue(f.getUf());
+				row.createCell(15).setCellValue(f.getCpf());
+				row.createCell(16).setCellValue(f.getCtps());
+				row.createCell(17).setCellValue(f.getFuncao().getCbo());
+				row.createCell(18).setCellValue("");
+				row.createCell(19).setCellValue(f.getSerie());
 				row.createCell(20).setCellValue("");
 				row.createCell(21).setCellValue("");
 				row.createCell(22).setCellValue("");
@@ -100,13 +112,14 @@ public class GerarExcel {
 				row.createCell(27).setCellValue("");
 				row.createCell(28).setCellValue("");
 				row.createCell(29).setCellValue("");
-				row.createCell(30).setCellValue(f.getMatricula());
-				row.createCell(31).setCellValue(f.getSexo());
-				row.createCell(32).setCellValue("");
+				row.createCell(30).setCellValue("");
+				row.createCell(31).setCellValue(f.getMatricula());
+				row.createCell(32).setCellValue(f.getSexo());
 				row.createCell(33).setCellValue("");
 				row.createCell(34).setCellValue("");
 				row.createCell(35).setCellValue("");
 				row.createCell(36).setCellValue("");
+				row.createCell(37).setCellValue("");
 			  
 			  i++; }
 			 
