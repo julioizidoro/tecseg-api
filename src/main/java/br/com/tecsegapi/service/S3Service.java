@@ -1,5 +1,7 @@
 package br.com.tecsegapi.service;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -24,6 +26,9 @@ public class S3Service {
 
 	@Value("${bucketpictureuser}")
 	private String bucketpictureuser;
+	@Value("${buckettecsegimg}")
+	private String buckettecsegimg;
+	
 	
 	
 
@@ -48,6 +53,35 @@ public class S3Service {
 			s3Client.putObject(bucketpictureuser, fileName, is, meta);
 			LOG.info("Upload Finalizado");
 			return s3Client.getUrl(bucketpictureuser, fileName).toURI();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("Erro converter URI");
+		}
+	}
+	
+	
+	//Salvar Arquivos Diversos
+	
+	public URI uploadFile(File file) {
+		try {
+			InputStream is = new FileInputStream(file);
+			String contentType = "Content-Type: multipart/form-data; boundary=something";
+			return uploadFile(is, file.getName(), contentType);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("Erro IO: " + e.getMessage());
+		}
+
+	}
+
+	public URI uploadFile(InputStream is, String fileName, String contentType) {
+		try {
+			ObjectMetadata meta = new ObjectMetadata();
+			meta.setContentType(contentType);
+			LOG.info("Iniciando Upload");
+			s3Client.putObject(buckettecsegimg, fileName, is, meta);
+			LOG.info("Upload Finalizado");
+			return s3Client.getUrl(buckettecsegimg, fileName).toURI();
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException("Erro converter URI");

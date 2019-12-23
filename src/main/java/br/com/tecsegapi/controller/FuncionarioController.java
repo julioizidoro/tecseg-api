@@ -1,9 +1,12 @@
 package br.com.tecsegapi.controller;
 
+import java.io.File;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tecsegapi.model.Funcionario;
 import br.com.tecsegapi.repository.FuncionarioRepository;
+import br.com.tecsegapi.service.S3Service;
 import br.com.tecsegapi.util.GerarExcel;
 
 @CrossOrigin
@@ -32,6 +36,8 @@ public class FuncionarioController {
 	
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
+	@Autowired
+	private S3Service s3Service;
 	
 	@GetMapping("/{nome}/{sit}")
 	public ResponseEntity<Optional<List<Funcionario>>> listar(@PathVariable("nome") String nome, @PathVariable("sit") String sit1) {
@@ -152,14 +158,16 @@ public class FuncionarioController {
 	}
 	
 	@GetMapping("salutar")
-	public ResponseEntity<String> consultar() {
-		Optional<List<Funcionario>> funcionarios = funcionarioRepository.findAllNome("", "Ativo", "Afastado");
+	public ResponseEntity<Void> gerarSalutar() {
+		List<Funcionario> funcionarios = funcionarioRepository.findAll();
 		if (funcionarios==null) {
 			return ResponseEntity.notFound().build();
 		}
 		GerarExcel gerar = new GerarExcel();
-		gerar.excelSalutar(funcionarios.get());
-		return ResponseEntity.ok("Gerado");
+		gerar.excelSalutar(funcionarios);
+		File file = gerar.getFile();
+		URI uri = s3Service.uploadFile(file);
+		return ResponseEntity.created(uri).build();
 	}
 	
 	public void ctps() {
