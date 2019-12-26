@@ -1,5 +1,6 @@
 package br.com.tecsegapi.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.tecsegapi.model.Funcionario;
 import br.com.tecsegapi.model.Salutar;
 import br.com.tecsegapi.repository.SalutarRepository;
+import br.com.tecsegapi.util.Conversor;
 
 @CrossOrigin
 @RestController
@@ -41,17 +42,27 @@ public class SalutarController {
 	
 	
 	@GetMapping("listar")
-	public ResponseEntity<List<Salutar>> listar() {
-		List<Salutar> lista = salutarRepository.findAll();
+	public ResponseEntity<Optional<List<Salutar>>> listar() {
+		Conversor c = new Conversor();
+		Date datainicial = c.SomarDiasData(new Date(), -180);
+		Optional<List<Salutar>> lista = salutarRepository.listar(datainicial, new Date());
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping("listar/{idloja}")
-	public ResponseEntity<Optional<List<Salutar>>> listar(@PathVariable("idloja") int idloja) {
-		Optional<List<Salutar>> lista = salutarRepository.findAllLoja(idloja);
+	@GetMapping("listar/{idloja}/{datainicial}/datafinal")
+	public ResponseEntity<Optional<List<Salutar>>> listar(@PathVariable("idloja") int idloja, 
+			@PathVariable("datainicial") Date datainicial, @PathVariable("datafinal") Date datafinal) {
+		if (datainicial==null) {
+			Conversor c = new Conversor();
+			datainicial = c.SomarDiasData(new Date(), -180);
+		}
+		if (datafinal == null) {
+			datafinal = new Date();
+		}
+		Optional<List<Salutar>> lista = salutarRepository.findAllLoja(idloja, datainicial, new Date());
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}
