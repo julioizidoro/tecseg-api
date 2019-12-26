@@ -2,6 +2,7 @@ package br.com.tecsegapi.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -12,9 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+
 
 @Entity
 @Table(name = "salutar")
@@ -38,9 +42,16 @@ public class Salutar implements Serializable{
 	@JoinColumn(name = "usuario_idusario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Usuario usuario;
-	@JoinColumn(name = "funcionario_idfuncionario", referencedColumnName = "idfuncionario")
-    @ManyToOne(optional = false)
-    private Funcionario funcionario;
+	@Column(name = "admitidos")
+    private Integer admitidos;
+	@Column(name = "afastados")
+    private Integer afastados;
+	@Column(name = "demitidos")
+    private Integer demitidos;
+	@Column(name = "total")
+    private Integer total;
+	@OneToMany(mappedBy = "salutar")
+	private List<Salutarfuncionario> salutarFuncionarioList;
 
 	
 	public Salutar() {
@@ -79,12 +90,46 @@ public class Salutar implements Serializable{
 		this.usuario = usuario;
 	}
 
-	public Funcionario getFuncionario() {
-		return funcionario;
+	
+
+	public Integer getAdmitidos() {
+		return admitidos;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public void setAdmitidos(Integer admitidos) {
+		this.admitidos = admitidos;
+	}
+
+	public Integer getAfastados() {
+		return afastados;
+	}
+
+	public void setAfastados(Integer afastados) {
+		this.afastados = afastados;
+	}
+
+	public Integer getDemitidos() {
+		return demitidos;
+	}
+
+	public void setDemitidos(Integer demitidos) {
+		this.demitidos = demitidos;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+
+	public List<Salutarfuncionario> getSalutarFuncionarioList() {
+		return salutarFuncionarioList;
+	}
+
+	public void setSalutarFuncionarioList(List<Salutarfuncionario> salutarFuncionarioList) {
+		this.salutarFuncionarioList = salutarFuncionarioList;
 	}
 
 	@Override

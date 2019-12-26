@@ -12,7 +12,6 @@ import br.com.tecsegapi.model.Salutar;
 public interface SalutarRepository extends JpaRepository<Salutar, Integer>{
 	
 	Optional<Salutar> findById(int id);
-	Optional<List<Salutar>> findByNomeContainingOrderByNome(String Nome);
 	List<Salutar> findAll();
 	
 	@Query("select s from Salutar s where s.loja.idloja= :idloja " 
