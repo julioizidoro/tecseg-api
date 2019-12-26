@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,25 +34,38 @@ public class Salutar implements Serializable{
     @Basic(optional = false)
     @Column(name = "idsalutar")
     private Integer idsalutar;
+	@Column(name = "nome")
+    private String nome;
 	@Column(name = "dataemissao")
     @Temporal(TemporalType.DATE)
     private Date dataemissao;
-	@JoinColumn(name = "loja_idloja", referencedColumnName = "idloja")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Loja loja;
-	@JoinColumn(name = "usuario_idusario", referencedColumnName = "idusuario")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Usuario usuario;
 	@Column(name = "admitidos")
     private Integer admitidos;
 	@Column(name = "afastados")
     private Integer afastados;
 	@Column(name = "demitidos")
     private Integer demitidos;
+	@Column(name = "ativos")
+    private Integer ativos;
 	@Column(name = "total")
     private Integer total;
-	@OneToMany(mappedBy = "salutar")
-	private List<Salutarfuncionario> salutarFuncionarioList;
+	@JoinColumn(name = "loja_idloja", referencedColumnName = "idloja")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Loja loja;
+	@JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Usuario usuario;
+	
+	public Integer getAtivos() {
+		return ativos;
+	}
+
+	public void setAtivos(Integer ativos) {
+		this.ativos = ativos;
+	}
+
+	
+	
 
 	
 	public Salutar() {
@@ -64,6 +78,14 @@ public class Salutar implements Serializable{
 
 	public void setIdsalutar(Integer idsalutar) {
 		this.idsalutar = idsalutar;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Date getDataemissao() {
@@ -124,14 +146,7 @@ public class Salutar implements Serializable{
 		this.total = total;
 	}
 
-	public List<Salutarfuncionario> getSalutarFuncionarioList() {
-		return salutarFuncionarioList;
-	}
-
-	public void setSalutarFuncionarioList(List<Salutarfuncionario> salutarFuncionarioList) {
-		this.salutarFuncionarioList = salutarFuncionarioList;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

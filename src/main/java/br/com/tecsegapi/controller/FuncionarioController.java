@@ -2,6 +2,7 @@ package br.com.tecsegapi.controller;
 
 import java.io.File;
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -168,6 +169,25 @@ public class FuncionarioController {
 		File file = gerar.getFile();
 		URI uri = s3Service.uploadFile(file);
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@GetMapping("lojasalutar/{idloja}")
+	public ResponseEntity<Optional<List<Funcionario>>> consultarLoja(@PathVariable("idloja") int idloja) {
+		Optional<List<Funcionario>> lista = funcionarioRepository.findAllLoja(idloja);
+		if (lista==null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(lista);
+	}
+	
+	@GetMapping("lojasalutar/{idloja}/{datainicial}/{datafinal}")
+	public ResponseEntity<Optional<List<Funcionario>>> consultarLojaData(@PathVariable("idloja") int idloja,
+			@PathVariable("date") Date datainicial, @PathVariable("datafinal") Date datafinal) {
+		Optional<List<Funcionario>> lista = funcionarioRepository.findAllLojaData(idloja, datainicial, datafinal);
+		if (lista==null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(lista);
 	}
 	
 	public void ctps() {

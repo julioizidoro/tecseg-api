@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "salutar")
+@Table(name = "salutarfuncionario")
 public class Salutarfuncionario implements Serializable{
 	
 	/**
@@ -36,10 +36,6 @@ public class Salutarfuncionario implements Serializable{
     private Date datasituacao;
 	@Column(name = "situacao")
     private String situacao;
-	@JoinColumn(name = "salutar_idsalutar", referencedColumnName = "idsalutar")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-	@JsonBackReference
-    private Salutar salutar;
 	@JoinColumn(name = "funcionario_idfuncionario", referencedColumnName = "idfuncionario")
     @ManyToOne(optional = false)
     private Funcionario funcionario;
@@ -49,6 +45,9 @@ public class Salutarfuncionario implements Serializable{
 	@JoinColumn(name = "setor_idsetor", referencedColumnName = "idsetor")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Setor setor;
+	@JoinColumn(name = "salutar_idsalutar", referencedColumnName = "idsalutar")
+    @ManyToOne(optional = false)
+    private Salutar salutar;
 	
 	public Salutarfuncionario() {
 	

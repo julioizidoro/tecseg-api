@@ -1,6 +1,7 @@
 package br.com.tecsegapi.repository;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +50,18 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 	@Query("select f from Funcionario f where  f.nome = :nome ")
 	Funcionario getNome(@Param("nome") String nome);
 	
-	
+	//Pesquiar Loja
+		@Query("select f from Funcionario f where f.loja.idloja= :idloja  order by f.nome")
+		Optional<List<Funcionario>> findAllLoja( 
+		@Param("idloja") int idloja);
+		
+
+		//Pesquiar LojaData
+				@Query("select f from Funcionario f where f.loja.idloja= :idloja and f.datasituacao>= :datainicial and f.datasituacao<= :datafinal  order by f.nome")
+				Optional<List<Funcionario>> findAllLojaData( 
+				@Param("idloja") int idloja, @Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal);
+		
+
 	
 
 }

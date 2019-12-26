@@ -80,6 +80,9 @@ public class Funcionario  {
 	@JoinColumn(name = "setor_idsetor", referencedColumnName = "idsetor")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Setor setor;
+	@Column(name = "datasituacao")
+    @Temporal(TemporalType.DATE)
+    private Date datasituacao;
     
     
     public Funcionario() {
@@ -179,6 +182,14 @@ public class Funcionario  {
 	}
 
 	
+
+	public Date getDatasituacao() {
+		return datasituacao;
+	}
+
+	public void setDatasituacao(Date datasituacao) {
+		this.datasituacao = datasituacao;
+	}
 
 	public Date getDatanascimento() {
 		return datanascimento;
