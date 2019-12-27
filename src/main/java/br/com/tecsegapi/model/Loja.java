@@ -36,6 +36,22 @@ public class Loja  {
     private String cnpj;
     @Column(name = "codigosalutar")
     private int codigosalutar;
+    @Column(name = "endereco")
+    private String endereco;
+    @Column(name = "numero")
+    private String numero;
+    @Column(name = "bairro")
+    private String bairro;
+    @Column(name = "cidade")
+    private String cidade;
+    @Column(name = "estado")
+    private String estado;
+    @Column(name = "cep")
+    private String cep;
+    @Column(name = "telefone")
+    private String telefone;
+    @Column(name = "nomefantasia")
+    private String nomefantasia;
     
 
     public Loja() {
@@ -83,6 +99,70 @@ public class Loja  {
 
 	public void setCodigosalutar(int codigosalutar) {
 		this.codigosalutar = codigosalutar;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getNomefantasia() {
+		return nomefantasia;
+	}
+
+	public void setNomefantasia(String nomefantasia) {
+		this.nomefantasia = nomefantasia;
 	}
 
 	@Override

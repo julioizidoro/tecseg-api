@@ -43,8 +43,8 @@ public class Salutar implements Serializable{
     private Integer admitidos;
 	@Column(name = "afastados")
     private Integer afastados;
-	@Column(name = "demitidos")
-    private Integer demitidos;
+	@Column(name = "inativos")
+    private Integer inativos;
 	@Column(name = "ativos")
     private Integer ativos;
 	@Column(name = "total")
@@ -130,12 +130,14 @@ public class Salutar implements Serializable{
 		this.afastados = afastados;
 	}
 
-	public Integer getDemitidos() {
-		return demitidos;
+	
+
+	public Integer getInativos() {
+		return inativos;
 	}
 
-	public void setDemitidos(Integer demitidos) {
-		this.demitidos = demitidos;
+	public void setInativos(Integer inativos) {
+		this.inativos = inativos;
 	}
 
 	public Integer getTotal() {
