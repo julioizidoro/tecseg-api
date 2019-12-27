@@ -61,6 +61,9 @@ public class Usuario implements Serializable{
 	@JoinColumn(name = "acesso_idacesso", referencedColumnName = "idacesso")
 	@OneToOne(optional = false, fetch = FetchType.EAGER)
 	private Acesso acesso;
+	@Column(name = "urlfoto")
+	private String urlfoto;
+	
 	
 	public Usuario() {
 		
@@ -144,6 +147,14 @@ public class Usuario implements Serializable{
 
 	public void setAcesso(Acesso acesso) {
 		this.acesso = acesso;
+	}
+
+	public String getUrlfoto() {
+		return urlfoto;
+	}
+
+	public void setUrlfoto(String urlfoto) {
+		this.urlfoto = urlfoto;
 	}
 
 	@Override
