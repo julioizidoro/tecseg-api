@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tecsegapi.model.Salutar;
+import br.com.tecsegapi.repository.SalutarFuncionarioRepository;
 import br.com.tecsegapi.repository.SalutarRepository;
 import br.com.tecsegapi.util.Conversor;
 
@@ -29,6 +31,8 @@ public class SalutarController {
 	
 	@Autowired
 	private SalutarRepository salutarRepository;
+	@Autowired 
+	private SalutarFuncionarioRepository salutarFuncionarioRepository;
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Salutar> buscar(@PathVariable Integer id) {
@@ -94,6 +98,13 @@ public class SalutarController {
 	public Salutar salvar(@Valid @RequestBody Salutar salutar) {
 		salutar = salutarRepository.save(salutar);
 		return salutar;
+	}
+	
+	@DeleteMapping("/deletar")
+	@ResponseStatus(HttpStatus.CREATED)
+	public void deletar(@Valid @RequestBody Salutar salutar) {
+		salutarFuncionarioRepository.deleteSalutar(salutar.getIdsalutar());
+		salutarRepository.delete(salutar);
 	}
 
 }
