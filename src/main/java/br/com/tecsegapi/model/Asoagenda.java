@@ -1,5 +1,6 @@
 package br.com.tecsegapi.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -18,8 +19,12 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "asoagenda")
-public class Asoagenda {
+public class Asoagenda implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -34,6 +39,21 @@ public class Asoagenda {
 	@Size(max = 10)
     @Column(name = "situacao")
     private String situacao;
+	@Column(name = "datacancelamento")
+    @Temporal(TemporalType.DATE)
+    private Date datacancelamento;
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public Date getDatacancelamento() {
+		return datacancelamento;
+	}
+	public void setDatacancelamento(Date datacancelamento) {
+		this.datacancelamento = datacancelamento;
+	}
 	@JoinColumn(name = "funcionario_idfuncionario", referencedColumnName = "idfuncionario")
     @ManyToOne(optional = false)
     private Funcionario funcionario;
@@ -46,7 +66,9 @@ public class Asoagenda {
 	@JoinColumn(name = "clinica_idclinica", referencedColumnName = "idclinica")
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	private Clinica clinica;
-	
+	@JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Usuario usuario;
 	
 	public Integer getIdasoagenda() {
 		return idasoagenda;

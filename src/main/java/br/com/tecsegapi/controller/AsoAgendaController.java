@@ -1,8 +1,16 @@
 package br.com.tecsegapi.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +27,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.tecsegapi.config.ConectionFactory;
 import br.com.tecsegapi.model.Asoagenda;
 import br.com.tecsegapi.repository.AsoAgendaRepository;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 @CrossOrigin
 @RestController
@@ -29,9 +44,12 @@ public class AsoAgendaController {
 
 	@Autowired
 	private AsoAgendaRepository asoAgendaRepository;
+	
+	@Autowired
+	private ConectionFactory conexao;
 
 	@GetMapping
-	@Cacheable("consultaAsoAgenda")
+	//@Cacheable("consultaAsoAgenda")
 	public ResponseEntity<Optional<List<Asoagenda>>> listar() {
 		Optional<List<Asoagenda>> agendas = asoAgendaRepository.findAllAsoAgenda();
 		if (agendas == null) {
@@ -107,5 +125,36 @@ public class AsoAgendaController {
 	public Asoagenda salvar(@Valid @RequestBody Asoagenda asoAgenda) {
 		return asoAgendaRepository.save(asoAgenda);
 	}
+	
+	@GetMapping("/autorizacao/{id}")
+	public void imprimirFichaAutorizacao(@PathVariable("id") int id, HttpServletResponse response) throws JRException, IOException {
+		Map<String, Object> parametros = new HashMap<>();
+		parametros.put("id", id);
+		InputStream isLogo = this.getClass().getResourceAsStream("/report/logosalutar.jpg");
+		BufferedImage logo = ImageIO.read(isLogo);
+		parametros.put("logo", logo);
+		// Pega o arquivo .jasper localizado em resources
+		InputStream jasperStream = this.getClass().getResourceAsStream("/report/AutorizacaoConsultaSalutar.jasper");
+		
+		// Cria o objeto JaperReport com o Stream do arquivo jasper
+		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
+		
+		// Passa para o JasperPrint o relatório, os parâmetros e a fonte dos dados, no caso uma conexão ao banco de dados
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, conexao.getConexao());
+		
+		// Configura a respota para o tipo PDF
+		response.setContentType("application/pdf");
+		// Define que o arquivo pode ser visualizado no navegador e também nome final do arquivo
+		// para fazer download do relatório troque 'inline' por 'attachment'
+		response.setHeader("Content-Disposition", "inline; filename=AutorizacaoConsultaOcupacional.pdf");
+
+		// Faz a exportação do relatório para o HttpServletResponse
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	}
+	
+	
+	
+	
 
 }
