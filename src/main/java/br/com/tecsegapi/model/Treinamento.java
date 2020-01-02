@@ -1,5 +1,6 @@
 package br.com.tecsegapi.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,31 +20,43 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "treinamento")
-public class Treinamento {
+public class Treinamento implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idtreinamento")
     private Integer idtreinamento;
-    @Size(max =200)
-    @Column(name = "nome")
-    private String nome;
     @Column(name = "data")
     @Temporal(TemporalType.DATE)
     private Date data;
+    @Column(name = "hora")
+    private String hora;
+    @Column(name = "duracao")
+    private String duracao;
     @Size(max =100)
     @Column(name = "instrutor")
     private String instrutor;
+    @Column(name = "conteudo")
+    @Lob
+    private String conteudo;
     @Size(max =9)
+    @Column(name = "local")
+    private String local;
+    @Column(name = "cidade")
+    private String cidade;
     @Column(name = "situacao")
     private String situacao;
-    @Size(max =8)
-    @Column(name = "duracao")
-    private String duracao;
-    @JoinColumn(name = "loja_idloja", referencedColumnName = "idloja")
+    @JoinColumn(name = "treinamentotipo_idtreinamentotipo", referencedColumnName = "idtreinamentotipo")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Loja loja;
+    private Treinamentotipo treinamentotipo;
+    @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Usuario usuario;
     
 	public Treinamento() {
 		
@@ -54,14 +68,6 @@ public class Treinamento {
 
 	public void setIdtreinamento(Integer idtreinamento) {
 		this.idtreinamento = idtreinamento;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public Date getData() {
@@ -96,12 +102,54 @@ public class Treinamento {
 		this.duracao = duracao;
 	}
 
-	public Loja getLoja() {
-		return loja;
+	
+
+	public String getHora() {
+		return hora;
 	}
 
-	public void setLoja(Loja loja) {
-		this.loja = loja;
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
+	public String getConteudo() {
+		return conteudo;
+	}
+
+	public void setConteudo(String conteudo) {
+		this.conteudo = conteudo;
+	}
+
+	public String getLocal() {
+		return local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public Treinamentotipo getTreinamentotipo() {
+		return treinamentotipo;
+	}
+
+	public void setTreinamentotipo(Treinamentotipo treinamentotipo) {
+		this.treinamentotipo = treinamentotipo;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override

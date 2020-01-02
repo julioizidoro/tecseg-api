@@ -3,6 +3,7 @@ package br.com.tecsegapi.model;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,6 +30,9 @@ public class Treinamentoparticipante {
 	@JoinColumn(name = "treinamento_idtreinamento", referencedColumnName = "idtreinamento")
     @ManyToOne(optional = false)
     private Treinamento treinamento;
+	@JoinColumn(name = "loja_idloja", referencedColumnName = "idloja")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Loja loja;
 	
 	public Treinamentoparticipante() {
 		
@@ -72,6 +76,14 @@ public class Treinamentoparticipante {
 
 	public void setTreinamento(Treinamento treinamento) {
 		this.treinamento = treinamento;
+	}
+
+	public Loja getLoja() {
+		return loja;
+	}
+
+	public void setLoja(Loja loja) {
+		this.loja = loja;
 	}
 
 	@Override
