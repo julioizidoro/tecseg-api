@@ -19,7 +19,7 @@ public interface AsoAgendaRepository extends JpaRepository<Asoagenda, Integer>{
 	
 	// Somente Loja
 	@Query("select a from Asoagenda a where a.funcionario.loja.idloja= :idloja "
-			+ " and a.funcionario.nome like CONCAT('%', :nome, '%') order by a.dataexame")
+			+ " and a.funcionario.nome like CONCAT('%', :nome, '%')  and (a.situacao='Agendar' or a.situacao='Agendado') order by a.dataexame")
 	Optional<List<Asoagenda>> findAllLoja(@Param("idloja") int idloja, @Param("nome") String nome);
 	
 	// Somente situação
@@ -28,7 +28,7 @@ public interface AsoAgendaRepository extends JpaRepository<Asoagenda, Integer>{
 		Optional<List<Asoagenda>> findAllSituacao(@Param("situacao") String situacao, @Param("nome") String nome);
 	
 	// Somente nome
-		@Query("select a from Asoagenda a where a.funcionario.nome like CONCAT('%', :nome, '%') order by a.dataexame")
+		@Query("select a from Asoagenda a where a.funcionario.nome like CONCAT('%', :nome, '%') and (a.situacao='Agendar' or a.situacao='Agendado') order by a.dataexame")
 			Optional<List<Asoagenda>> findAllNome(@Param("nome") String nome);
 		
 		// tudo

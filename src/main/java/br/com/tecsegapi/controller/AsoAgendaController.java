@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -61,9 +59,12 @@ public class AsoAgendaController {
 
 	// Somente Loja
 	@GetMapping("/loja/{idloja}/{nome}")
-	@Cacheable("consultaAsoAgenda")
+	//@Cacheable("consultaAsoAgenda")
 	public ResponseEntity<Optional<List<Asoagenda>>> findAllLoja(@PathVariable("idloja") int idloja,
 			@PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asoagenda>> agendas = asoAgendaRepository.findAllLoja(idloja, nome);
 		if (agendas == null) {
 			return ResponseEntity.notFound().build();
@@ -74,9 +75,12 @@ public class AsoAgendaController {
 
 	// Somente Situacao
 	@GetMapping("/situacao/{situacao}/{nome}")
-	@Cacheable("consultaAsoAgenda")
+	//@Cacheable("consultaAsoAgenda")
 	public ResponseEntity<Optional<List<Asoagenda>>> findAllSituacao(@PathVariable("situacao") String situacao,
 			@PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asoagenda>> agendas = asoAgendaRepository.findAllSituacao(situacao, nome);
 		if (agendas == null) {
 			return ResponseEntity.notFound().build();
@@ -87,8 +91,11 @@ public class AsoAgendaController {
 
 	// Somente Nome
 	@GetMapping("/nome/{nome}")
-	@Cacheable("consultaAsoAgenda")
+	//@Cacheable("consultaAsoAgenda")
 	public ResponseEntity<Optional<List<Asoagenda>>> findAllNome(@PathVariable("nome") String nome) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asoagenda>> agendas = asoAgendaRepository.findAllNome(nome);
 		if (agendas == null) {
 			return ResponseEntity.notFound().build();
@@ -99,9 +106,12 @@ public class AsoAgendaController {
 
 	// tudo
 	@GetMapping("{idloja}/{nome}/{situacao}")
-	@Cacheable("consultaAsoAgenda")
+	//@Cacheable("consultaAsoAgenda")
 	public ResponseEntity<Optional<List<Asoagenda>>> findAll(@PathVariable("idloja") int idloja,
 			@PathVariable("nome") String nome, @PathVariable("situacao") String situacao) {
+		if (nome.equalsIgnoreCase("@")) {
+			nome = " ";
+		}
 		Optional<List<Asoagenda>> agendas = asoAgendaRepository.findAll(idloja, nome, situacao);
 		if (agendas == null) {
 			return ResponseEntity.notFound().build();
@@ -121,7 +131,7 @@ public class AsoAgendaController {
 
 	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
-	@CachePut("consultaAsoAgenda")
+	//@CachePut("consultaAsoAgenda")
 	public Asoagenda salvar(@Valid @RequestBody Asoagenda asoAgenda) {
 		return asoAgendaRepository.save(asoAgenda);
 	}
