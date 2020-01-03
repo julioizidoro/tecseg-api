@@ -43,7 +43,10 @@ public class TreinamentoController {
 	@ResponseStatus(HttpStatus.CREATED)
 	//@CachePut("consultaTreinamento")
 	public Treinamentoparticipante salvarPArticipante(@Valid @RequestBody Treinamentoparticipante participante) {
-		return treinamentoParticipanteRepository.save(participante);
+		Treinamentoparticipante verficar = treinamentoParticipanteRepository.findParticipante(participante.getTreinamento().getIdtreinamento(), participante.getFuncionario().getIdfuncionario());
+		if (verficar == null) {
+			return treinamentoParticipanteRepository.save(participante);
+		} else return verficar;		
 	}
 	
 	@PostMapping("salvar")
@@ -79,4 +82,6 @@ public class TreinamentoController {
 		}
 		return ResponseEntity.ok(treinamentos);
 	}
+	
+	
 }

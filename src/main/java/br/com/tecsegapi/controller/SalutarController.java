@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tecsegapi.model.Salutar;
+import br.com.tecsegapi.model.Salutarfuncionario;
 import br.com.tecsegapi.repository.SalutarFuncionarioRepository;
 import br.com.tecsegapi.repository.SalutarRepository;
 import br.com.tecsegapi.util.Conversor;
@@ -45,12 +46,14 @@ public class SalutarController {
 	
 	
 	@GetMapping("listar/{datainicial}/{datafinal}")
-	public ResponseEntity<Optional<List<Salutar>>> listar(@PathVariable("datainicial") Date datainicial, @PathVariable("datafinal") Date datafinal) {
-		if (datainicial.after(datafinal)) {
-			Conversor c = new Conversor();
-			datainicial = c.SomarDiasData(new Date(), -180);
+	public ResponseEntity<Optional<List<Salutar>>> listar(@PathVariable("datainicial") String datainicial, @PathVariable("datafinal") String datafinal) {
+		Conversor c = new Conversor();
+		Date di = c.ConvercaoStringData(datainicial);
+		Date df = c.ConvercaoStringData(datafinal);
+		if (di.after(df)) {
+			di = c.SomarDiasData(new Date(), -180);
 		}
-		Optional<List<Salutar>> lista = salutarRepository.listar(datainicial, datafinal);
+		Optional<List<Salutar>> lista = salutarRepository.listar(di, df);
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -68,14 +71,13 @@ public class SalutarController {
 		return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping("listar/{idloja}/{datainicial}/datafinal")
+	@GetMapping("listar/{idloja}/{datainicial}/{datafinal}")
 	public ResponseEntity<Optional<List<Salutar>>> listar(@PathVariable("idloja") int idloja, 
-			@PathVariable("datainicial") Date datainicial, @PathVariable("datafinal") Date datafinal) {
-		if (datainicial.after(datafinal)) {
-			Conversor c = new Conversor();
-			datainicial = c.SomarDiasData(new Date(), -180);
-		}
-		Optional<List<Salutar>> lista = salutarRepository.findAllLoja(idloja, datainicial, new Date());
+			@PathVariable("datainicial") String datainicial, @PathVariable("datafinal") String datafinal) {
+		Conversor c = new Conversor();
+		Date di = c.ConvercaoStringData(datainicial);
+		Date df = c.ConvercaoStringData(datafinal);
+		Optional<List<Salutar>> lista = salutarRepository.findAllLoja(idloja, di, df);
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -103,7 +105,10 @@ public class SalutarController {
 	@DeleteMapping("/deletar")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void deletar(@Valid @RequestBody Salutar salutar) {
-		salutarFuncionarioRepository.deleteSalutar(salutar.getIdsalutar());
+		List<Salutarfuncionario> lista = salutarFuncionarioRepository.findAllSalutar(salutar.getIdsalutar()).get();
+		for (Salutarfuncionario f : lista) {
+			salutarFuncionarioRepository.delete(f);
+		}
 		salutarRepository.delete(salutar);
 	}
 

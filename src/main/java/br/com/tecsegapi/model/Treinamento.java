@@ -44,7 +44,6 @@ public class Treinamento implements Serializable {
     @Column(name = "conteudo")
     @Lob
     private String conteudo;
-    @Size(max =9)
     @Column(name = "local")
     private String local;
     @Column(name = "cidade")

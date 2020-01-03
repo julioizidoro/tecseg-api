@@ -1,5 +1,7 @@
 package br.com.tecsegapi.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +13,12 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "setor")
-public class Setor {
+public class Setor implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -27,15 +33,6 @@ public class Setor {
 	}
 
 	
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((idsetor == null) ? 0 : idsetor.hashCode());
-		return result;
-	}
-
 	public Integer getIdsetor() {
 		return idsetor;
 	}
@@ -76,6 +73,15 @@ public class Setor {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idsetor == null) ? 0 : idsetor.hashCode());
+		return result;
+	}
+
 
 	@Override
 	public String toString() {

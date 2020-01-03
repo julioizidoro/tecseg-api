@@ -15,14 +15,6 @@ public interface SalutarFuncionarioRepository extends JpaRepository<Salutarfunci
 			+ " order by s.funcionario.nome ASC")
 	Optional<List<Salutarfuncionario>> findAllSalutar(
 	@Param("idsalutar") int idsalutar);		
-	
-	
-	@Query(
-			value = "delete from Salutar s where s.salutar_idsalutar= :idsalutar",
-			nativeQuery = true)
-	void deleteSalutar(
-	@Param("idsalutar") int idsalutar);		
-	
-	
+		
 
 }

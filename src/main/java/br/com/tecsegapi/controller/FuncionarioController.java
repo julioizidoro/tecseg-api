@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.tecsegapi.model.Funcionario;
 import br.com.tecsegapi.repository.FuncionarioRepository;
 import br.com.tecsegapi.service.S3Service;
+import br.com.tecsegapi.util.Conversor;
 import br.com.tecsegapi.util.GerarExcel;
 
 @CrossOrigin
@@ -182,8 +183,11 @@ public class FuncionarioController {
 	
 	@GetMapping("lojasalutar/{idloja}/{datainicial}/{datafinal}")
 	public ResponseEntity<Optional<List<Funcionario>>> consultarLojaData(@PathVariable("idloja") int idloja,
-			@PathVariable("date") Date datainicial, @PathVariable("datafinal") Date datafinal) {
-		Optional<List<Funcionario>> lista = funcionarioRepository.findAllLojaData(idloja, datainicial, datafinal);
+			@PathVariable("datainicial") String datainicial, @PathVariable("datafinal") String datafinal) {
+		Conversor c = new Conversor();
+		Date di = c.ConvercaoStringData(datainicial);
+		Date df = c.ConvercaoStringData(datafinal);
+		Optional<List<Funcionario>> lista = funcionarioRepository.findAllLojaData(idloja, di, df);
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}

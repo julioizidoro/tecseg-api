@@ -121,10 +121,10 @@ public interface AsoControleRepository  extends JpaRepository<Asocontrole, Integ
 		@Param("idtipo") int idtipo);
 		
 		//Baixa anterior 
-		@Query("select a from Asocontrole a where a.asotipo.tipo='aso' " 
+		@Query("select a from Asocontrole a where a.asotipo.tipo= :tipo " 
 				+ " and a.finalizado=0 and a.funcionario.idfuncionario= :idfuncionario ")
 		Optional<Asocontrole> findLast(
-		@Param("idfuncionario") int idfuncionario);	
+		@Param("idfuncionario") int idfuncionario, @Param("tipo") String tipo);	
 	
 		//Consulta pelo id do funcionario
 		@Query("select a from Asocontrole a where a.funcionario.idfuncionario= :idfuncionario order by a.dataexame")

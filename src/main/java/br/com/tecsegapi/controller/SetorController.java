@@ -23,7 +23,7 @@ public class SetorController {
 	private SetorRepository setorRepository;
 	
 	@GetMapping
-	@Cacheable("consultaSetor")
+	//@Cacheable("consultaSetor")
 	public ResponseEntity<List<Setor>> listar() {
 		Sort sort = new Sort(Sort.Direction.ASC, "Nome");
 		List<Setor> setor = setorRepository.findAll(sort);

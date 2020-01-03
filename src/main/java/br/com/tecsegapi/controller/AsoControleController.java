@@ -242,9 +242,9 @@ public class AsoControleController {
 		return ResponseEntity.ok(asoControle);
 	}	
 	
-	@GetMapping("/last/{idfuncionario}")
-	public ResponseEntity<Optional<Asocontrole>> findLast(@PathVariable("idfuncionario") int idfuncionario) {
-		Optional<Asocontrole> asoControle = asoControleRepository.findLast(idfuncionario);
+	@GetMapping("/last/{idfuncionario}/{tipo}")
+	public ResponseEntity<Optional<Asocontrole>> findLast(@PathVariable("idfuncionario") int idfuncionario, @PathVariable("tipo") String tipo) {
+		Optional<Asocontrole> asoControle = asoControleRepository.findLast(idfuncionario, tipo);
 		if (asoControle==null) {
 			return ResponseEntity.notFound().build();
 		}

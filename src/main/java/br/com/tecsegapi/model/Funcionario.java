@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 /**
@@ -83,12 +84,24 @@ public class Funcionario  {
 	@Column(name = "datasituacao")
     @Temporal(TemporalType.DATE)
     private Date datasituacao;
+	@Transient
+	private boolean participa;
+	
     
     
     public Funcionario() {
+    	setParticipa(false);
     }
 
-    public Funcionario(Integer idfuncionario) {
+    public boolean isParticipa() {
+		return participa;
+	}
+
+	public void setParticipa(boolean participa) {
+		this.participa = participa;
+	}
+
+	public Funcionario(Integer idfuncionario) {
         this.idfuncionario = idfuncionario;
     }
 
