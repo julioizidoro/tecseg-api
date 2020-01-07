@@ -35,6 +35,8 @@ public class Asotipo implements Serializable {
     private String tipo;
     @Column(name = "periodicidade")
     private int periodicidade;
+    @Column(name = "categoria")
+    private String categoria;
     
 
     public Asotipo() {
@@ -74,6 +76,14 @@ public class Asotipo implements Serializable {
 
 	public void setPeriodicidade(int periodicidade) {
 		this.periodicidade = periodicidade;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
 	@Override
