@@ -42,6 +42,12 @@ public class Asoagenda implements Serializable{
 	@Column(name = "datacancelamento")
     @Temporal(TemporalType.DATE)
     private Date datacancelamento;
+	@Column(name = "avaliacaomedica")
+    private String avaliacaomedica;
+	@Column(name = "examescomplementares")
+    private String examescomplementares;
+	@Column(name = "manipulacaoalimentos")
+    private String manipulacaoalimentos;
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -114,6 +120,24 @@ public class Asoagenda implements Serializable{
 	}
 	
 	
+	public String getAvaliacaomedica() {
+		return avaliacaomedica;
+	}
+	public void setAvaliacaomedica(String avaliacaomedica) {
+		this.avaliacaomedica = avaliacaomedica;
+	}
+	public String getExamescomplementares() {
+		return examescomplementares;
+	}
+	public void setExamescomplementares(String examescomplementares) {
+		this.examescomplementares = examescomplementares;
+	}
+	public String getManipulacaoalimentos() {
+		return manipulacaoalimentos;
+	}
+	public void setManipulacaoalimentos(String manipulacaoalimentos) {
+		this.manipulacaoalimentos = manipulacaoalimentos;
+	}
 	public Clinica getClinica() {
 		return clinica;
 	}
