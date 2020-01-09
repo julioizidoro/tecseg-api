@@ -2,21 +2,24 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AutorizacaoConsultaSalutar" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e5cb6bb-a46d-4966-8052-3c018589ea7c">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="358"/>
+	<property name="ireport.y" value="144"/>
 	<property name="ireport.callouts" value="##Mon Dec 30 12:07:51 GMT-03:00 2019"/>
 	<parameter name="id" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="logo" class="java.awt.Image" isForPrompting="false"/>
+	<parameter name="manipulacaoalimento" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="amdescricao" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ecdescricao" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="asotipo" class="java.lang.Integer" isForPrompting="false"/>
 	<queryString>
 		<![CDATA[Select distinct ag.dataexame, ag.hora, ag.situacao, f.nome, f.rg, f.cpf, f.datanascimento, s.nome as nomesetor,
-fc.nome as nomefuncao, fc.cbo, f.pis, f.ctps, f.serie, f.uf, t.nome as tipoexame, l.razaosocial, l.cnpj, fn.nome as novaFuncao,
-t.idasotipo, ag.avaliacaomedica, ag.examescomplementares, ag.manipulacaoalimentos
+fc.nome as nomefuncao, fc.cbo, f.pis, f.ctps, f.serie, f.uf, l.razaosocial, l.cnpj, fn.nome as novaFuncao
+
 from
 asoagenda ag join funcionario  f on ag.funcionario_idfuncionario = f.idfuncionario
 join funcao fc on f.funcao_idfuncao = fc.idfuncao
 join setor s on f.setor_idsetor = s.idsetor
-join asotipo t on ag.asotipo_idasotipo = t.idasotipo
 join loja l on f.loja_idloja = l.idloja
 join funcao fn on ag.funcao_idfuncao = fn.idfuncao
 where ag.idasoagenda = $P{id}]]>
@@ -59,7 +62,6 @@ where ag.idasoagenda = $P{id}]]>
 	<field name="uf" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="tipoexame" class="java.lang.String"/>
 	<field name="razaosocial" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -67,18 +69,6 @@ where ag.idasoagenda = $P{id}]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="novaFuncao" class="java.lang.String"/>
-	<field name="idasotipo" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="avaliacaomedica" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="examescomplementares" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="manipulacaoalimentos" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<title>
 		<band height="58" splitType="Stretch">
 			<rectangle>
@@ -360,49 +350,49 @@ where ag.idasoagenda = $P{id}]]>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{idasotipo}.equals( 1 ) ? "X" : " " )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $P{asotipo}.equals( 1 ) ? "X" : " " )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="7" y="263" width="121" height="14" uuid="ec1c62be-34f6-440d-a2bb-a19d5f52de6d"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{idasotipo}.equals( 5 ) ? "X" : " " )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $P{asotipo}.equals( 5 ) ? "X" : " " )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="7" y="283" width="121" height="14" uuid="ae442ab9-97f7-47ae-847c-0683705317c7"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{idasotipo}.equals( 2 ) ? "X" : " " )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $P{asotipo}.equals( 2 ) ? "X" : " " )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="7" y="304" width="121" height="14" uuid="f78df307-76ad-4afb-bca2-d2617de72aaa"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{idasotipo}.equals( 4 ) ? "X" : " " )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $P{asotipo}.equals( 4 ) ? "X" : " " )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="7" y="332" width="121" height="14" uuid="3c63bf75-83fb-464e-acce-30a1aa780d0a"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{idasotipo}.equals( 3 ) ? "X" : " " )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $P{asotipo}.equals( 3 ) ? "X" : " " )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="300" y="324" width="249" height="14" uuid="160085da-d6ef-4355-b93e-ab5bb994bd48"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{idasotipo}.equals( 3 ) ? $F{nomefuncao} : " " )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $P{asotipo}.equals( 3 ) ? $F{nomefuncao} : " " )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="300" y="340" width="249" height="14" uuid="a7c4ea6f-ca39-4c93-af13-da871b7787a2"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{idasotipo}.equals( 3 ) ? $F{novaFuncao} : " " )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $P{asotipo}.equals( 3 ) ? $F{novaFuncao} : " " )]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="423" width="555" height="14" uuid="9ecaea19-9a3e-412d-a285-539920c1778b"/>
@@ -497,35 +487,35 @@ where ag.idasoagenda = $P{id}]]>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{manipulacaoalimentos}.equals( "S" ) ? "X" : " " )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $P{manipulacaoalimento}.equals( "S" ) ? "X" : " " )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="7" y="384" width="121" height="14" uuid="8f04b820-bac8-45bc-a7d6-7267a36499e9"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{avaliacaomedica}.length()>2 ? "X" : " " )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $P{amdescricao}.length()>2 ? "X" : " " )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="7" y="403" width="121" height="14" uuid="d58e16af-f913-46b1-803d-352224ad08fa"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{examescomplementares}.length()>2 ? "X" : " " )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $P{ecdescricao}.length()>2 ? "X" : " " )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="144" y="384" width="405" height="14" uuid="283b36a2-cf59-4c16-9db9-4d522017f454"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["AVALIAÇÃO MÉDICA "  + $F{avaliacaomedica}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["AVALIAÇÃO MÉDICA " + $P{amdescricao}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="144" y="403" width="405" height="14" uuid="de741f0e-4617-43ae-ab62-435543d09c95"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["EXAMES COMPLEMENTARES " + $F{examescomplementares}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["EXAME COMPLEMENTAR " + $P{ecdescricao}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

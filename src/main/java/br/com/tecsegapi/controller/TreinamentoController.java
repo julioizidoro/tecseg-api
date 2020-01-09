@@ -89,6 +89,18 @@ public class TreinamentoController {
 		return ResponseEntity.ok(participantes);
 	}
 	
+	@GetMapping("/dias/{dias}")
+	//@Cacheable("consultaTreinamento")
+	public ResponseEntity<Optional<List<Treinamento>>> findAllDias(@PathVariable("dias") int dias) {
+		Conversor c = new Conversor();
+		Date dataConsulta = c.SomarDiasData(new Date(), dias);
+		Optional<List<Treinamento>> treinamentos = treinamentoRepository.findAllDias(dataConsulta);
+		if (treinamentos==null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(treinamentos);
+	}
+	
 	@GetMapping
 	@Cacheable("consultaTreinamento")
 	public ResponseEntity<Optional<List<Treinamento>>> findAll() {

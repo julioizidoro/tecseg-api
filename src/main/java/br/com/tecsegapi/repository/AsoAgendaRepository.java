@@ -1,5 +1,6 @@
 package br.com.tecsegapi.repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,9 @@ public interface AsoAgendaRepository extends JpaRepository<Asoagenda, Integer>{
 				+ " and a.funcionario.nome like CONCAT('%', :nome, '%') order by a.dataexame")
 		Optional<List<Asoagenda>> findAll(@Param("idloja") int idloja, @Param("nome") String nome, @Param("situacao") String situacao);
 	
-	
+		// Data 7 dias
+		@Query("select a from Asoagenda a where (a.situacao='Agendar' or a.situacao='Agendado') and a.dataexame <= :data order by a.dataexame")
+		Optional<List<Asoagenda>> findAllData7(@Param("data") Date data);
+		
 
 }

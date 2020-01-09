@@ -42,36 +42,12 @@ public class Asoagenda implements Serializable{
 	@Column(name = "datacancelamento")
     @Temporal(TemporalType.DATE)
     private Date datacancelamento;
-	@Column(name = "avaliacaomedica")
-    private String avaliacaomedica;
-	@Column(name = "examescomplementares")
-    private String examescomplementares;
-	@Column(name = "manipulacaoalimentos")
-    private String manipulacaoalimentos;
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	public Date getDatacancelamento() {
-		return datacancelamento;
-	}
-	public void setDatacancelamento(Date datacancelamento) {
-		this.datacancelamento = datacancelamento;
-	}
 	@JoinColumn(name = "funcionario_idfuncionario", referencedColumnName = "idfuncionario")
     @ManyToOne(optional = false)
     private Funcionario funcionario;
-	@JoinColumn(name = "asotipo_idasotipo", referencedColumnName = "idasotipo")
-	@ManyToOne(optional = false)
-	private Asotipo asotipo;
 	@JoinColumn(name = "funcao_idfuncao", referencedColumnName = "idfuncao")
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	private Funcao funcao;
-	@JoinColumn(name = "clinica_idclinica", referencedColumnName = "idclinica")
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	private Clinica clinica;
 	@JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Usuario usuario;
@@ -106,12 +82,7 @@ public class Asoagenda implements Serializable{
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
-	public Asotipo getAsotipo() {
-		return asotipo;
-	}
-	public void setAsotipo(Asotipo asotipo) {
-		this.asotipo = asotipo;
-	}
+
 	public Funcao getFuncao() {
 		return funcao;
 	}
@@ -119,31 +90,20 @@ public class Asoagenda implements Serializable{
 		this.funcao = funcao;
 	}
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public Date getDatacancelamento() {
+		return datacancelamento;
+	}
+	public void setDatacancelamento(Date datacancelamento) {
+		this.datacancelamento = datacancelamento;
+	}
 	
-	public String getAvaliacaomedica() {
-		return avaliacaomedica;
-	}
-	public void setAvaliacaomedica(String avaliacaomedica) {
-		this.avaliacaomedica = avaliacaomedica;
-	}
-	public String getExamescomplementares() {
-		return examescomplementares;
-	}
-	public void setExamescomplementares(String examescomplementares) {
-		this.examescomplementares = examescomplementares;
-	}
-	public String getManipulacaoalimentos() {
-		return manipulacaoalimentos;
-	}
-	public void setManipulacaoalimentos(String manipulacaoalimentos) {
-		this.manipulacaoalimentos = manipulacaoalimentos;
-	}
-	public Clinica getClinica() {
-		return clinica;
-	}
-	public void setClinica(Clinica clinica) {
-		this.clinica = clinica;
-	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -17,6 +17,11 @@ public interface TreinamentoRepository extends JpaRepository<Treinamento, Intege
 	Optional<List<Treinamento>> findAllPadrao(
 	@Param("data") Date data);
 	
+	//7 Dias
+	@Query("select t from Treinamento t where t.data<= :data and t.situacao='Agendado' order by t.data DESC")
+	Optional<List<Treinamento>> findAllDias(
+	@Param("data") Date data);
+	
 	
 	//Perido - Situacao
 	@Query("select t from Treinamento t where t.data>= :datainicio and t.data<= :datafinal and t.situacao= :situacao  order by t.data")
