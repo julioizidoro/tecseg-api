@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AutorizacaoConsultaSalutar" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e5cb6bb-a46d-4966-8052-3c018589ea7c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.callouts" value="##Mon Dec 30 12:07:51 GMT-03:00 2019"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.awt.Image" isForPrompting="false"/>
+	<parameter name="asotipo" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="tipoexame" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="exames" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="clinica" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="endereco" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="cidade" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="fone" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[Select distinct ag.dataexame, ag.hora, ag.situacao, f.nome, f.rg, f.cpf, f.datanascimento, s.nome as nomesetor,
+fc.nome as nomefuncao, fc.cbo, f.pis, f.ctps, f.serie, f.uf, l.razaosocial, l.cnpj, fn.nome as novaFuncao, l.nome as unidade
+from
+asoagenda ag join funcionario  f on ag.funcionario_idfuncionario = f.idfuncionario
+join funcao fc on f.funcao_idfuncao = fc.idfuncao
+join setor s on f.setor_idsetor = s.idsetor
+join loja l on f.loja_idloja = l.idloja
+join funcao fn on ag.funcao_idfuncao = fn.idfuncao
+
+where ag.idasoagenda = $P{id}]]>
+	</queryString>
+	<field name="dataexame" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hora" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="situacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rg" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="datanascimento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomesetor" class="java.lang.String"/>
+	<field name="nomefuncao" class="java.lang.String"/>
+	<field name="cbo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pis" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctps" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="serie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uf" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razaosocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cnpj" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="novaFuncao" class="java.lang.String"/>
+	<field name="unidade" class="java.lang.String"/>
+	<title>
+		<band height="58" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="56" uuid="31d6cfdf-2af7-43c9-ba27-51b8aad2ddea"/>
+			</rectangle>
+			<image>
+				<reportElement x="13" y="3" width="60" height="52" uuid="8f04aea1-404c-468e-81be-91609974bd9a"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="73" y="6" width="476" height="17" uuid="f93bae20-fe2f-44c4-b45f-7f262f509575"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLASS SAÚDE - MEDICINA OCUPACIONAL LTDA.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="74" y="23" width="476" height="17" uuid="2ed82c95-7baf-4a8c-a31a-e97731b8b798"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Autorização Laboratório Unidos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="744">
+			<rectangle>
+				<reportElement x="0" y="563" width="555" height="91" uuid="d61b27d1-8a19-4a41-8dd0-94ed4ab7a103"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="135" height="20" uuid="62f9bda7-ef19-4482-99c2-09f460dd6ecd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="4" y="4" width="124" height="14" uuid="00ee6843-b61a-44d1-b515-96390fdd05e0"/>
+				<text><![CDATA[Empresa / Razão Social :]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="20" width="135" height="20" uuid="a82546bf-d34f-4c61-ba5d-d44fed41f250"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="40" width="135" height="20" uuid="6f654abf-00b5-4da5-8359-eaa5554138d7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="60" width="135" height="20" uuid="a8a1395b-1c04-48eb-8e37-112fb43e5255"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="80" width="135" height="20" uuid="1198d6ee-d406-440c-9f3d-5f9d413b257c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="100" width="135" height="20" uuid="ba1ba47c-fb16-4434-ae58-aa5b0753e0dd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="4" y="22" width="124" height="14" uuid="33434d3f-b240-44a5-b849-390ff8566869"/>
+				<text><![CDATA[Unidade:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="44" width="124" height="14" uuid="996c8046-7d77-4525-b5d1-d30d1643b74c"/>
+				<text><![CDATA[Nome :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="64" width="124" height="14" uuid="447681b0-bcb0-4f19-b02e-1cd68092e103"/>
+				<text><![CDATA[Função Atual :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="84" width="124" height="14" uuid="c7f485ea-b298-426f-bb0d-96c30595ef42"/>
+				<text><![CDATA[Nova Função:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="104" width="124" height="14" uuid="96599d68-0c64-484c-8c39-cfb723edc00b"/>
+				<text><![CDATA[Tipo de Exame:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="135" y="0" width="420" height="20" uuid="98fe07b3-eb4e-475c-94ae-51183b106ae9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="135" y="20" width="420" height="20" uuid="4fa9f45a-feac-4b45-9d16-f7de730e48a0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="135" y="40" width="420" height="20" uuid="7851b9a7-b0d6-41be-9879-529cfebc7af7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="135" y="60" width="420" height="20" uuid="add22b7d-1cd0-4a20-b20d-72ade4f75f94"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="135" y="100" width="420" height="20" uuid="4a8ec4b4-c6ad-4feb-b187-d7e4a44885c7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="135" y="80" width="420" height="20" uuid="555a2564-b3a6-4491-ade7-b54c669b32dd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="142" width="555" height="40" uuid="98f08518-624b-4a97-9d44-043d6f878eaf"/>
+			</rectangle>
+			<textField>
+				<reportElement x="141" y="23" width="408" height="14" uuid="3639e7f7-8c70-48bc-aa9e-a548741410c9"/>
+				<textFieldExpression><![CDATA[$F{unidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="43" width="408" height="14" uuid="bd9307eb-dd8b-4762-a231-1115bceeafae"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="63" width="408" height="14" uuid="4624217e-a6d2-41f5-8f3a-1660317bcd02"/>
+				<textFieldExpression><![CDATA[$F{nomefuncao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="83" width="408" height="14" uuid="e4586cc7-a39b-4d04-92ae-09fe57551199"/>
+				<textFieldExpression><![CDATA[( $P{asotipo}.equals( 3 ) ? $F{novaFuncao} : " " )]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="141" y="103" width="408" height="14" uuid="d1f2bb3b-8c0a-4b82-9f1e-cb265e687eb1"/>
+				<textFieldExpression><![CDATA[$P{tipoexame}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="125" width="545" height="14" forecolor="#FF0000" uuid="d2f9b274-31ee-4711-8d9c-73c38bed6c5b"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["EXAMES AUTORIZADOS"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="146" width="542" height="32" uuid="8c32cb24-f8fe-4dc4-abd0-efc309efce14"/>
+				<textFieldExpression><![CDATA[$P{exames}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="185" width="555" height="20" uuid="32f76dd5-50d4-4f9c-89a9-bfde719deba7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="189" width="555" height="14" forecolor="#FF0000" uuid="11ca162c-6ed5-42c0-af3c-752be5c4d5f7"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[LABORATÓRIOS AUTORIZADO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="211" width="277" height="312" uuid="cf30956b-ad52-4ec0-b6a8-c01e47fff427"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="278" y="211" width="277" height="312" uuid="1a49e21c-7400-49e0-8ad1-6d7fb5ebbb8a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="543" width="554" height="20" uuid="c1521faa-7d6d-437d-adba-6b85c943eb26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="563" width="60" height="91" uuid="a9a55418-75d7-4b57-8327-abd8c31591a4"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="222" width="250" height="66" uuid="8ba59e11-af1a-4da3-8425-a670fde54033"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LABORATÓRIO UNIDOS(CENTRO)
+RUA: R. PADRE ROMA, 272 - CENTRO
+FLORIANOPOLIS (SC)
+(48) 3225-0925
+Obs.: horário de coleta 07:00 ÁS 16:00h
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="143" y="3" width="408" height="14" uuid="74c9ef81-d6dc-4be6-9488-29413dbafa2a"/>
+				<textFieldExpression><![CDATA[$F{razaosocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="569" width="467" height="14" uuid="d58e16af-f913-46b1-803d-352224ad08fa"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{clinica}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="546" width="536" height="14" uuid="de741f0e-4617-43ae-ab62-435543d09c95"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CLÍNICA CREDENCIADA"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="294" width="252" height="66" uuid="d5ed33b9-0dd5-4109-aceb-414ea39a4953"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LABORATÓRIO UNIDOS(ED. CELSO RAMOS MEDICAL
+CENTER)
+RUA DOM JOAQUIM, 885 – SALA201
+FLORIANOPOLIS
+(48) 3229-0170
+Obs.: Horário de coleta 07:00 AS 12:00h..]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="369" width="252" height="66" uuid="2c0f8a19-5398-478f-ba8d-eb3bbba24627"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LABORATÓRIO UNIDOS (BEIRAMAR SHOPPING)
+CENTRO MÉDICO/ L4 - LJ16
+FLORIANOPOLIS (SC)
+(48) 3223-8852
+Obs.: Horário de coleta 07:00 AS 12:00h.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="443" width="252" height="66" uuid="dd927207-c8e6-4ddc-a29d-95c55f6bdf26"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LABORATÓRIO UNIDOS (HOSPITAL DA POLICIA
+MILITAR)
+RUA MAJOR COSTA, 221
+FLORIANOPOLIS (SC)
+(48) 3229-6536
+Obs.: horário de coleta 07:00 ÁS 12:00h]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="222" width="250" height="66" uuid="fa2a3419-abc3-42c3-baf1-f0ed42d09e4a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LABORATÓRIO UNIDOS (TRINDADE)
+RUA LAURO LINHARES, 2123 – LJ01
+FLORIANOPOLIS (SC)
+(48) 3234-4925
+Obs.: Horário de coleta 07:00 AS 10:30h]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="443" width="252" height="66" uuid="526d80d3-725e-4fa4-9dd0-5c75c9cdcf05"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LABORATÓRIO UNIDOS (KOBRASOL) TOP IMAGE.
+RUA KPESA,100
+SÃO JOSE (SC)
+(48) 3357-5085
+Obs.: Horário de coleta 07:00 AS 10:30.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="369" width="252" height="66" uuid="ea0ec4c1-b5a9-4865-a17a-bcc4c3b78569"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LABORATÓRIO UNIDOS (SUL DA ILHA)
+ROD. SC 405, 531 – LJ01
+FLORIANOPOLIS (SC)
+(48) 3338-2247
+Obs.: horário de coleta 07:00 ÁS 10:30.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="294" width="252" height="66" uuid="31cfdc29-01dc-40c7-adad-066587fdbbc7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LABORATÓRIO UNIDOS (INGLESES)
+ROD. SC 403, 6101 – LJ01
+FLORIANOPOLIS (SC)
+(48) 3369-0280
+Obs.: Horário de coleta 07:00 AS 10:30h .]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="569" width="46" height="14" uuid="e32df859-b862-47db-96d7-31e0e8e5d541"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clinica:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="590" width="46" height="14" uuid="df385fd0-9ac9-4899-a0cc-98d8acb1d02d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="74" y="590" width="467" height="14" uuid="d24bf562-a17a-4a15-a2fb-6d035319456b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{endereco}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="610" width="46" height="14" uuid="1fd89670-8baa-43bd-9f74-408cd5d0d19a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cidade:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="73" y="610" width="467" height="14" uuid="fe1a7db1-6444-428b-aa30-b18de50bd118"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cidade}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="630" width="46" height="14" uuid="59722e3d-66fd-4355-b432-bf5251d1b512"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clinica:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="73" y="630" width="467" height="14" uuid="e2783d20-1e81-4e82-afdd-5ec1d64509ac"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fone}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+</jasperReport>
