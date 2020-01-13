@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,9 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 
 @Entity
 @Table(name = "agendaexame")
@@ -46,6 +49,10 @@ public class Agendaexame implements Serializable {
 	@JoinColumn(name = "asotipo_idasotipo", referencedColumnName = "idasotipo")
 	@ManyToOne(optional = false)
 	private Asotipo asotipo;
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "agendaexame")
+	private  Clinicaexame clinicaexame;
+	
+	
 	
 	public Agendaexame() {
 	
@@ -105,6 +112,14 @@ public class Agendaexame implements Serializable {
 
 	public void setAsotipo(Asotipo asotipo) {
 		this.asotipo = asotipo;
+	}
+
+	public Clinicaexame getClinicaexame() {
+		return clinicaexame;
+	}
+
+	public void setClinicaexame(Clinicaexame clinicaexame) {
+		this.clinicaexame = clinicaexame;
 	}
 
 	@Override

@@ -192,6 +192,52 @@ public class AsoAgendaController {
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
 	
+	@GetMapping("/autorizacaounidos/{id}/{lab}")
+	public void imprimirFichaAutorizacaoUnidos(@PathVariable("id") int id, @PathVariable("lab") int lab, HttpServletResponse response) throws JRException, IOException {
+		Map<String, Object> parametros = new HashMap<>();
+		parametros.put("id", id);
+		InputStream isLogo = this.getClass().getResourceAsStream("/report/logosalutar.jpg");
+		BufferedImage logo = ImageIO.read(isLogo);
+		parametros.put("logo", logo);
+		List<Agendaexame> lista = getAgendaExame(id);
+		String exames = "";
+		for (Agendaexame exame : lista) {
+			if (exame.getSituacao().equalsIgnoreCase("Agendado")) {
+				if (exame.getClinicaexame().getClinica().getIdclinica() == lab) {
+					exames = exames + exame.getAsotipo().getNome() + " / ";
+				}
+				if (exame.getAsotipo().getCategoria().equalsIgnoreCase("aso")) {
+					parametros.put("tipoexame",exame.getAsotipo().getNome());
+					parametros.put("asotipo",exame.getAsotipo().getIdasotipo());
+				}
+			}
+		}
+		parametros.put("exames", exames);
+		parametros.put("clinia", lista.get(0).getClinica().getNome());
+		parametros.put("endereco", lista.get(0).getClinica().getEndereco() + ", " + lista.get(0).getClinica().getNumero() + " - " +
+		               lista.get(0).getClinica().getComplemento());
+		parametros.put("cidade", lista.get(0).getClinica().getCidade() + "(" + lista.get(0).getClinica().getEstado()  + ")");
+		parametros.put("fone", lista.get(0).getClinica().getFone());
+		// Pega o arquivo .jasper localizado em resources
+		InputStream jasperStream = this.getClass().getResourceAsStream("/report/agenda/AutorizacaoLaboratorioUnidos.jasper");
+		
+		// Cria o objeto JaperReport com o Stream do arquivo jasper
+		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
+		
+		// Passa para o JasperPrint o relatório, os parâmetros e a fonte dos dados, no caso uma conexão ao banco de dados
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, conexao.getConexao());
+		
+		// Configura a respota para o tipo PDF
+		response.setContentType("application/pdf");
+		// Define que o arquivo pode ser visualizado no navegador e também nome final do arquivo
+		// para fazer download do relatório troque 'inline' por 'attachment'
+		response.setHeader("Content-Disposition", "inline; filename=AutorizacaoLaboratorioUnidos.pdf");
+
+		// Faz a exportação do relatório para o HttpServletResponse
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	}
+	
 	public List<Agendaexame> getAgendaExame(int idAsoAgenda) {
 		Optional<List<Agendaexame>> lista = agendaExameRepository.findAllSAgendaExame(idAsoAgenda);
 		return lista.get();
