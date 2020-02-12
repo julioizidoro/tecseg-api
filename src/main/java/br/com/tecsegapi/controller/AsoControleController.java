@@ -286,7 +286,7 @@ public class AsoControleController {
 			@PathVariable("dias") int dias) {
 		Conversor c = new Conversor();
 		Date dataVencimento = c.ConvercaoStringData(dataExame);
-		dataVencimento = c.SomarDiasData(dataVencimento, (dias+2));
+		dataVencimento = c.SomarDiasData(dataVencimento, (dias));
 		return ResponseEntity.ok(dataVencimento);
 	}
 	
@@ -304,6 +304,11 @@ public class AsoControleController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@CachePut(value="consultaAsoControle", key="#asoControle.idasocontrole")
 	public Asocontrole salvar(@Valid @RequestBody Asocontrole asoControle) {
+		if (asoControle.getDatavencimento()== null) {
+			Conversor c = new Conversor();
+			Date dataVencimento = c.SomarDiasData(asoControle.getDataexame(), asoControle.getAsotipo().getPeriodicidade());
+			asoControle.setDatavencimento(dataVencimento);
+		}
 		return asoControleRepository.save(asoControle);
 	}
 	
