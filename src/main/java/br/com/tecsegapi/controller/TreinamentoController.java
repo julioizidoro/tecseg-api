@@ -69,7 +69,7 @@ public class TreinamentoController {
 	
 	@PostMapping("salvar")
 	@ResponseStatus(HttpStatus.CREATED)
-	@CachePut("consultaTreinamento")
+	//@CachePut("consultaTreinamento")
 	public Treinamento salvar(@Valid @RequestBody Treinamento treinamento) {
 		return treinamentoRepository.save(treinamento);
 	}
@@ -102,7 +102,7 @@ public class TreinamentoController {
 	}
 	
 	@GetMapping
-	@Cacheable("consultaTreinamento")
+	//@Cacheable("consultaTreinamento")
 	public ResponseEntity<Optional<List<Treinamento>>> findAll() {
 		Conversor c = new Conversor();
 		Date dataConsulta = c.SomarDiasData(new Date(), -90);

@@ -25,20 +25,34 @@ public class Acesso implements Serializable{
     private Integer idaacesso;
 	@Column(name = "nome")
     private String nome;
-	@Column(name = "cadastro")
-    private Boolean cadastro;
-	@Column(name = "aso")
-    private Boolean aso;
+	@Column(name = "clientes")
+    private Boolean clientes;
+	@Column(name = "funcionarios")
+    private Boolean funcionarios;
+	@Column(name = "funcao")
+    private Boolean funcao;
+	@Column(name = "loja")
+    private Boolean loja;
 	@Column(name = "treinamento")
     private Boolean treinamento;
-	@Column(name = "asoagenda")
-    private Boolean asoagenda;
-	@Column(name = "asoagendanova")
-    private Boolean asoagendanova;
-	@Column(name = "asocontrole")
-    private Boolean asocontrole;
-	@Column(name = "asocontrolenovo")
-    private Boolean asocontrolenovo;
+	@Column(name = "tipoexame")
+    private Boolean tipoexame;
+	@Column(name = "acesso")
+    private Boolean acesso;
+	@Column(name = "usuario")
+    private Boolean usuairo;
+	@Column(name = "agendamento")
+    private Boolean agendamento;
+	@Column(name = "controle")
+    private Boolean controle;
+	@Column(name = "relatorios")
+    private Boolean relatorios;
+	@Column(name = "afastamento")
+    private Boolean afastamento;
+	@Column(name = "salutar")
+    private Boolean salutar;
+	@Column(name = "turma")
+    private Boolean turma;
 	
 	
 	public Acesso() {
@@ -61,20 +75,38 @@ public class Acesso implements Serializable{
 		this.nome = nome;
 	}
 
-	public Boolean getCadastro() {
-		return cadastro;
+	
+	
+	public Boolean getClientes() {
+		return clientes;
 	}
 
-	public void setCadastro(Boolean cadastro) {
-		this.cadastro = cadastro;
+	public void setClientes(Boolean clientes) {
+		this.clientes = clientes;
 	}
 
-	public Boolean getAso() {
-		return aso;
+	public Boolean getFuncionarios() {
+		return funcionarios;
 	}
 
-	public void setAso(Boolean aso) {
-		this.aso = aso;
+	public void setFuncionarios(Boolean funcionarios) {
+		this.funcionarios = funcionarios;
+	}
+
+	public Boolean getFuncao() {
+		return funcao;
+	}
+
+	public void setFuncao(Boolean funcao) {
+		this.funcao = funcao;
+	}
+
+	public Boolean getLoja() {
+		return loja;
+	}
+
+	public void setLoja(Boolean loja) {
+		this.loja = loja;
 	}
 
 	public Boolean getTreinamento() {
@@ -85,39 +117,78 @@ public class Acesso implements Serializable{
 		this.treinamento = treinamento;
 	}
 
-	public Boolean getAsoagenda() {
-		return asoagenda;
+	public Boolean getTipoexame() {
+		return tipoexame;
 	}
 
-	public void setAsoagenda(Boolean asoagenda) {
-		this.asoagenda = asoagenda;
+	public void setTipoexame(Boolean tipoexame) {
+		this.tipoexame = tipoexame;
 	}
 
-	public Boolean getAsoagendanova() {
-		return asoagendanova;
+	public Boolean getAcesso() {
+		return acesso;
 	}
 
-	public void setAsoagendanova(Boolean asoagendanova) {
-		this.asoagendanova = asoagendanova;
+	public void setAcesso(Boolean acesso) {
+		this.acesso = acesso;
 	}
 
-	public Boolean getAsocontrole() {
-		return asocontrole;
+	public Boolean getUsuairo() {
+		return usuairo;
 	}
 
-	public void setAsocontrole(Boolean asocontrole) {
-		this.asocontrole = asocontrole;
+	public void setUsuairo(Boolean usuairo) {
+		this.usuairo = usuairo;
 	}
 
-	public Boolean getAsocontrolenovo() {
-		return asocontrolenovo;
+	public Boolean getAgendamento() {
+		return agendamento;
 	}
 
-	public void setAsocontrolenovo(Boolean asocontrolenovo) {
-		this.asocontrolenovo = asocontrolenovo;
+	public void setAgendamento(Boolean agendamento) {
+		this.agendamento = agendamento;
 	}
 
-	
+	public Boolean getControle() {
+		return controle;
+	}
+
+	public void setControle(Boolean controle) {
+		this.controle = controle;
+	}
+
+	public Boolean getRelatorios() {
+		return relatorios;
+	}
+
+	public void setRelatorios(Boolean relatorios) {
+		this.relatorios = relatorios;
+	}
+
+	public Boolean getAfastamento() {
+		return afastamento;
+	}
+
+	public void setAfastamento(Boolean afastamento) {
+		this.afastamento = afastamento;
+	}
+
+	public Boolean getSalutar() {
+		return salutar;
+	}
+
+	public void setSalutar(Boolean salutar) {
+		this.salutar = salutar;
+	}
+
+	public Boolean getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Boolean turma) {
+		this.turma = turma;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
