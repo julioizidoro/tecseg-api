@@ -53,6 +53,24 @@ public class Acesso implements Serializable{
     private Boolean salutar;
 	@Column(name = "turma")
     private Boolean turma;
+	@Column(name = "produto")
+    private Boolean produto;
+	@Column(name = "produtogrupo")
+    private Boolean produtogrupo;
+	@Column(name = "epitipo")
+    private Boolean epitipo;
+	@Column(name = "fornecedor")
+    private Boolean fornecedor;
+	@Column(name = "epicompras")
+    private Boolean epicompras;
+	@Column(name = "epicontrole")
+    private Boolean epicontorle;
+	@Column(name = "uniformes")
+    private Boolean uniformes;
+	@Column(name = "epi")
+    private Boolean epi;
+	@Column(name = "epibaixa")
+    private Short epibaixa;
 	
 	
 	public Acesso() {
@@ -187,6 +205,70 @@ public class Acesso implements Serializable{
 
 	public void setTurma(Boolean turma) {
 		this.turma = turma;
+	}
+
+	public Boolean getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Boolean produto) {
+		this.produto = produto;
+	}
+
+	public Boolean getProdutogrupo() {
+		return produtogrupo;
+	}
+
+	public void setProdutogrupo(Boolean produtogrupo) {
+		this.produtogrupo = produtogrupo;
+	}
+
+	public Boolean getEpitipo() {
+		return epitipo;
+	}
+
+	public void setEpitipo(Boolean epitipo) {
+		this.epitipo = epitipo;
+	}
+
+	public Boolean getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Boolean fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	public Boolean getEpicompras() {
+		return epicompras;
+	}
+
+	public void setEpicompras(Boolean epicompras) {
+		this.epicompras = epicompras;
+	}
+
+	public Boolean getEpicontorle() {
+		return epicontorle;
+	}
+
+	public void setEpicontorle(Boolean epicontorle) {
+		this.epicontorle = epicontorle;
+	}
+
+	public Boolean getUniformes() {
+		return uniformes;
+	}
+
+	public void setUniformes(Boolean uniformes) {
+		this.uniformes = uniformes;
+	}
+
+	public Boolean getEpi() {
+		return epi;
+	}
+
+	public void setEpi(Boolean epi) {
+		this.epi = epi;
 	}
 
 	@Override

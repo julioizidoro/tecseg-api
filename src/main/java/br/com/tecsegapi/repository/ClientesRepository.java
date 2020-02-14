@@ -9,9 +9,9 @@ import br.com.tecsegapi.model.Clientes;
 
 public interface ClientesRepository extends JpaRepository<Clientes, Integer>{
 	
-	Optional<Clientes> findById(int id);
-	Optional<List<Clientes>> findByNomeContainingOrderByNome(String Nome);
-	List<Clientes> findAll();
+	Optional<List<Clientes>> findByTipojuridicoOrderByNome(String Tipojuridico);
+	Optional<List<Clientes>> findByTipojuridicoAndNomeContainingOrEmailContainingOrderByNome(String tipojuridico, String Nome, String Email);
+	Optional<List<Clientes>> findByTipojuridicoAndNomeContainingOrderByNome(String tipojuridico, String Nome);
 	
 
 }

@@ -25,8 +25,8 @@ public class Clientes  implements Serializable{
     private Integer idclientes;
 	@Column(name = "nome")
     private String nome;
-	@Column(name = "tipo")
-    private String tipo;
+	@Column(name = "tipojuridico")
+    private String tipojuridico;
 	@Column(name = "cpf")
     private String cpf;
 	@Column(name = "datanascimento")
@@ -56,6 +56,8 @@ public class Clientes  implements Serializable{
     private String email;
 	@Column(name = "contato")
     private String contato;
+	@Column(name = "tipo")
+    private String tipo;
 	
 	public Clientes() {
 	
@@ -195,6 +197,14 @@ public class Clientes  implements Serializable{
 
 	public void setContato(String contato) {
 		this.contato = contato;
+	}
+
+	public String getTipojuridico() {
+		return tipojuridico;
+	}
+
+	public void setTipojuridico(String tipojuridico) {
+		this.tipojuridico = tipojuridico;
 	}
 
 	@Override

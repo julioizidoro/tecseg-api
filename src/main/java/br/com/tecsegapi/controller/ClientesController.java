@@ -44,12 +44,26 @@ public class ClientesController {
 		return ResponseEntity.ok(cliente.get());
 	}
 	
-	@GetMapping("listar/{nome}")
-	public ResponseEntity<Optional<List<Clientes>>> listar(@PathVariable("nome") String nome) {
+
+	@GetMapping("listar/tipo/{tipo}")
+	public ResponseEntity<Optional<List<Clientes>>> listar(@PathVariable("tipo") String tipo) {
+		Optional<List<Clientes>> lista = clientesRepository.findByTipojuridicoOrderByNome(tipo);
+		if (lista==null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		return ResponseEntity.ok(lista);
+	}
+	
+	@GetMapping("listar/{nome}/{email}/{tipo}")
+	public ResponseEntity<Optional<List<Clientes>>> listar(@PathVariable("nome") String nome, @PathVariable("email") String email, @PathVariable("email") String tipo) {
 		if (nome.equalsIgnoreCase("@")) {
 			nome = " ";
 		}
-		Optional<List<Clientes>> lista = clientesRepository.findByNomeContainingOrderByNome(nome);
+		if (email.equalsIgnoreCase("@")) {
+			email = " ";
+		}
+		Optional<List<Clientes>> lista = clientesRepository.findByTipojuridicoAndNomeContainingOrEmailContainingOrderByNome(tipo, nome, email);
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}
