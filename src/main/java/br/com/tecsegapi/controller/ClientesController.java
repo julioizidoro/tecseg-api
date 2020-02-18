@@ -1,5 +1,6 @@
 package br.com.tecsegapi.controller;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,6 +75,37 @@ public class ClientesController {
 	@GetMapping("listar")
 	public ResponseEntity<List<Clientes>> listar() {
 		List<Clientes> lista = clientesRepository.findAll();
+		if (lista==null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		return ResponseEntity.ok(lista);
+	}
+	
+	@GetMapping("aniversariantes")
+	public ResponseEntity<Optional<List<Clientes>>> getAniversariantes() {
+		GregorianCalendar calendar = new GregorianCalendar();
+		int dia = calendar.get(GregorianCalendar.DAY_OF_MONTH);
+		int mes = calendar.get(GregorianCalendar.MONTH);
+		int mes1 = mes;
+		int mes2= mes;
+		int dia1 = dia - 5;
+		if (dia1<1) {
+			dia1= 31;
+			mes1 = mes1 - 1;
+			if (mes1<1) {
+				mes1 = 12;
+			}
+		}
+		int dia2 = dia + 7;
+		if (dia2>31) {
+			dia2 = 0 + (dia2 - 31);
+			mes2 = mes2 + 1;
+			if (mes2==12) {
+				mes2 = 1;
+			}
+		}		
+		Optional<List<Clientes>> lista = clientesRepository.getAniversariantes(mes1, dia1, mes2, dia2);
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}
