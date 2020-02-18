@@ -47,7 +47,7 @@ public class ClientesController {
 
 	@GetMapping("listar/tipo/{tipo}")
 	public ResponseEntity<Optional<List<Clientes>>> listar(@PathVariable("tipo") String tipo) {
-		Optional<List<Clientes>> lista = clientesRepository.findByTipojuridicoOrderByNome(tipo);
+		Optional<List<Clientes>> lista = clientesRepository.findByTipoOrderByNome(tipo);
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -63,7 +63,7 @@ public class ClientesController {
 		if (email.equalsIgnoreCase("@")) {
 			email = " ";
 		}
-		Optional<List<Clientes>> lista = clientesRepository.findByTipojuridicoAndNomeContainingOrEmailContainingOrderByNome(tipo, nome, email);
+		Optional<List<Clientes>> lista = clientesRepository.findByTipoAndNomeContainingOrEmailContainingOrderByNome(tipo, nome, email);
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}

@@ -74,10 +74,10 @@ public class TreinamentoController {
 		return treinamentoRepository.save(treinamento);
 	}
 	
-	@DeleteMapping("participante/deletar")
+	@DeleteMapping("participante/deletar/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void deleteParticipante(@Valid @RequestBody Treinamentoparticipante participante) {
-		treinamentoParticipanteRepository.delete(participante);
+	public void deleteParticipante(@PathVariable("id") int id) {
+		treinamentoParticipanteRepository.deleteById(id);
 	}
 	
 	@GetMapping("/participantes/{id}")

@@ -20,7 +20,7 @@ public interface EpiControleRepository extends JpaRepository<Epicontrole, Intege
 	@Query("Select e from Epicontrole e where e.idlocal= :idlocal and e.tipolocal= :tipolocal order by e.epi.estoque.produto.descricao")
 	Optional<List<Epicontrole>> findEpiControleLocal(@Param("idlocal") int idlocal, @Param("tipolocal") String tipolocal);
 	
-	@Query("Select e from Epicontrole e where :sql")
-	Optional<List<Epicontrole>> findSql(@Param("sql") String sql);
+	//Query("Select e from Epicontrole e where idepicontrole>0")
+	//Optional<List<Epicontrole>> findSql(@Param("sql") String sql);
 	
 }

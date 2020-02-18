@@ -34,15 +34,15 @@ public class EpiControleController {
 		return epiControleRepository.save(epiControle);
 	}
 	
-	@GetMapping("listar/{sql}")
-	public ResponseEntity<Optional<List<Epicontrole>>> listar(@PathVariable("sql") String sql) {
-		Optional<List<Epicontrole>> lista = epiControleRepository.findSql(sql);
-		if (lista==null) {
-			return ResponseEntity.notFound().build();
-		}
+	//@GetMapping("listar/{sql}")
+	//public ResponseEntity<Optional<List<Epicontrole>>> listar(@PathVariable("sql") String sql) {
+//		Optional<List<Epicontrole>> lista = epiControleRepository.findSql(sql);
+	//	if (lista==null) {
+		//	return ResponseEntity.notFound().build();
+	//	}
 		
-		return ResponseEntity.ok(lista);
-	}
+//		return ResponseEntity.ok(lista);
+//	}
 	
 
 }
