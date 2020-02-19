@@ -67,6 +67,13 @@ public class TreinamentoController {
 		} else return verficar;		
 	}
 	
+	@PostMapping("participante/nota")
+	@ResponseStatus(HttpStatus.CREATED)
+	//@CachePut("consultaTreinamento")
+	public Treinamentoparticipante salvarNotasParticipante(@Valid @RequestBody Treinamentoparticipante participante) {
+		return treinamentoParticipanteRepository.save(participante);
+	}
+	
 	@PostMapping("salvar")
 	@ResponseStatus(HttpStatus.CREATED)
 	//@CachePut("consultaTreinamento")
