@@ -23,7 +23,7 @@ import br.com.tecsegapi.repository.ProdutoRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/estoque")
+@RequestMapping("estoque")
 public class EstoqueController {
 	
 	@Autowired

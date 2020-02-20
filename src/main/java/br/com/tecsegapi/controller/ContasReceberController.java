@@ -44,7 +44,7 @@ public class ContasReceberController {
 	
 	//Consulta Inicial
 	@GetMapping
-	@Cacheable("consultaContasReceber")
+	//@Cacheable("consultaContasReceber")
 	public ResponseEntity<Optional<List<Contas>>> listarCR() {
 		Conversor c = new Conversor();
 		Date data = c.SomarDiasData(new Date(), 90);
@@ -156,5 +156,20 @@ public class ContasReceberController {
 	public Contas baixar(@Valid @RequestBody Contas conta) {
 		return conta = contasRepository.save(conta);
 	}
+	
+	//Consulta Data Vencimento todas Dashboard
+		@GetMapping("todas")
+		public ResponseEntity<Optional<List<Contas>>>  getTodasDashboard() {
+			Conversor c = new Conversor();
+			Date dataInicial = new Date();
+			dataInicial = c.SomarDiasData(dataInicial, -10);
+			Date dataFinal = new Date();
+			dataFinal = c.SomarDiasData(dataFinal, 15);
+			Optional<List<Contas>> lista = contasRepository.getTodasDashboardCR(" ", dataInicial, dataFinal, "r");
+			if (lista==null) {
+				return ResponseEntity.notFound().build();
+			}
+			return ResponseEntity.ok(lista);
+		}
 	
 }

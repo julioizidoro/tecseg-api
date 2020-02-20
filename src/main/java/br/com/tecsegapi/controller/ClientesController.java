@@ -86,7 +86,7 @@ public class ClientesController {
 	public ResponseEntity<Optional<List<Clientes>>> getAniversariantes() {
 		GregorianCalendar calendar = new GregorianCalendar();
 		int dia = calendar.get(GregorianCalendar.DAY_OF_MONTH);
-		int mes = calendar.get(GregorianCalendar.MONTH);
+		int mes = calendar.get(GregorianCalendar.MONTH) + 1;
 		int mes1 = mes;
 		int mes2= mes;
 		int dia1 = dia - 5;

@@ -70,7 +70,11 @@ public class Acesso implements Serializable{
 	@Column(name = "epi")
     private Boolean epi;
 	@Column(name = "epibaixa")
-    private Short epibaixa;
+    private boolean epibaixa;
+	@Column(name = "contas")
+    private boolean contas;
+	@Column(name = "contausuario")
+    private boolean contausuario;
 	
 	
 	public Acesso() {
@@ -269,6 +273,32 @@ public class Acesso implements Serializable{
 
 	public void setEpi(Boolean epi) {
 		this.epi = epi;
+	}
+
+	public boolean isEpibaixa() {
+		return epibaixa;
+	}
+
+	public void setEpibaixa(boolean epibaixa) {
+		this.epibaixa = epibaixa;
+	}
+
+	
+
+	public boolean isContas() {
+		return contas;
+	}
+
+	public void setContas(boolean contas) {
+		this.contas = contas;
+	}
+
+	public boolean isContausuario() {
+		return contausuario;
+	}
+
+	public void setContausuario(boolean contausuario) {
+		this.contausuario = contausuario;
 	}
 
 	@Override
