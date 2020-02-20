@@ -1,5 +1,6 @@
 package br.com.tecsegapi.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.tecsegapi.bean.AsoControleBean;
+import br.com.tecsegapi.bean.PagSalutarBean;
 import br.com.tecsegapi.model.Asocontrole;
 import br.com.tecsegapi.model.Asotipo;
 import br.com.tecsegapi.model.Funcionario;
@@ -325,6 +328,77 @@ public class AsoControleController {
 	public void upload(@RequestParam MultipartFile file) {
 	//	UploadAWSS3 s3 = new UploadAWSS3("local");
 //		s3.uploadFile(file, "remoto");
+	}
+	
+	//Data do Exame
+	@GetMapping("/dataexame/{datainicial}/{datafinal}/{idloja}")
+	public ResponseEntity<PagSalutarBean> findAllDataExame(@PathVariable("datainicial") String datainicial, 
+			@PathVariable("datafinal") String datafinal, @PathVariable("idloja") int idloja) {
+		Conversor c = new Conversor();
+		Date dataStart = c.ConvercaoStringData(datainicial);
+		Date dataEnd = c.ConvercaoStringData(datafinal);
+		List<Asocontrole> listaAso = asoControleRepository.findAllDataExame(dataStart, dataEnd, idloja);
+		if (listaAso==null) {
+			return ResponseEntity.notFound().build();
+		}
+		PagSalutarBean pagSalutar = calcularValoresExame(listaAso);
+		pagSalutar.setFuncionarios(CalcularQuantidadeFuncionarios(dataStart, dataEnd, idloja));
+		pagSalutar.setValorFuncioanarios((float) (5.95 * pagSalutar.getFuncionarios()));
+		pagSalutar.setValorTotal(pagSalutar.getValorExames() + pagSalutar.getValorFuncioanarios());
+		return ResponseEntity.ok(pagSalutar);
+	}
+	
+	public List<AsoControleBean> montarListaAso(List<Asocontrole> listaAso) {
+		List<AsoControleBean> lista = new ArrayList<AsoControleBean>();
+		for (int i=0;i<listaAso.size();i++) {
+			int id = listaAso.get(i).getAsotipo().getIdasotipo();
+			boolean achou = false;
+			for (int l=0;l<lista.size();l++) {
+				if (id == lista.get(l).getAsotipo().getIdasotipo()) {
+					achou = true;
+					lista.get(l).setQuantidade(lista.get(l).getQuantidade()+1);
+					l=100000;
+				}
+			}
+			if (!achou) {
+				AsoControleBean asoBean = new AsoControleBean();
+				asoBean.setAsotipo(listaAso.get(i).getAsotipo());
+				asoBean.setQuantidade(1);
+				asoBean.setValortotal(0);
+				lista.add(asoBean);
+			}
+		}
+		return lista;
+	}
+	
+	
+	
+	
+	public PagSalutarBean calcularValoresExame(List<Asocontrole> listaAso) {
+		List<AsoControleBean> lista = montarListaAso(listaAso);
+		float valorExame = 0;
+		float valorfunc = 0;
+		for (int i=0;i<lista.size();i++) {
+			if (!lista.get(i).getAsotipo().getTipo().equalsIgnoreCase("aso")) {
+				if (lista.get(i).getQuantidade()>0) {
+					lista.get(i).setValortotal(lista.get(i).getQuantidade() * lista.get(i).getAsotipo().getValor());
+					valorExame = valorExame + lista.get(i).getValortotal();
+				}
+			} else {
+				valorfunc = lista.get(i).getAsotipo().getValor();
+			}
+		}
+		PagSalutarBean pagSalutar = new PagSalutarBean();
+		pagSalutar.setLoja(listaAso.get(0).getFuncionario().getLoja());
+		pagSalutar.setListaExames(lista);
+		pagSalutar.setValorExames(valorExame);
+		pagSalutar.setFuncionarios(0);
+		return pagSalutar;
+	}
+	
+	public int CalcularQuantidadeFuncionarios(Date dataStart, Date dataEnd, int idloja) {
+		int quantidade = funcionarioRepository.calculaTotalFncionarios(dataStart, dataEnd, idloja);
+		return quantidade;
 	}
 	
 	

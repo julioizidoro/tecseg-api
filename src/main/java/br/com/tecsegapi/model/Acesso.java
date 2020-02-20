@@ -75,6 +75,8 @@ public class Acesso implements Serializable{
     private boolean contas;
 	@Column(name = "contausuario")
     private boolean contausuario;
+	@Column(name = "calculosalutar")
+    private boolean calculosalutar;
 	
 	
 	public Acesso() {
@@ -299,6 +301,14 @@ public class Acesso implements Serializable{
 
 	public void setContausuario(boolean contausuario) {
 		this.contausuario = contausuario;
+	}
+
+	public boolean isCalculosalutar() {
+		return calculosalutar;
+	}
+
+	public void setCalculosalutar(boolean calculosalutar) {
+		this.calculosalutar = calculosalutar;
 	}
 
 	@Override

@@ -37,9 +37,19 @@ public class Asotipo implements Serializable {
     private int periodicidade;
     @Column(name = "categoria")
     private String categoria;
+    @Column(name = "valor")
+    private float valor;
     
 
-    public Asotipo() {
+    public float getValor() {
+		return valor;
+	}
+
+	public void setValor(float valor) {
+		this.valor = valor;
+	}
+
+	public Asotipo() {
     }
 
     public Asotipo(Integer idasotipo) {

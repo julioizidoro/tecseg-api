@@ -61,6 +61,15 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 				Optional<List<Funcionario>> findAllLojaData( 
 				@Param("idloja") int idloja, @Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal);
 		
+				
+	//Quantidade de funciionarios
+	@Query(
+			value = "select distinct count(idfuncionario) as total From funcionario where (loja_idloja= :idloja and situacao<>'Inativo') "
+					+ "or (loja_idloja= :idloja and situacao='Inativo' and datasituacao>= :datainicial and datasituacao<= :datafinal)  ",
+			nativeQuery = true)
+	int calculaTotalFncionarios(@Param("datainicial") Date datainicial,
+			@Param("datafinal") Date datafinal,
+			@Param("idloja") int idloja);
 
 	
 
