@@ -64,7 +64,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 				
 	//Quantidade de funciionarios
 	@Query(
-			value = "select distinct count(idfuncionario) as total From funcionario where (loja_idloja= :idloja and situacao<>'Inativo') "
+			value = "select distinct count(idfuncionario) as total From funcionario where (loja_idloja= :idloja and situacao<>'Inativo' and datasituacao<= :datafinal) "
 					+ "or (loja_idloja= :idloja and situacao='Inativo' and datasituacao>= :datainicial and datasituacao<= :datafinal)  ",
 			nativeQuery = true)
 	int calculaTotalFncionarios(@Param("datainicial") Date datainicial,
