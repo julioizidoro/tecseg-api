@@ -27,6 +27,8 @@ public class Historicosituacao {
 	@Column(name = "data")
     @Temporal(TemporalType.DATE)
     private Date data;
+	@Column(name = "observacao")
+    private String observacao;
 	@JoinColumn(name = "funcionario_idfuncionario", referencedColumnName = "idfuncionario")
     @ManyToOne(optional = false)
     private Funcionario funcionario;
@@ -79,6 +81,14 @@ public class Historicosituacao {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	@Override

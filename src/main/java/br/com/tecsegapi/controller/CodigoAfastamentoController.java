@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +22,13 @@ public class CodigoAfastamentoController {
 	@Autowired
 	private CodigoAfastamentoRepository codigoAfastamentoRepository;
 	
-	@GetMapping
-	public ResponseEntity<List<Codigoafastamento>> listar() {
-		Sort sort = new Sort(Sort.Direction.ASC, "Descricao");
-		List<Codigoafastamento> lista = codigoAfastamentoRepository.findAll(sort);
+	@GetMapping("{descricao}")
+	public ResponseEntity<Optional<List<Codigoafastamento>>> listar(@PathVariable String descricao) {
+		if (descricao.equalsIgnoreCase("@")) {
+			descricao = " ";
+		}
+		Optional<List<Codigoafastamento>> lista = codigoAfastamentoRepository.findByDescricaoContainingOrderByDescricao(descricao);
+		
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}
