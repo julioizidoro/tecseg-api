@@ -37,6 +37,8 @@ public class Agendaexame implements Serializable {
 	@Column(name = "datalancamento")
     @Temporal(TemporalType.DATE)
     private Date datalancamento;
+	@Column(name = "calculado")
+    private boolean canculado;
 	@JoinColumn(name = "asoagenda_idasoagenda", referencedColumnName = "idasoagenda")
     @ManyToOne(optional = false)
     private Asoagenda asoagenda;
@@ -120,6 +122,14 @@ public class Agendaexame implements Serializable {
 
 	public void setClinicaexame(Clinicaexame clinicaexame) {
 		this.clinicaexame = clinicaexame;
+	}
+
+	public boolean isCanculado() {
+		return canculado;
+	}
+
+	public void setCanculado(boolean canculado) {
+		this.canculado = canculado;
 	}
 
 	@Override

@@ -6,13 +6,17 @@
 package br.com.tecsegapi.model;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+
 
 /**
  *
@@ -52,6 +56,7 @@ public class Loja  {
     private String telefone;
     @Column(name = "nomefantasia")
     private String nomefantasia;
+    
     
 
     public Loja() {
@@ -164,6 +169,7 @@ public class Loja  {
 	public void setNomefantasia(String nomefantasia) {
 		this.nomefantasia = nomefantasia;
 	}
+
 
 	@Override
     public int hashCode() {

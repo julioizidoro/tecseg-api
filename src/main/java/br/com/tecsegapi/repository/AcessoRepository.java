@@ -15,4 +15,5 @@ public interface AcessoRepository extends JpaRepository<Acesso, Integer>{
 	Optional<List<Acesso>> findByNomeContainingOrderByNome(String Nome);
 	List<Acesso> findAll();
 	
+	
 }

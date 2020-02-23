@@ -76,6 +76,18 @@ public class Conversor {
 			return "https://tecseg-img.s3.us-east-2.amazonaws.com/agendado.png";
 		}
 	}
+	
+	public String getMesAno(Date data) {
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setGregorianChange(data);
+		int ano = calendar.get(GregorianCalendar.YEAR);
+		int mes = calendar.get(GregorianCalendar.MONTH) + 1;
+		String mesAno;
+		if (mes<10) {
+			mesAno = '0' + String.valueOf(mes) + "/" + String.valueOf(ano);
+		}else mesAno = String.valueOf(mes) + "/" + String.valueOf(ano);
+		return mesAno;
+	}
 
 }
 

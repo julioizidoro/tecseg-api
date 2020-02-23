@@ -138,13 +138,6 @@ public interface AsoControleRepository  extends JpaRepository<Asocontrole, Integ
 				
 				
 	
-	//Somente Data Vencimento
-	@Query("select a from Asocontrole a where a.dataexame>= :datainicial and a.dataexame<= :datafinal and a.funcionario.loja.idloja= :idloja"
-			+ " order by a.asotipo.idasotipo")
-			List<Asocontrole> findAllDataExame(
-			@Param("datainicial") Date datainicla,
-			@Param("datafinal") Date datafinal,
-			@Param("idloja") int idlojal);
 				
 
 	
