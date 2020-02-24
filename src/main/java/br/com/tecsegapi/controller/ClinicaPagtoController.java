@@ -22,7 +22,7 @@ import br.com.tecsegapi.repository.ClinicaPagtoRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/acessos")
+@RequestMapping("/clinicapagtos")
 public class ClinicaPagtoController {
 	
 	@Autowired
@@ -52,8 +52,7 @@ public class ClinicaPagtoController {
 		}
 		return ResponseEntity.ok(lista);
 	}
-	
-	
+
 	
 	
 
