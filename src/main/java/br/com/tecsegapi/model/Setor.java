@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -27,6 +30,9 @@ public class Setor implements Serializable {
 	@Size(max = 50)
     @Column(name = "nome")
     private String nome;
+	@JoinColumn(name = "funcionario_idfuncionario", referencedColumnName = "idfuncionario")
+    @OneToOne(optional = false)
+    private Funcionario funcionario;
 
 	public Setor() {
 	
@@ -55,6 +61,16 @@ public class Setor implements Serializable {
 		this.nome = nome;
 	}
 
+
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
 
 
 	@Override
