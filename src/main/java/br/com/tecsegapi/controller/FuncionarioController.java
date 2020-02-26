@@ -187,7 +187,7 @@ public class FuncionarioController {
 		Conversor c = new Conversor();
 		Date di = c.ConvercaoStringData(datainicial);
 		Date df = c.ConvercaoStringData(datafinal);
-		Optional<List<Funcionario>> lista = funcionarioRepository.findAllLojaData(idloja, di, df);
+		Optional<List<Funcionario>> lista = funcionarioRepository.findAllLojaData(idloja, df);
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}

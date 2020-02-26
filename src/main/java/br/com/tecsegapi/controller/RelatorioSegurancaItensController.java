@@ -1,6 +1,5 @@
 package br.com.tecsegapi.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,41 +17,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.tecsegapi.model.Acesso;
-import br.com.tecsegapi.model.Relatorioseguranca;
-import br.com.tecsegapi.repository.RelatorioSegurancaRepository;
-import br.com.tecsegapi.util.Conversor;
+import br.com.tecsegapi.model.Relatoriosegurancaitens;
+import br.com.tecsegapi.repository.RelatorioSegurancaItensRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/relseguranca")
-public class RelatorioSegurancaController {
-	
+@RequestMapping("/rsitens")
+public class RelatorioSegurancaItensController {
+
 	@Autowired
-	private RelatorioSegurancaRepository relatorioSegurancaRepository;
+	private RelatorioSegurancaItensRepository relatorioSegurancaItensRepository;
 	
+
 	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Relatorioseguranca salvar(@Valid @RequestBody Relatorioseguranca rs) {
-		return relatorioSegurancaRepository.save(rs);
+	public Relatoriosegurancaitens salvar(@Valid @RequestBody Relatoriosegurancaitens rsitens) {
+		return relatorioSegurancaItensRepository.save(rsitens);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Relatorioseguranca> buscar(@PathVariable Integer id) {
-		Optional<Relatorioseguranca> rs = relatorioSegurancaRepository.findById(id);
+	public ResponseEntity<Relatoriosegurancaitens> buscar(@PathVariable Integer id) {
+		Optional<Relatoriosegurancaitens> rsitens = relatorioSegurancaItensRepository.findById(id);
 		
-		if (rs==null) {
+		if (rsitens==null) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		return ResponseEntity.ok(rs.get());
+		return ResponseEntity.ok(rsitens.get());
 	}
 	
-	@GetMapping("listar")
-	public ResponseEntity<Optional<List<Relatorioseguranca>>> listar() {
-		Conversor c = new Conversor();
-		Date data = c.SomarDiasData(new Date(), -180);
-		Optional<List<Relatorioseguranca>> lista = relatorioSegurancaRepository.findAllRelatorios(data);
+	@GetMapping("listar/{id}")
+	public ResponseEntity<Optional<List<Relatoriosegurancaitens>>> listar(@PathVariable Integer id) {
+		Optional<List<Relatoriosegurancaitens>> lista = relatorioSegurancaItensRepository.findAllRelatoriosItens(id);
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -60,5 +56,4 @@ public class RelatorioSegurancaController {
 		return ResponseEntity.ok(lista);
 	}
 	
-
 }

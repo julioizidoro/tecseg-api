@@ -17,7 +17,7 @@ public interface RelatorioSegurancaRepository extends JpaRepository<Relatorioseg
 	Optional<Relatorioseguranca> findById(int id);
 	
 	
-	@Query("select r from Relatorioseguranca r where a.data> :data order by a.data")
+	@Query("select r from Relatorioseguranca r where r.data> :data order by r.data")
 	Optional<List<Relatorioseguranca>> findAllRelatorios(@Param("data") Date data);
 	List<Relatorioseguranca> findAll();
 	

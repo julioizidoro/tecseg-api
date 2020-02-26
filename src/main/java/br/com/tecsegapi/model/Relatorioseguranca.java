@@ -39,8 +39,7 @@ public class Relatorioseguranca implements Serializable {
     @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
     private Usuario usuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "relatorioseguranca")
-    private List<Relatoriosegurancaitens> relatoriosegurancaitensList;
+   
 
     public Relatorioseguranca() {
     }
@@ -81,15 +80,7 @@ public class Relatorioseguranca implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<Relatoriosegurancaitens> getRelatoriosegurancaitensList() {
-        return relatoriosegurancaitensList;
-    }
-
-    public void setRelatoriosegurancaitensList(List<Relatoriosegurancaitens> relatoriosegurancaitensList) {
-        this.relatoriosegurancaitensList = relatoriosegurancaitensList;
-    }
-
-    @Override
+      @Override
     public int hashCode() {
         int hash = 0;
         hash += (idrelatorioseguranca != null ? idrelatorioseguranca.hashCode() : 0);

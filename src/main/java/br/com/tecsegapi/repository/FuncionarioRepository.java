@@ -57,9 +57,9 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 		
 
 		//Pesquiar LojaData
-				@Query("select f from Funcionario f where f.loja.idloja= :idloja and f.datasituacao>= :datainicial and f.datasituacao<= :datafinal  order by f.nome")
+				@Query("select f from Funcionario f where f.loja.idloja= :idloja and f.datasituacao<= :datafinal  order by f.nome")
 				Optional<List<Funcionario>> findAllLojaData( 
-				@Param("idloja") int idloja, @Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal);
+				@Param("idloja") int idloja, @Param("datafinal") Date datafinal);
 		
 				
 	//Quantidade de funciionarios

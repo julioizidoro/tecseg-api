@@ -30,10 +30,7 @@ public class Setor implements Serializable {
 	@Size(max = 50)
     @Column(name = "nome")
     private String nome;
-	@JoinColumn(name = "funcionario_idfuncionario", referencedColumnName = "idfuncionario")
-    @OneToOne(optional = false)
-    private Funcionario funcionario;
-
+	
 	public Setor() {
 	
 	}
@@ -60,18 +57,6 @@ public class Setor implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-
-
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-
-
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
-
 
 	@Override
 	public boolean equals(Object obj) {

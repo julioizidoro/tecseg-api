@@ -29,6 +29,8 @@ public class Relatoriosegurancaitens implements Serializable {
     @Lob
     @Column(name = "adequacao")
     private String adequacao;
+    @Column(name = "urlfoto")
+    private String urlfoto;
     @JoinColumn(name = "relatorioseguranca_idrelatorioseguranca", referencedColumnName = "idrelatorioseguranca")
     @ManyToOne(optional = false)
     private Relatorioseguranca relatorioseguranca;
@@ -83,7 +85,15 @@ public class Relatoriosegurancaitens implements Serializable {
         this.setor = setor;
     }
 
-    @Override
+    public String getUrlfoto() {
+		return urlfoto;
+	}
+
+	public void setUrlfoto(String urlfoto) {
+		this.urlfoto = urlfoto;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idrelatoriosegurancaitens != null ? idrelatoriosegurancaitens.hashCode() : 0);
