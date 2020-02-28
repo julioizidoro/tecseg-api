@@ -16,7 +16,7 @@ public interface RelatorioSegurancaItensRepository extends JpaRepository<Relator
 	Optional<Relatoriosegurancaitens> findById(int id);
 	
 	
-	@Query("select r from Relatoriosegurancaitens r where r.relatorioseguranca = :id order by r.setor.nome")
+	@Query("select r from Relatoriosegurancaitens r where r.relatorioseguranca.idrelatorioseguranca = :id order by r.setor.nome")
 	Optional<List<Relatoriosegurancaitens>> findAllRelatoriosItens(@Param("id") int id);
 	
 	
