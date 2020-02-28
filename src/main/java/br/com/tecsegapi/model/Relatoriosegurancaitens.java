@@ -31,6 +31,8 @@ public class Relatoriosegurancaitens implements Serializable {
     private String adequacao;
     @Column(name = "urlfoto")
     private String urlfoto;
+    @Column(name = "uploadimagem")
+    private boolean uploadimagem;
     @JoinColumn(name = "relatorioseguranca_idrelatorioseguranca", referencedColumnName = "idrelatorioseguranca")
     @ManyToOne(optional = false)
     private Relatorioseguranca relatorioseguranca;
@@ -91,6 +93,16 @@ public class Relatoriosegurancaitens implements Serializable {
 
 	public void setUrlfoto(String urlfoto) {
 		this.urlfoto = urlfoto;
+	}
+
+	
+
+	public boolean isUploadimagem() {
+		return uploadimagem;
+	}
+
+	public void setUploadimagem(boolean uploadimagem) {
+		this.uploadimagem = uploadimagem;
 	}
 
 	@Override

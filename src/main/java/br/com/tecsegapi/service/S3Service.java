@@ -32,12 +32,12 @@ public class S3Service {
 	
 	
 
-	public URI uploadFilePictureUser(MultipartFile multipartFile) {
+	public URI uploadFilePictureUser(MultipartFile multipartFile, String pasta) {
 		try {
 			String fileName = multipartFile.getOriginalFilename();
 			InputStream is = multipartFile.getInputStream();
 			String contentType = multipartFile.getContentType();
-			return uploadFilePictureUser(is, fileName, contentType);
+			return uploadFilePictureUser(is, fileName, contentType, pasta);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException("Erro IO: " + e.getMessage());
@@ -45,14 +45,15 @@ public class S3Service {
 
 	}
 
-	public URI uploadFilePictureUser(InputStream is, String fileName, String contentType) {
+	public URI uploadFilePictureUser(InputStream is, String fileName, String contentType, String pasta) {
 		try {
 			ObjectMetadata meta = new ObjectMetadata();
 			meta.setContentType(contentType);
 			LOG.info("Iniciando Upload");
-			s3Client.putObject(bucketpictureuser, fileName, is, meta);
+			buckettecsegimg = buckettecsegimg + "/" + pasta ;
+			s3Client.putObject(buckettecsegimg, fileName, is, meta);
 			LOG.info("Upload Finalizado");
-			return s3Client.getUrl(bucketpictureuser, fileName).toURI();
+			return s3Client.getUrl(buckettecsegimg, fileName).toURI();
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException("Erro converter URI");

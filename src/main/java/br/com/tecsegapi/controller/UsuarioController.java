@@ -110,7 +110,7 @@ public class UsuarioController {
 	@PostMapping("/picture")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name="file") MultipartFile file) {
-		URI uri = s3Service.uploadFilePictureUser(file);
+		URI uri = s3Service.uploadFilePictureUser(file, "user");
 		return ResponseEntity.created(uri).build();
 	}
 }

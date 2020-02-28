@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioSeguranca" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e5cb6bb-a46d-4966-8052-3c018589ea7c">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.callouts" value="##Mon Dec 30 12:07:51 GMT-03:00 2019"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.awt.Image" isForPrompting="false"/>
+	<parameter name="logosst" class="java.awt.Image" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT r.data, l.razaosocial, l.cnpj, l.endereco, l.numero, l.bairro, l.cidade, l.estado, l.cep,
+u.nome as nomeusuario, i.constatacao, i.adequacao, i.urlfoto, i.uploadimagem, s.nome as nomesetor
+FROM
+	relatorioseguranca r join loja l on r.loja_idloja = l.idloja
+    join relatoriosegurancaitens i on r.idrelatorioseguranca = i.relatorioseguranca_idrelatorioseguranca
+    join usuario u on r.usuario_idusuario = u.idusuario
+    join setor s on i.setor_idsetor = s.idsetor
+where r.idrelatorioseguranca = $P{id}
+order by s.nome, i.idrelatoriosegurancaitens]]>
+	</queryString>
+	<field name="data" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razaosocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cnpj" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="endereco" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numero" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bairro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cidade" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cep" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomeusuario" class="java.lang.String"/>
+	<field name="constatacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="adequacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="urlfoto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uploadimagem" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomesetor" class="java.lang.String"/>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<title>
+		<band height="347" splitType="Stretch">
+			<rectangle>
+				<reportElement x="40" y="213" width="439" height="60" uuid="c9df0bd9-ce6a-4a93-bdb3-eb663d4d816f"/>
+			</rectangle>
+			<image scaleImage="RetainShape">
+				<reportElement x="34" y="0" width="141" height="52" uuid="8f04aea1-404c-468e-81be-91609974bd9a"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<image scaleImage="RetainShape">
+				<reportElement x="444" y="0" width="95" height="52" uuid="6060d818-661f-4334-9e17-f1888c0a2e6b"/>
+				<imageExpression><![CDATA[$P{logosst}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="90" y="76" width="389" height="14" uuid="526d8074-9f30-4c9e-b88c-b9a242f04243"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razaosocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="76" width="52" height="14" uuid="a591b714-304d-4f54-933f-58ce68752cbf"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Empresa :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="95" width="180" height="14" uuid="0b3758c0-5823-424f-89d9-b57ba15d52fc"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cnpj}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="95" width="52" height="14" uuid="ebf90f05-8779-4d5e-8c2b-585c664f0cbf"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[CNPJ :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="116" width="389" height="14" uuid="5fe9a6b6-db3a-4b0d-b360-935345309a38"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{endereco} + ", " + $F{numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="116" width="52" height="14" uuid="ca8ee1b9-865a-48a0-bfb1-645baa37ff78"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[CNPJ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="138" width="52" height="14" uuid="0907c363-78ec-4160-a193-8468f9ce3c53"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Bairro :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="138" width="179" height="14" uuid="af6a95ef-aa8c-4b05-857e-b8aae88f540a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bairro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="336" y="138" width="143" height="14" uuid="2459e3f6-6b2d-4536-97b7-6bc13778bab7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cep}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="296" y="138" width="36" height="14" uuid="fc9e5a08-5d58-440d-be07-52427cbe0739"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cep :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="92" y="158" width="179" height="14" uuid="18c311ef-b320-4a28-baeb-d5e98b0abcd7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="336" y="158" width="108" height="14" uuid="296f93a1-92ba-4268-aa63-7b25b499c2ea"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="36" y="158" width="52" height="14" uuid="62248ac5-2298-4fc7-97da-01fd461493a5"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cidade :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="283" y="158" width="49" height="14" uuid="51b61897-21de-49cf-b8cb-125855218a15"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Estado :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="196" width="139" height="14" uuid="dbe96ea1-3fa7-4225-85ec-1394c9fd6531"/>
+				<textElement textAlignment="Left">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Responsável  Técnico]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="227" width="191" height="14" uuid="1164803e-8708-42e9-8c9e-f1199772e1df"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeusuario}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="245" width="286" height="14" uuid="0f39e193-6697-4c5a-a38b-43d8ceaba631"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ténica em Segurança do Trabalho - MTE/SC 0034268"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="295" width="539" height="25" uuid="2dc5451e-a761-403f-ad42-5b00b8abb3d8"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE SEGURANÇA DO TRABALHO]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="296" y="323" width="230" height="14" uuid="deb01cc8-cbd9-4978-95fe-5fb7243c5900"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="186" y="323" width="100" height="14" uuid="5a2a6d5c-dcef-4e27-87ce-b96641a711e6"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da Elaboração :]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="50"/>
+	</pageHeader>
+</jasperReport>
