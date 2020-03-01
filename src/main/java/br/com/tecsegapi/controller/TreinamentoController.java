@@ -78,6 +78,13 @@ public class TreinamentoController {
 	@ResponseStatus(HttpStatus.CREATED)
 	//@CachePut("consultaTreinamento")
 	public Treinamento salvar(@Valid @RequestBody Treinamento treinamento) {
+		if (treinamento.getSituacao().equalsIgnoreCase("Finalizado")) {
+			if (treinamento.getDatavencimento() == null) {
+				Conversor c = new Conversor();
+				int dias = treinamento.getTreinamentotipo().getPeriodicidade();
+				treinamento.setDatavencimento(c.SomarDiasData(treinamento.getData(), dias));
+			}
+		}
 		return treinamentoRepository.save(treinamento);
 	}
 	
