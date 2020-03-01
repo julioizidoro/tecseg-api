@@ -33,6 +33,8 @@ public class Relatoriosegurancaitens implements Serializable {
     private String urlfoto;
     @Column(name = "uploadimagem")
     private boolean uploadimagem;
+    @Column(name = "nomefile")
+    private String nomefile;
     @JoinColumn(name = "relatorioseguranca_idrelatorioseguranca", referencedColumnName = "idrelatorioseguranca")
     @ManyToOne(optional = false)
     private Relatorioseguranca relatorioseguranca;
@@ -96,6 +98,14 @@ public class Relatoriosegurancaitens implements Serializable {
 	}
 
 	
+
+	public String getNomefile() {
+		return nomefile;
+	}
+
+	public void setNomefile(String nomefile) {
+		this.nomefile = nomefile;
+	}
 
 	public boolean isUploadimagem() {
 		return uploadimagem;

@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
 @Service
@@ -49,12 +51,23 @@ public class S3Service {
 		try {
 			ObjectMetadata meta = new ObjectMetadata();
 			meta.setContentType(contentType);
-			LOG.info("Iniciando Upload");
-			buckettecsegimg = buckettecsegimg + "/" + pasta ;
-			s3Client.putObject(buckettecsegimg, fileName, is, meta);
+			LOG.info("Iniciando Upload"); 
+			s3Client.putObject(buckettecsegimg + "/" + pasta, fileName, is, meta);
 			LOG.info("Upload Finalizado");
 			return s3Client.getUrl(buckettecsegimg, fileName).toURI();
 		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("Erro converter URI");
+		}
+	}
+	
+
+	public void deleteFilePicture(String fileName, String pasta) {
+		try {
+			LOG.info("Iniciando Delete");
+			s3Client.deleteObject(buckettecsegimg, pasta+"/" + fileName);
+			LOG.info("Upload Finalizado");
+		} catch (SdkClientException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException("Erro converter URI");
 		}
