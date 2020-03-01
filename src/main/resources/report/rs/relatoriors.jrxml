@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioSeguranca" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e5cb6bb-a46d-4966-8052-3c018589ea7c">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="359"/>
+	<property name="ireport.y" value="357"/>
 	<property name="ireport.callouts" value="##Mon Dec 30 12:07:51 GMT-03:00 2019"/>
 	<parameter name="id" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -118,7 +118,7 @@ order by s.nome, i.idrelatoriosegurancaitens]]>
 				<textElement textAlignment="Right">
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[CNPJ :]]></text>
+				<text><![CDATA[Endereço :]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="35" y="138" width="52" height="14" uuid="0907c363-78ec-4160-a193-8468f9ce3c53"/>
@@ -218,6 +218,9 @@ order by s.nome, i.idrelatoriosegurancaitens]]>
 				</textElement>
 				<text><![CDATA[Data da Elaboração :]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="62" width="555" height="1" uuid="61a323e3-7fa6-435a-ba03-2bad58e2075f"/>
+			</line>
 		</band>
 	</title>
 	<detail>
@@ -255,7 +258,7 @@ order by s.nome, i.idrelatoriosegurancaitens]]>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{adequacao}.isEmpty() ? "" : "ADEQUAÇÃO: " + $F{adequacao})]]></textFieldExpression>
 			</textField>
-			<image>
+			<image scaleImage="RealSize" hAlign="Center">
 				<reportElement x="6" y="6" width="210" height="179" uuid="f94a381d-616c-4707-a0f5-36f18ac0e8d7"/>
 				<imageExpression><![CDATA[$F{urlfoto}]]></imageExpression>
 			</image>
