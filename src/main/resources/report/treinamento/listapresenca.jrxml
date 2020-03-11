@@ -67,7 +67,7 @@ order by f.nome]]>
 			<rectangle>
 				<reportElement x="179" y="0" width="376" height="304" uuid="1b71ac27-e829-4114-bba6-429f9d05e52c"/>
 			</rectangle>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="184" y="55" width="365" height="238" uuid="8c61df5b-2ac4-4614-85a0-4b1160540dd5"/>
 				<textFieldExpression><![CDATA[$F{conteudo}]]></textFieldExpression>
 			</textField>
@@ -78,7 +78,7 @@ order by f.nome]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nometipo}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="184" y="24" width="365" height="15" uuid="820d8404-ca74-4621-b650-cd1246f991ba"/>
 				<textElement textAlignment="Center">
 					<font isBold="true" isUnderline="true"/>
@@ -97,7 +97,7 @@ order by f.nome]]>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[HIPER SELECT SUPEORMERCADOS :]]></text>
+				<text><![CDATA[HIPER SELECT SUPERMERCADOS :]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="25" width="52" height="14" uuid="f838881e-4403-4145-9fca-312650d44a22"/>
@@ -132,7 +132,7 @@ order by f.nome]]>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Cidde :]]></text>
+				<text><![CDATA[Cidade :]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="66" y="65" width="137" height="14" uuid="77e4b05a-5855-4cf7-8f94-36a91b29c9c5"/>
@@ -248,4 +248,36 @@ order by f.nome]]>
 			</textField>
 		</band>
 	</detail>
+	<lastPageFooter>
+		<band height="116">
+			<staticText>
+				<reportElement x="134" y="78" width="236" height="15" uuid="f1d0c59d-3fea-4d74-95bd-3773e857730b"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Técnica em Segurança do Trabalho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="62" width="236" height="15" uuid="85819fd3-6b79-41fc-b855-71bcb6dd583a"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Andrieli A. Welter]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="95" width="236" height="15" uuid="ca0d8df7-9c8f-4b7e-bdf4-de00b41c029c"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[MTE SC 0034268 - Fona (48)99641-9026]]></text>
+			</staticText>
+			<line>
+				<reportElement x="134" y="61" width="236" height="1" uuid="2b0de26d-be30-45b3-94f3-e93003d97614"/>
+			</line>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle" isUsingCache="true">
+				<reportElement mode="Opaque" x="233" y="10" width="56" height="50" uuid="54543f17-0cb2-4654-a4c5-930ed41a08f9"/>
+				<imageExpression><![CDATA["https://tecseg-img.s3.us-east-2.amazonaws.com/ass1.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</lastPageFooter>
 </jasperReport>

@@ -2,13 +2,14 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AutorizacaoConsultaSalutar" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e5cb6bb-a46d-4966-8052-3c018589ea7c">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="326"/>
 	<property name="ireport.callouts" value="##Mon Dec 30 12:07:51 GMT-03:00 2019"/>
 	<parameter name="id" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="logo" class="java.awt.Image" isForPrompting="false"/>
 	<parameter name="exames" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="assintarua" class="java.awt.Image" isForPrompting="false"/>
 	<queryString>
 		<![CDATA[Select distinct ag.dataexame, ag.hora, ag.situacao, f.nome, f.rg, f.cpf, f.datanascimento, s.nome as nomesetor,
 fc.nome as nomefuncao, fc.cbo, f.pis, f.ctps, f.serie, f.uf, l.razaosocial, l.cnpj, fn.nome as novaFuncao, l.nome as unidade,
@@ -22,8 +23,7 @@ join funcao fn on ag.funcao_idfuncao = fn.idfuncao
 join agendaexame ex on ag.idasoagenda = ex.asoagenda_idasoagenda
 join asotipo at on ex.asotipo_idasotipo = at.idasotipo
 
-where ag.idasoagenda = $P{id}  and at.categoria= "aso"
-]]>
+where ag.idasoagenda = $P{id}  and at.categoria= "aso"]]>
 	</queryString>
 	<field name="dataexame" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -103,7 +103,7 @@ where ag.idasoagenda = $P{id}  and at.categoria= "aso"
 	<pageHeader>
 		<band height="744">
 			<rectangle>
-				<reportElement x="0" y="563" width="555" height="91" uuid="d61b27d1-8a19-4a41-8dd0-94ed4ab7a103"/>
+				<reportElement x="0" y="547" width="555" height="91" uuid="d61b27d1-8a19-4a41-8dd0-94ed4ab7a103"/>
 			</rectangle>
 			<rectangle>
 				<reportElement x="0" y="0" width="135" height="20" uuid="62f9bda7-ef19-4482-99c2-09f460dd6ecd"/>
@@ -216,10 +216,10 @@ where ag.idasoagenda = $P{id}  and at.categoria= "aso"
 				<reportElement x="278" y="211" width="277" height="312" uuid="1a49e21c-7400-49e0-8ad1-6d7fb5ebbb8a"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="1" y="543" width="554" height="20" uuid="c1521faa-7d6d-437d-adba-6b85c943eb26"/>
+				<reportElement x="1" y="527" width="554" height="20" uuid="c1521faa-7d6d-437d-adba-6b85c943eb26"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="1" y="563" width="60" height="91" uuid="a9a55418-75d7-4b57-8327-abd8c31591a4"/>
+				<reportElement x="1" y="547" width="60" height="91" uuid="a9a55418-75d7-4b57-8327-abd8c31591a4"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="10" y="222" width="250" height="66" uuid="8ba59e11-af1a-4da3-8425-a670fde54033"/>
@@ -238,14 +238,14 @@ Obs.: horário de coleta 07:00 ÁS 16:00h
 				<textFieldExpression><![CDATA[$F{razaosocial}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="73" y="569" width="467" height="14" uuid="d58e16af-f913-46b1-803d-352224ad08fa"/>
+				<reportElement x="73" y="553" width="467" height="14" uuid="d58e16af-f913-46b1-803d-352224ad08fa"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["CLASS SAÚDE -MEDICINA OCUPACIONAL LTDA – (SALUTAR)"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="13" y="546" width="536" height="14" uuid="de741f0e-4617-43ae-ab62-435543d09c95"/>
+				<reportElement x="13" y="530" width="536" height="14" uuid="de741f0e-4617-43ae-ab62-435543d09c95"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
@@ -331,54 +331,82 @@ FLORIANOPOLIS (SC)
 Obs.: Horário de coleta 07:00 AS 10:30h .]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="8" y="569" width="46" height="14" uuid="e32df859-b862-47db-96d7-31e0e8e5d541"/>
+				<reportElement x="8" y="553" width="46" height="14" uuid="e32df859-b862-47db-96d7-31e0e8e5d541"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Clinica:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="9" y="590" width="46" height="14" uuid="df385fd0-9ac9-4899-a0cc-98d8acb1d02d"/>
+				<reportElement x="9" y="574" width="46" height="14" uuid="df385fd0-9ac9-4899-a0cc-98d8acb1d02d"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Endereço:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="74" y="590" width="467" height="14" uuid="d24bf562-a17a-4a15-a2fb-6d035319456b"/>
+				<reportElement x="74" y="574" width="467" height="14" uuid="d24bf562-a17a-4a15-a2fb-6d035319456b"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["RUA JERÒNIMO COELHO, 170 – SLAS. 901/902 – ED. CEISA"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="8" y="610" width="46" height="14" uuid="1fd89670-8baa-43bd-9f74-408cd5d0d19a"/>
+				<reportElement x="8" y="594" width="46" height="14" uuid="1fd89670-8baa-43bd-9f74-408cd5d0d19a"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cidade:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="73" y="610" width="467" height="14" uuid="fe1a7db1-6444-428b-aa30-b18de50bd118"/>
+				<reportElement x="73" y="594" width="467" height="14" uuid="fe1a7db1-6444-428b-aa30-b18de50bd118"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["FLORIANOPOLIS (SC)"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="8" y="630" width="46" height="14" uuid="59722e3d-66fd-4355-b432-bf5251d1b512"/>
+				<reportElement x="8" y="614" width="46" height="14" uuid="59722e3d-66fd-4355-b432-bf5251d1b512"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Clinica:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="73" y="630" width="467" height="14" uuid="e2783d20-1e81-4e82-afdd-5ec1d64509ac"/>
+				<reportElement x="73" y="614" width="467" height="14" uuid="e2783d20-1e81-4e82-afdd-5ec1d64509ac"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["(48) 3028-8050 Guilherme / Sandra"]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="148" y="692" width="236" height="1" uuid="20a6b7e5-32f6-40cb-ac7e-d17dc407f6eb"/>
+			</line>
+			<staticText>
+				<reportElement x="148" y="693" width="236" height="15" uuid="4d01e8ec-75cf-40b7-9b4f-16b688701d87"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Andrieli A. Welter]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="709" width="236" height="15" uuid="4c8fd4b3-300e-4bb0-986a-66d35b5d04ee"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Técnica em Segurança do Trabalho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="726" width="236" height="15" uuid="db7c8b10-0252-49e6-aa51-15ec70d4258f"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[MTE SC 0034268 - Fona (48)99641-9026]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle" isUsingCache="true">
+				<reportElement mode="Opaque" x="247" y="641" width="56" height="50" uuid="5d094e0c-4be3-4692-90af-07e8d7bb9c66"/>
+				<imageExpression><![CDATA["https://tecseg-img.s3.us-east-2.amazonaws.com/ass1.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
 </jasperReport>

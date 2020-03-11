@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioSeguranca" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e5cb6bb-a46d-4966-8052-3c018589ea7c">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="357"/>
+	<property name="ireport.y" value="536"/>
 	<property name="ireport.callouts" value="##Mon Dec 30 12:07:51 GMT-03:00 2019"/>
 	<parameter name="id" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -264,4 +264,36 @@ order by s.nome, i.idrelatoriosegurancaitens]]>
 			</image>
 		</band>
 	</detail>
+	<lastPageFooter>
+		<band height="118">
+			<staticText>
+				<reportElement x="136" y="81" width="236" height="15" uuid="48d2a491-e54d-48fd-8e75-0f3b05831739"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Técnica em Segurança do Trabalho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="65" width="236" height="15" uuid="d88d1847-3545-483a-ae17-63cb04f79520"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Andrieli A. Welter]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="98" width="236" height="15" uuid="5dd38a15-1c62-4c12-9afd-a05179bf56f6"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[MTE SC 0034268 - Fona (48)99641-9026]]></text>
+			</staticText>
+			<line>
+				<reportElement x="136" y="64" width="236" height="1" uuid="ea89ea48-943b-4010-9b28-247c8a2846ff"/>
+			</line>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle" isUsingCache="true">
+				<reportElement mode="Opaque" x="235" y="13" width="56" height="50" uuid="473911eb-dddf-4823-938f-3f1072c45f1d"/>
+				<imageExpression><![CDATA["https://tecseg-img.s3.us-east-2.amazonaws.com/ass1.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</lastPageFooter>
 </jasperReport>

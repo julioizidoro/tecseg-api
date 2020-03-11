@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import br.com.tecsegapi.model.Clientes;
 import br.com.tecsegapi.model.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer>{
@@ -69,6 +70,9 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 	int calculaTotalFncionarios(@Param("datafinal") Date datafinal,
 			@Param("idloja") int idloja);
 
-	
+	@Query(
+			value = "SELECT * FROM funcionario WHERE ((month(datanascimento))=:mes1 and (day(datanascimento))>= :dia1) or ((month(datanascimento))= :mes2 and (day(datanascimento))<= :dia2) order by month(datanascimento), day(datanascimento), nome",
+			nativeQuery = true)
+	Optional<List<Funcionario>> getAniversariantes(@Param("mes1") int mes1, @Param("dia1") int dia1, @Param("mes2") int mes2, @Param("dia2") int dia2);
 
 }

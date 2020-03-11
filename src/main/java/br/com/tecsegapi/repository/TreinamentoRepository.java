@@ -37,9 +37,9 @@ public interface TreinamentoRepository extends JpaRepository<Treinamento, Intege
 	@Param("datafinal") Date datafinal);
 	
 	//Situacao
-	@Query("select t from Treinamento t where t.situacao= :situacao  order by t.data")
+	@Query("select t from Treinamento t where t.situacao= :situacao and data>= :data  order by t.data")
 	Optional<List<Treinamento>> findAllSituacao(
-	@Param("situacao") String situacao);
+	@Param("situacao") String situacao, @Param("data") Date data);
 	
 	
 

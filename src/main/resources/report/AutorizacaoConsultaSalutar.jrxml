@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AutorizacaoConsultaSalutar" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e5cb6bb-a46d-4966-8052-3c018589ea7c">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.y" value="326"/>
 	<property name="ireport.callouts" value="##Mon Dec 30 12:07:51 GMT-03:00 2019"/>
 	<parameter name="id" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -442,41 +442,38 @@ where ag.idasoagenda = $P{id}]]>
 				<text><![CDATA[Fone: (48) 3028-8050 / 3028-4707]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="0" y="564" width="555" height="180" uuid="ea2dc405-b60f-4b18-837e-cae5ebbcfcf3"/>
+				<reportElement x="-1" y="563" width="555" height="180" uuid="ea2dc405-b60f-4b18-837e-cae5ebbcfcf3"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="610" width="551" height="14" uuid="05d9d69f-139b-425d-8c1d-2945aafa0086"/>
+				<reportElement x="0" y="589" width="551" height="14" uuid="05d9d69f-139b-425d-8c1d-2945aafa0086"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[  *retorno ao trabalho, apresentar documento de decisão do INSS.*]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="595" width="551" height="14" uuid="8299b8db-3ad1-4930-a41f-65512a77a456"/>
+				<reportElement x="0" y="574" width="551" height="14" uuid="8299b8db-3ad1-4930-a41f-65512a77a456"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[  *trazer documento de identificação oficial com foto.*]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="657" width="107" height="14" uuid="f1de94c3-347d-4a53-8d6b-80cf52071c9c"/>
+				<reportElement x="2" y="622" width="107" height="14" uuid="f1de94c3-347d-4a53-8d6b-80cf52071c9c"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Assinatura/empresa:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="716" width="113" height="14" uuid="8ba59e11-af1a-4da3-8425-a670fde54033"/>
+				<reportElement x="2" y="724" width="113" height="14" uuid="8ba59e11-af1a-4da3-8425-a670fde54033"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Assinatura/funcionário:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="113" y="669" width="300" height="1" uuid="09a53d21-cf9b-41cd-b150-9585a551f2e3"/>
-			</line>
-			<line>
-				<reportElement x="113" y="729" width="300" height="1" uuid="b23f4a9e-3142-4d92-bfcc-84d16f8adca6"/>
+				<reportElement x="113" y="737" width="300" height="1" uuid="b23f4a9e-3142-4d92-bfcc-84d16f8adca6"/>
 			</line>
 			<textField>
 				<reportElement x="143" y="3" width="408" height="14" uuid="74c9ef81-d6dc-4be6-9488-29413dbafa2a"/>
@@ -517,6 +514,34 @@ where ag.idasoagenda = $P{id}]]>
 				</textElement>
 				<textFieldExpression><![CDATA["EXAME COMPLEMENTAR " + $P{ecdescricao}]]></textFieldExpression>
 			</textField>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle" isUsingCache="true">
+				<reportElement mode="Opaque" x="254" y="605" width="56" height="50" uuid="93c224ad-73ae-43d9-b9ad-3f621ec1d77f"/>
+				<imageExpression><![CDATA["https://tecseg-img.s3.us-east-2.amazonaws.com/ass1.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="166" y="650" width="236" height="15" uuid="fd1b9a6f-c61b-476d-8d0a-a7545eb935e6"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Andrieli A. Welter]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="665" width="236" height="15" uuid="0185b03b-e7ec-44af-a19e-73ff4b21c77f"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Técnica em Segurança do Trabalho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="680" width="236" height="15" uuid="45a5bb04-59db-47c0-b6d5-03d2cf535d2f"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[MTE SC 0034268 - Fona (48)99641-9026]]></text>
+			</staticText>
+			<line>
+				<reportElement x="166" y="645" width="236" height="1" uuid="b9df2bc8-4960-4a34-ac0c-18c1343f59fd"/>
+			</line>
 		</band>
 	</pageHeader>
 </jasperReport>

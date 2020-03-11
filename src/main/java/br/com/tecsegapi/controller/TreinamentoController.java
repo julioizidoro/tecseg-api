@@ -115,6 +115,47 @@ public class TreinamentoController {
 		return ResponseEntity.ok(treinamentos);
 	}
 	
+	//Pesquisar data - situacao
+	@GetMapping("{datai}/{dataf}/{situacao}")
+	//@Cacheable("consultaTreinamento")
+	public ResponseEntity<Optional<List<Treinamento>>> pesquisarDataSituacao(@PathVariable("datai") String datai, @PathVariable("dataf") String dataf, @PathVariable("situacao") String situacao) {
+		Conversor c = new Conversor();
+		Date dataInicial = c.ConvercaoStringData(datai);
+		Date dataFinal = c.ConvercaoStringData(dataf);
+		Optional<List<Treinamento>> treinamentos = treinamentoRepository.findAllPeridoSituacao(dataInicial, dataFinal, situacao);
+		if (treinamentos==null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(treinamentos);
+	}
+	
+	//Pesquisar data
+		@GetMapping("{datai}/{dataf}")
+		//@Cacheable("consultaTreinamento")
+		public ResponseEntity<Optional<List<Treinamento>>> pesquisarData(@PathVariable("datai") String datai, @PathVariable("dataf") String dataf) {
+			Conversor c = new Conversor();
+			Date dataInicial = c.ConvercaoStringData(datai);
+			Date dataFinal = c.ConvercaoStringData(dataf);
+			Optional<List<Treinamento>> treinamentos = treinamentoRepository.findAllPerido(dataInicial, dataFinal);
+			if (treinamentos==null) {
+				return ResponseEntity.notFound().build();
+			}
+			return ResponseEntity.ok(treinamentos);
+		}
+		
+		//Pesquisar situacao
+		@GetMapping("situacao/{situacao}")
+		//@Cacheable("consultaTreinamento")
+		public ResponseEntity<Optional<List<Treinamento>>> pesquisarSituacao(@PathVariable("situacao") String situacao) {
+			Conversor c = new Conversor();
+			Date data = c.SomarDiasData(new Date(), -90);
+			Optional<List<Treinamento>> treinamentos = treinamentoRepository.findAllSituacao(situacao, data);
+			if (treinamentos==null) {
+				return ResponseEntity.notFound().build();
+			}
+			return ResponseEntity.ok(treinamentos);
+		}
+	
 	@GetMapping
 	//@Cacheable("consultaTreinamento")
 	public ResponseEntity<Optional<List<Treinamento>>> findAll() {
@@ -125,6 +166,18 @@ public class TreinamentoController {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(treinamentos);
+	}
+	
+	@GetMapping("participantes/vencidos")
+	//@Cacheable("consultaTreinamento")
+	public ResponseEntity<Optional<List<Treinamentoparticipante>>> findVencidos() {
+		Conversor c = new Conversor();
+		Date dataConsulta = c.SomarDiasData(new Date(), -31);
+		Optional<List<Treinamentoparticipante>> participantes = treinamentoParticipanteRepository.findVencidos(dataConsulta);
+		if (participantes==null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(participantes);
 	}
 	
 	@GetMapping("/listapresenca/{id}")
@@ -154,6 +207,8 @@ public class TreinamentoController {
 		final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
+	
+	
 	
 	
 }

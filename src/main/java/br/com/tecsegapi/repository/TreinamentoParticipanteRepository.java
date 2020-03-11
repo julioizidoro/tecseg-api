@@ -1,5 +1,6 @@
 package br.com.tecsegapi.repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,10 @@ public interface TreinamentoParticipanteRepository extends JpaRepository<Treinam
 	@Query("select t from Treinamentoparticipante t where t.treinamento.idtreinamento= :idtreinamento and t.funcionario.idfuncionario= :idfuncionario ")
 	Treinamentoparticipante findParticipante(
 	@Param("idtreinamento") int idtreinamento, @Param("idfuncionario") int idfuncionario);
+	
+	@Query("select t from Treinamentoparticipante t where t.treinamento.datavencimento<= :data and t.funcionario.situacao='Ativo' order by t.treinamento.datavencimento")
+	Optional<List<Treinamentoparticipante>> findVencidos(
+	@Param("data") Date data);
 	
 	
 }
