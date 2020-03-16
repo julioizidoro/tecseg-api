@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -80,10 +81,10 @@ public class FuncionarioController {
 		return ResponseEntity.ok(funcionario);
 	}
 	
-	@GetMapping("funcao/{idfuncao}/{nome}/{sit}")
+	@GetMapping("funcao/{idfuncao}/{nome}/{sit}/{sexo}")
 	@Cacheable("consultaFuncionarioFuncao")
 	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncionarioFuncao(@PathVariable("idfuncao") int idfuncao, 
-			@PathVariable("nome") String nome, @PathVariable("sit") String sit1) {
+			@PathVariable("nome") String nome, @PathVariable("sit") String sit1, @PathVariable("sexo") String sexo) {
 		if (nome.equalsIgnoreCase("@")) {
 			nome = " ";
 		}
@@ -94,17 +95,17 @@ public class FuncionarioController {
 		}else {
 			sit2 = sit1;
 		}
-		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioFuncao(idfuncao, nome, sit1, sit2);
+		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioFuncao(idfuncao, nome, sit1, sit2, sexo);
 		if (funcionario==null) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(funcionario);
 	}
 	
-	@GetMapping("loja/{idloja}/{nome}/{sit}")
+	@GetMapping("loja/{idloja}/{nome}/{sit}/{sexo}")
 	@Cacheable("consultaFuncionarioLoja")
 	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncinarioLoja(@PathVariable("idloja") int idloja, 
-			@PathVariable("nome") String nome, @PathVariable("sit") String sit1) {
+			@PathVariable("nome") String nome, @PathVariable("sit") String sit1, @PathVariable("sexo") String sexo) {
 		if (nome.equalsIgnoreCase("@")) {
 			nome = " ";
 		}
@@ -115,20 +116,21 @@ public class FuncionarioController {
 		}else {
 			sit2 = sit1;
 		}
-		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioLoja(idloja, nome, sit1, sit2);
+		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioLoja(idloja, nome, sit1, sit2, sexo);
 		if (funcionario==null) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(funcionario);
 	}
 	
-	@GetMapping("{idloja}/{idfuncao}/{nome}/{sit}")
+	@GetMapping("{idloja}/{idfuncao}/{nome}/{sit}/{sexo}")
 	@Cacheable("consultaFuncionarioFuncaoLoja")
 	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncionarioLoja(
 			@PathVariable("idloja") int idloja, 
 			@PathVariable("idfuncao") int idfuncao, 
 			@PathVariable("nome") String nome,
-			@PathVariable("sit") String sit1) {
+			@PathVariable("sit") String sit1,
+			@PathVariable("sexo") String sexo) {
 		if (nome.equalsIgnoreCase("@")) {
 			nome = " ";
 		}
@@ -139,7 +141,7 @@ public class FuncionarioController {
 		}else {
 			sit2 = sit1;
 		}
-		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioFuncaoLoja(idloja, idfuncao, nome, sit1, sit2);
+		Optional<List<Funcionario>> funcionario = funcionarioRepository.findAllFuncionarioFuncaoLoja(idloja, idfuncao, nome, sit1, sit2, sexo);
 		if (funcionario==null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -175,7 +177,7 @@ public class FuncionarioController {
 	
 	@GetMapping("lojasalutar/{idloja}")
 	public ResponseEntity<Optional<List<Funcionario>>> consultarLoja(@PathVariable("idloja") int idloja) {
-		Optional<List<Funcionario>> lista = funcionarioRepository.findAllLoja(idloja);
+		Optional<List<Funcionario>> lista = funcionarioRepository.findAllLoja(idloja, "N");
 		if (lista==null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -247,5 +249,26 @@ public class FuncionarioController {
 		
 		return ResponseEntity.ok(lista);
 	}
-
+	
+	@GetMapping("calcudarexp/{dias}/{data}") 
+	public Date calcularDataExperiencia(
+			@PathVariable("dias") int dias,
+			@PathVariable("data") String data) {
+		Conversor c = new Conversor();
+		Date dataCalculada = c.ConvercaoStringData(data);
+		dataCalculada = c.SomarDiasData(dataCalculada, dias);
+		
+	return dataCalculada;
+	}
+	
+	@GetMapping("contratos")
+	public ResponseEntity<Optional<List<Funcionario>>> findContrato() {
+		Conversor c = new Conversor();
+		Date data = c.SomarDiasData(new Date(), 7);
+		Optional<List<Funcionario>> lista = funcionarioRepository.findContrato(new Date(), data);
+		if (lista==null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(lista);
+	}
 }

@@ -84,6 +84,16 @@ public class Funcionario  {
 	@Column(name = "datasituacao")
     @Temporal(TemporalType.DATE)
     private Date datasituacao;
+	@Column(name = "dataexp1")
+    @Temporal(TemporalType.DATE)
+    private Date dataexp1;
+	@Column(name = "dataexp2")
+    @Temporal(TemporalType.DATE)
+    private Date dataexp2;
+	@Column(name = "diasexp1")
+    private int diasexp1;
+	@Column(name = "diasexp2")
+    private int diasexp2;
 	@Transient
 	private boolean participa;
 	
@@ -252,6 +262,38 @@ public class Funcionario  {
 
 	public void setSerie(String serie) {
 		this.serie = serie;
+	}
+
+	public Date getDataexp1() {
+		return dataexp1;
+	}
+
+	public void setDataexp1(Date dataexp1) {
+		this.dataexp1 = dataexp1;
+	}
+
+	public Date getDataexp2() {
+		return dataexp2;
+	}
+
+	public void setDataexp2(Date dataexp2) {
+		this.dataexp2 = dataexp2;
+	}
+
+	public int getDiasexp1() {
+		return diasexp1;
+	}
+
+	public void setDiasexp1(int diasexp1) {
+		this.diasexp1 = diasexp1;
+	}
+
+	public int getDiasexp2() {
+		return diasexp2;
+	}
+
+	public void setDiasexp2(int diasexp2) {
+		this.diasexp2 = diasexp2;
 	}
 
 	@Override

@@ -308,9 +308,13 @@ public class AsoControleController {
 	@CachePut(value="consultaAsoControle", key="#asoControle.idasocontrole")
 	public Asocontrole salvar(@Valid @RequestBody Asocontrole asoControle) {
 		if (asoControle.getDatavencimento()== null) {
-			Conversor c = new Conversor();
-			Date dataVencimento = c.SomarDiasData(asoControle.getDataexame(), asoControle.getAsotipo().getPeriodicidade());
-			asoControle.setDatavencimento(dataVencimento);
+			if (asoControle.getAsotipo().getPeriodicidade()==0) {
+				asoControle.setDatavencimento(null);
+			}else {
+				Conversor c = new Conversor();
+				Date dataVencimento = c.SomarDiasData(asoControle.getDataexame(), asoControle.getAsotipo().getPeriodicidade());
+				asoControle.setDatavencimento(dataVencimento);
+			}
 		}
 		return asoControleRepository.save(asoControle);
 	}

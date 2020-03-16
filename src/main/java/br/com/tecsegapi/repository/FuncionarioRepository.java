@@ -9,10 +9,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import br.com.tecsegapi.model.Clientes;
+
 import br.com.tecsegapi.model.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer>{
+	
+	
+	
 	
 	@Query("select f from Funcionario f where (f.situacao= :sit1 or f.situacao= :sit2)   and  f.nome like CONCAT('%', :nome, '%') order by f.nome")
 	Optional<List<Funcionario>> findAllNome(@Param("nome") String nome,
@@ -21,40 +24,44 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 	Optional<Funcionario> findById(int Id);
 	Optional<Funcionario> findBycpf(String cpf);
 	
-	//Pesquiar Função Loja
-	@Query("select f from Funcionario f where f.funcao.idfuncao= :idfuncao and f.loja.idloja= :idloja and (f.situacao= :sit1 or f.situacao= :sit2)   and  f.nome like CONCAT('%', :nome, '%') order by f.nome")
+	//Pesquiar Função Loja sexo
+	@Query("select f from Funcionario f where f.funcao.idfuncao= :idfuncao and f.loja.idloja= :idloja and (f.situacao= :sit1 or f.situacao= :sit2)   and  f.nome like CONCAT('%', :nome, '%') and sexo <> :sexo order by f.nome")
 	Optional<List<Funcionario>> findAllFuncionarioFuncaoLoja( 
 	@Param("idloja") int idloja, 
 	@Param("idfuncao") int idfuncao,
 	@Param("nome") String nome,
 	@Param("sit1") String sit1,
-	@Param("sit2") String sit2);
+	@Param("sit2") String sit2,
+	@Param("sexo") String sexo);
 	
 	
 	//Consulta por Loja
-	@Query("select f from Funcionario f where f.loja.idloja= :idloja and (f.situacao= :sit1 or f.situacao= :sit2) and f.nome like CONCAT('%', :nome, '%') order by f.nome")
+	@Query("select f from Funcionario f where f.loja.idloja= :idloja and (f.situacao= :sit1 or f.situacao= :sit2) and f.nome like CONCAT('%', :nome, '%') and sexo <> :sexo order by f.nome")
 	Optional<List<Funcionario>> findAllFuncionarioLoja(
 	@Param("idloja") int idloja, 
 	@Param("nome") String nome,
 	@Param("sit1") String sit1,
-	@Param("sit2") String sit2);
+	@Param("sit2") String sit2,
+	@Param("sexo") String sexo);
 	
 	
 	//Pesquiar Função
-	@Query("select f from Funcionario f where f.funcao.idfuncao= :idfuncao and (f.situacao= :sit1 or f.situacao= :sit2)  and f.nome like CONCAT('%', :nome, '%') order by f.nome")
+	@Query("select f from Funcionario f where f.funcao.idfuncao= :idfuncao and (f.situacao= :sit1 or f.situacao= :sit2)  and f.nome like CONCAT('%', :nome, '%') and sexo <> :sexo order by f.nome")
 	Optional<List<Funcionario>> findAllFuncionarioFuncao(
 	@Param("idfuncao") int idfuncao, 
 	@Param("nome") String nome,
 	@Param("sit1") String sit1,
-	@Param("sit2") String sit2);
+	@Param("sit2") String sit2,
+	@Param("sexo") String sexo);
 	
 	@Query("select f from Funcionario f where  f.nome = :nome ")
 	Funcionario getNome(@Param("nome") String nome);
 	
 	//Pesquiar Loja
-		@Query("select f from Funcionario f where f.loja.idloja= :idloja  order by f.nome")
+		@Query("select f from Funcionario f where f.loja.idloja= :idloja and sexo <> :sexo order by f.nome")
 		Optional<List<Funcionario>> findAllLoja( 
-		@Param("idloja") int idloja);
+		@Param("idloja") int idloja,
+		@Param("sexo") String sexo);
 		
 
 		//Pesquiar LojaData
@@ -71,8 +78,16 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 			@Param("idloja") int idloja);
 
 	@Query(
-			value = "SELECT * FROM funcionario WHERE ((month(datanascimento))=:mes1 and (day(datanascimento))>= :dia1) or ((month(datanascimento))= :mes2 and (day(datanascimento))<= :dia2) order by month(datanascimento), day(datanascimento), nome",
+			value = "SELECT * FROM funcionario WHERE ((month(datanascimento))=:mes1 and (day(datanascimento))>= :dia1 and situacao='Ativo') or ((month(datanascimento))= :mes2 and (day(datanascimento))<= :dia2 and situacao='Ativo') "
+					+ "  order by month(datanascimento), day(datanascimento), nome",
 			nativeQuery = true)
 	Optional<List<Funcionario>> getAniversariantes(@Param("mes1") int mes1, @Param("dia1") int dia1, @Param("mes2") int mes2, @Param("dia2") int dia2);
 
+	//Cotnrato de experiencia
+	@Query("select f from Funcionario f where (f.dataexp1 <= :idata and f.dataexp1 >= :fdata) or (f.dataexp2 <= :idata and f.dataexp2 >= :fdata)  order by f.nome")
+	Optional<List<Funcionario>> findContrato( 
+	@Param("idata") Date idata,
+	@Param("fdata") Date fdata);
+
+	
 }

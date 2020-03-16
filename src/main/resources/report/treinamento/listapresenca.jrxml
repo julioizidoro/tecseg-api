@@ -9,8 +9,8 @@
 	</parameter>
 	<parameter name="logo" class="java.awt.Image" isForPrompting="false"/>
 	<queryString>
-		<![CDATA[SELECT distinct t.data, t.hora, t.duracao, t.instrutor, t.conteudo, t.local, t.cidade, l.nome as nomeloja, f.nome as nomefuncionario, fn.nome as nomefuncao, l.cnpj,
-tt.nome as nometipo, tt.complementotitulo
+		<![CDATA[SELECT distinct t.data, t.hora, t.duracao, t.instrutor, t.conteudo, t.local, t.cidade, t.complementotitulo, l.nome as nomeloja, f.nome as nomefuncionario, fn.nome as nomefuncao, l.cnpj,
+tt.nome as nometipo
 from
 treinamento t join treinamentoparticipante p on t.idtreinamento = p.treinamento_idtreinamento
 join funcionario f on p.funcionario_idfuncionario = f.idfuncionario
@@ -41,6 +41,9 @@ order by f.nome]]>
 	<field name="cidade" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="complementotitulo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="nomeloja" class="java.lang.String"/>
 	<field name="nomefuncionario" class="java.lang.String"/>
 	<field name="nomefuncao" class="java.lang.String"/>
@@ -48,9 +51,6 @@ order by f.nome]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nometipo" class="java.lang.String"/>
-	<field name="complementotitulo" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<variable name="contador" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$V{contador}+1]]></variableExpression>
 		<initialValueExpression><![CDATA[1]]></initialValueExpression>

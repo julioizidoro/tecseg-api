@@ -53,6 +53,8 @@ public class Treinamento implements Serializable {
     @Column(name = "datavencimento")
     @Temporal(TemporalType.DATE)
     private Date datavencimento;
+    @Column(name = "complementotitulo")
+    private String complementotitulo;
     @JoinColumn(name = "treinamentotipo_idtreinamentotipo", referencedColumnName = "idtreinamentotipo")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Treinamentotipo treinamentotipo;
@@ -162,6 +164,14 @@ public class Treinamento implements Serializable {
 
 	public void setDatavencimento(Date datavencimento) {
 		this.datavencimento = datavencimento;
+	}
+
+	public String getComplementotitulo() {
+		return complementotitulo;
+	}
+
+	public void setComplementotitulo(String complementotitulo) {
+		this.complementotitulo = complementotitulo;
 	}
 
 	@Override
