@@ -84,7 +84,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 	Optional<List<Funcionario>> getAniversariantes(@Param("mes1") int mes1, @Param("dia1") int dia1, @Param("mes2") int mes2, @Param("dia2") int dia2);
 
 	//Cotnrato de experiencia
-	@Query("select f from Funcionario f where (f.dataexp1 <= :idata and f.dataexp1 >= :fdata) or (f.dataexp2 <= :idata and f.dataexp2 >= :fdata)  order by f.nome")
+	@Query("select f from Funcionario f where (f.dataexp1 >= :idata and f.dataexp1 <= :fdata) or (f.dataexp2 >= :idata and f.dataexp2 <= :fdata)  order by f.nome")
 	Optional<List<Funcionario>> findContrato( 
 	@Param("idata") Date idata,
 	@Param("fdata") Date fdata);

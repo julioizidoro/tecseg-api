@@ -8,9 +8,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import br.com.tecsegapi.model.Asocontrole;
 import br.com.tecsegapi.model.Treinamento;
 
 public interface TreinamentoRepository extends JpaRepository<Treinamento, Integer>{
+	
+	
+	Treinamento findById(int Id);
 	
 	//Padrão
 	@Query("select t from Treinamento t where t.data>= :data or t.situacao='Agendado' order by t.data DESC")

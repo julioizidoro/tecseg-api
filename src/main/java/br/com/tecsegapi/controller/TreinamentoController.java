@@ -180,6 +180,45 @@ public class TreinamentoController {
 		return ResponseEntity.ok(participantes);
 	}
 	
+	@GetMapping("duplicar/{id}")
+	//@Cacheable("consultaTreinamento")
+	public ResponseEntity<Treinamento> duplicarTreinamento(@PathVariable("id") int id ) {
+		Treinamento original = treinamentoRepository.findById(id);
+		if (original!=null) {
+			Treinamento duplicado = new Treinamento();
+			duplicado.setCidade(original.getCidade());
+			duplicado.setComplementotitulo(original.getComplementotitulo());
+			duplicado.setConteudo(original.getConteudo());
+			duplicado.setData(original.getData());
+			duplicado.setDuracao(original.getDuracao());
+			duplicado.setHora(original.getHora());
+			duplicado.setInstrutor(original.getInstrutor());
+			duplicado.setLocal(original.getLocal());
+			duplicado.setSituacao("Agendado");
+			duplicado.setTreinamentotipo(original.getTreinamentotipo());
+			duplicado.setUsuario(original.getUsuario());
+			duplicado = treinamentoRepository.save(original);
+			Optional<List<Treinamentoparticipante>> participantes = treinamentoParticipanteRepository.findAllPadrao(duplicado.getIdtreinamento());
+			if (participantes==null) {
+				for (int i=0;i<participantes.get().size();i++) {
+					Treinamentoparticipante po = participantes.get().get(i);
+					Treinamentoparticipante pd = new Treinamentoparticipante();
+					pd.setCompareceu(false);
+					pd.setFuncionario(po.getFuncionario());
+					pd.setLoja(po.getLoja());
+					pd.setNota(0.0);
+					pd.setTreinamento(duplicado);
+					treinamentoParticipanteRepository.save(pd);
+				}	
+			}
+			return ResponseEntity.ok(duplicado);
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+		
+	}
+	
+	
 	@GetMapping("/listapresenca/{id}")
 	public void imprimirListaPresenca(@PathVariable("id") int id, HttpServletResponse response) throws JRException, IOException {
 		Map<String, Object> parametros = new HashMap<>();
