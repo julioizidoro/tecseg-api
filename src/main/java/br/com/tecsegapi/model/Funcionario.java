@@ -94,6 +94,10 @@ public class Funcionario  {
     private int diasexp1;
 	@Column(name = "diasexp2")
     private int diasexp2;
+	@Column(name = "pcd")
+    private boolean pcd;
+	@Column(name = "tipopcd")
+    private String tipopcd;
 	@Transient
 	private boolean participa;
 	
@@ -294,6 +298,24 @@ public class Funcionario  {
 
 	public void setDiasexp2(int diasexp2) {
 		this.diasexp2 = diasexp2;
+	}
+
+	
+
+	public boolean isPcd() {
+		return pcd;
+	}
+
+	public void setPcd(boolean pcd) {
+		this.pcd = pcd;
+	}
+
+	public String getTipopcd() {
+		return tipopcd;
+	}
+
+	public void setTipopcd(String tipopcd) {
+		this.tipopcd = tipopcd;
 	}
 
 	@Override
