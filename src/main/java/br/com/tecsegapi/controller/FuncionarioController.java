@@ -2,6 +2,7 @@ package br.com.tecsegapi.controller;
 
 import java.io.File;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.tecsegapi.bean.Contratoexp;
 import br.com.tecsegapi.model.Funcionario;
 import br.com.tecsegapi.repository.FuncionarioRepository;
 import br.com.tecsegapi.service.S3Service;
@@ -262,13 +264,31 @@ public class FuncionarioController {
 	}
 	
 	@GetMapping("contratos")
-	public ResponseEntity<Optional<List<Funcionario>>> findContrato() {
+	public ResponseEntity<List<Contratoexp>> findContrato() {
 		Conversor c = new Conversor();
 		Date data = c.SomarDiasData(new Date(), 7);
-		Optional<List<Funcionario>> lista = funcionarioRepository.findContrato(new Date(), data);
-		if (lista==null) {
+		List<Funcionario> lista = funcionarioRepository.findContrato(new Date(), data);
+		List<Contratoexp> listaContrato = new ArrayList<Contratoexp>();
+		if (lista!=null) {
+			for (int i=0;i<lista.size();i++) {
+				Contratoexp contrato = new Contratoexp();
+				contrato.setFuncionario(lista.get(i));
+				if (lista.get(i).getDataexp1().after(new Date())) {
+					contrato.setDatavencendo(lista.get(i).getDataexp1());
+					contrato.setDiasvencendo(lista.get(i).getDiasexp1());
+					contrato.setTipovencimento("Contrato");
+					listaContrato.add(contrato);
+				} else {
+					contrato.setDatavencendo(lista.get(i).getDataexp2());
+					contrato.setDiasvencendo(lista.get(i).getDiasexp2());
+					contrato.setTipovencimento("Renovação");
+					listaContrato.add(contrato);
+				}
+			}
+		}
+		if (listaContrato.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(lista);
+		return ResponseEntity.ok(listaContrato);
 	}
 }
