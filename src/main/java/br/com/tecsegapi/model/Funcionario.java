@@ -98,6 +98,8 @@ public class Funcionario  {
     private boolean pcd;
 	@Column(name = "tipopcd")
     private String tipopcd;
+	@Column(name = "fone")
+    private String fone;
 	@Transient
 	private boolean participa;
 	
@@ -316,6 +318,18 @@ public class Funcionario  {
 
 	public void setTipopcd(String tipopcd) {
 		this.tipopcd = tipopcd;
+	}
+
+	
+
+	
+
+	public String getFone() {
+		return fone;
+	}
+
+	public void setFone(String fone) {
+		this.fone = fone;
 	}
 
 	@Override
