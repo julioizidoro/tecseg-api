@@ -363,8 +363,7 @@ public class AsoControleController {
 				asoControleRepository.save(aso);
 			}
 		}
-		System.out.print("terminou");
-
+	
 	}
 	
 	

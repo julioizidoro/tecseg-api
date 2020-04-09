@@ -50,7 +50,6 @@ public class ImportarController {
 			for (int i=0;i<lista.size();i++) {
 				Funcionario f = new Funcionario();
 				f = funcionarioRepository.getNome(lista.get(i).getNome_funcionario());
-				System.out.print(lista.get(i).getNome_funcionario());
 				if (f !=null) {
 					f.setCpf(lista.get(i).getCpf());
 					f.setDataadmissao(lista.get(i).getDataadmissao());

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Termo Recebimento de mascara" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e5cb6bb-a46d-4966-8052-3c018589ea7c">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="607"/>
+	<property name="ireport.callouts" value="##Mon Dec 30 12:07:51 GMT-03:00 2019"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.awt.Image" isForPrompting="false"/>
+	<parameter name="logosst" class="java.awt.Image" isForPrompting="false"/>
+	<parameter name="local" class="java.lang.String"/>
+	<parameter name="cor" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[Select distinct l.nome as nomeloja, f.nome as nomefuncionario, fn.nome as nomefuncao, f.cpf, l.cnpj
+from
+loja l join funcionario f on l.idloja = f.loja_idloja
+join funcao fn on f.funcao_idfuncao = fn.idfuncao
+where l.idloja=  $P{id}]]>
+	</queryString>
+	<field name="nomeloja" class="java.lang.String"/>
+	<field name="nomefuncionario" class="java.lang.String"/>
+	<field name="nomefuncao" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cnpj" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{contador}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<pageHeader>
+		<band height="156">
+			<image scaleImage="RetainShape">
+				<reportElement x="445" y="22" width="95" height="52" uuid="8dfe33bd-168b-4068-96d6-b05f42ef4985"/>
+				<imageExpression><![CDATA[$P{logosst}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="11" y="126" width="539" height="17" uuid="c80ce4d9-1074-4940-a9a5-e43c125b5ca7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Courier New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Termo de Recebimento e Orientação]]></text>
+			</staticText>
+			<image scaleImage="RetainShape">
+				<reportElement x="35" y="22" width="141" height="52" uuid="8b1c3df9-48e0-48c6-b58c-e62a2f0e4519"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="646">
+			<textField isBlankWhenNull="true">
+				<reportElement x="11" y="71" width="539" height="192" uuid="2fd7bd61-2779-49ea-8518-0dee39b06f2c"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Courier New" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Eu " +  $F{nomefuncionario} + ", portador(a) do CPF. " + $F{cpf} + ", ocupando o cargo de " + $F{nomefuncao} + ", lotado(a) na Loja do " + $F{nomeloja} + " CNPJ " + $F{cnpj} + ", declaro que recebi na data de hoje, 01 (um) máscara de proteção com material de tecido na cor " + $P{cor} + ", me comprometendo a utilizar bem como tomar o cuidados necessários conforme, informação expedida pela ACATS que traz o Ofício nº 0675/20 expedido pela Diretoria de Vigilância Sanitária do Estado de Santa Catarina acerca da higienização das máscaras de tecido, documento este que está disponibilizado no " + $P{local} + ", e demais orientações passadas pelos integrantes da Comissão Interna de Prevenção de Acidentes que realizaram a entrega do material."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="20" y="392" width="262" height="14" uuid="e62bdb51-13f7-4748-b73b-60d515dc7f1c"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Courier New" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomefuncionario}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="20" y="465" width="262" height="1" uuid="3ed51bbd-8537-49d5-be1d-3d8119fd209a"/>
+			</line>
+			<line>
+				<reportElement x="20" y="387" width="262" height="1" uuid="1de848b7-32aa-40f5-ad0e-620f499fea45"/>
+			</line>
+			<staticText>
+				<reportElement x="20" y="470" width="262" height="20" uuid="fdf0ac0c-85ed-4d54-b334-530693f7598d"/>
+				<textElement>
+					<font fontName="Courier New" size="12"/>
+				</textElement>
+				<text><![CDATA[Respinsável da Entrega e Orientação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="286" width="276" height="20" uuid="9fa97b68-0d82-48b3-99ed-0ec092f498d8"/>
+				<textElement>
+					<font fontName="Courier New" size="12"/>
+				</textElement>
+				<text><![CDATA[Florianópolis, ______/_____/________]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
