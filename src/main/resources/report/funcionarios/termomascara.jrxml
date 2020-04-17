@@ -16,7 +16,7 @@
 from
 loja l join funcionario f on l.idloja = f.loja_idloja
 join funcao fn on f.funcao_idfuncao = fn.idfuncao
-where l.idloja=  $P{id}]]>
+where l.idloja=  $P{id} and f.situacao= 'Ativo']]>
 	</queryString>
 	<field name="nomeloja" class="java.lang.String"/>
 	<field name="nomefuncionario" class="java.lang.String"/>

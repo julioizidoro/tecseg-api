@@ -88,6 +88,26 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 	List<Funcionario> findContrato( 
 	@Param("idata") Date idata,
 	@Param("fdata") Date fdata);
-
+	
+	
+	//Pesquiar order nome
+	@Query("select f from Funcionario f where  f.nome like CONCAT('%', :nome, '%')    "
+			+ " and f.loja.nome like CONCAT('%', :loja, '%') " 
+			+ " and f.funcao.nome like CONCAT('%', :funcao, '%') "
+			+ " and f.setor.nome like CONCAT('%', :setor, '%') "
+			+ " and f.sexo like CONCAT('%', :sexo, '%') and (f.situacao like CONCAT(:situacaoativo) or f.situacao like CONCAT(:situacaoafastado) or  "
+			+ " f.situacao like CONCAT(:situacaoinativo)) "
+			+ "order by f.setor.nome")
+ List<Funcionario> findByOrderNome(
+			@Param("nome") String nome,
+			@Param("loja") String loja,
+			@Param("sexo") String sexo,
+			@Param("situacaoativo") String situacaoativo,
+			@Param("situacaoafastado") String situacaoafastado,
+        	@Param("situacaoinativo") String situacaoinativo,
+			@Param("funcao") String funcao,
+			@Param("setor") String setor
+	);
+	
 	
 }

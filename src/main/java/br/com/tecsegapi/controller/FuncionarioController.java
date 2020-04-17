@@ -342,4 +342,59 @@ public class FuncionarioController {
 		final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
+	
+	@GetMapping("listar/{nome}/{loja}/{sexo}/{situacao}/{funcao}/{setor}") 
+	public ResponseEntity<List<Funcionario>> listarByOrderNome(
+			@PathVariable("nome") String nome,
+			@PathVariable("loja") String loja,
+			@PathVariable("sexo") String sexo,
+			@PathVariable("situacao") String situacao,
+			@PathVariable("funcao") String funcao,
+			@PathVariable("setor") String setor) {
+		String ativo =" ";
+		String afastado = " ";
+		String inativo = " ";
+		if (nome.equalsIgnoreCase("@")){
+			nome = "";
+		}
+		if (loja.equalsIgnoreCase("@")) {
+			loja = "";
+		}
+		if (sexo.equalsIgnoreCase("@")) {
+			sexo = "";
+		}
+		
+		if (situacao.equalsIgnoreCase("@")) {
+			ativo = "ativo";
+			afastado = "afastado";
+			inativo = "ativo";
+		} else if (situacao.equalsIgnoreCase("ativo")) {
+			ativo = "ativo";
+			afastado = "ativo";
+			inativo = "ativo";
+		} else if (situacao.equalsIgnoreCase("afastado")) {
+			ativo = "afastado";
+			afastado = "afastado";
+			inativo = "afastado";
+		} else if (situacao.equalsIgnoreCase("inativo")) {
+			ativo = "inativo";
+			afastado = "inativo";
+			inativo = "inativo";
+		} 
+		if (funcao.equalsIgnoreCase("@")) {
+			funcao = "";
+		}
+		if (setor.equalsIgnoreCase("@")) {
+			setor = "";
+		}
+		List<Funcionario> lista = funcionarioRepository.findByOrderNome(nome, loja, sexo, ativo, afastado, inativo, funcao, setor);
+		if (lista==null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		return ResponseEntity.ok(lista);
+		
+	}
+	
+	
 }
