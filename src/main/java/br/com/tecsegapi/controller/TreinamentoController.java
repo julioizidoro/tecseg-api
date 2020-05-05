@@ -197,7 +197,7 @@ public class TreinamentoController {
 			duplicado.setSituacao("Agendado");
 			duplicado.setTreinamentotipo(original.getTreinamentotipo());
 			duplicado.setUsuario(original.getUsuario());
-			duplicado = treinamentoRepository.save(original);
+			duplicado = treinamentoRepository.save(duplicado);
 			Optional<List<Treinamentoparticipante>> participantes = treinamentoParticipanteRepository.findAllPadrao(duplicado.getIdtreinamento());
 			if (participantes==null) {
 				for (int i=0;i<participantes.get().size();i++) {
