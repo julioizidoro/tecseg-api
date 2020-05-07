@@ -284,8 +284,31 @@ public class FuncionarioController {
 	@GetMapping("contratos")
 	public ResponseEntity<List<Contratoexp>> findContrato() {
 		Conversor c = new Conversor();
-		Date data = c.SomarDiasData(new Date(), 7);
-		List<Funcionario> lista = funcionarioRepository.findContrato(new Date(), data);
+		Date idata = c.SomarDiasData(new Date(), -7);
+		String sDate = c.ConvercaoDataBR(new Date());
+	    int dia = Integer.parseInt(sDate.substring(0,2));
+	    int mes = Integer.parseInt(sDate.substring(3,5));
+	    int ano = Integer.parseInt(sDate.substring(6,10));
+	    if (dia>=25) {
+	    	dia = 1;
+	    	if (mes==12) {
+	    		mes=1;
+	    		ano++;
+	    	}else {
+	    		mes++;
+	    	}
+	    } else {
+	    	dia = c.getRestoMes(mes);
+	    }
+	    if (dia<10) {
+	    	sDate = '0' + String.valueOf(dia);
+	    } else sDate = String.valueOf(dia);
+	    if (mes<10) {
+	    	sDate =  "0" + String.valueOf(mes)  + "-" + sDate;
+	    } else sDate = String.valueOf(mes) + "-" + sDate;
+	    sDate = Integer.valueOf(ano) + "-" + sDate;
+	    Date fdata = c.ConvercaoStringData(sDate);
+	    List<Funcionario> lista = funcionarioRepository.findContrato(idata, fdata);
 		List<Contratoexp> listaContrato = new ArrayList<Contratoexp>();
 		if (lista!=null) {
 			for (int i=0;i<lista.size();i++) {

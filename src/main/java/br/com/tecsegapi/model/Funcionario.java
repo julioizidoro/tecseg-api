@@ -100,6 +100,8 @@ public class Funcionario  {
     private String tipopcd;
 	@Column(name = "fone")
     private String fone;
+	@Column(name = "nacionalidade")
+    private String nacionalidade;
 	@Transient
 	private boolean participa;
 	
