@@ -14,10 +14,16 @@ import br.com.tecsegapi.model.Funcionario;
 import br.com.tecsegapi.model.Loja;
 import br.com.tecsegapi.model.Planilha;
 import br.com.tecsegapi.model.Setor;
+import br.com.tecsegapi.model.exportar.Campeche;
+import br.com.tecsegapi.model.exportar.Lagoa;
+import br.com.tecsegapi.model.exportar.Riotavares;
+import br.com.tecsegapi.repository.CampecheRepository;
 import br.com.tecsegapi.repository.FuncaoRepository;
 import br.com.tecsegapi.repository.FuncionarioRepository;
+import br.com.tecsegapi.repository.LagoaRepository;
 import br.com.tecsegapi.repository.LojaRepository;
 import br.com.tecsegapi.repository.PlanilhaRepository;
+import br.com.tecsegapi.repository.RiotavaresRepository;
 import br.com.tecsegapi.repository.SetorRepository;
 
 @CrossOrigin
@@ -41,64 +47,48 @@ public class ImportarController {
 	@Autowired
 	private SetorRepository setorRepository;
 	
+	@Autowired
+	private CampecheRepository campecheRepository;
+	
+	@Autowired
+	private LagoaRepository lagoaRepository;
+	
+	@Autowired
+	private RiotavaresRepository riotavaresRepository;
+	
 	
 	
 	@GetMapping("")
 	public ResponseEntity<String> importar() {
-		List<Planilha> lista = planilhaRepository.findAll();
+		List<Lagoa> lista = lagoaRepository.findAll();
 		if (lista!=null) {
 			for (int i=0;i<lista.size();i++) {
 				Funcionario f = new Funcionario();
-				f = funcionarioRepository.getNome(lista.get(i).getNome_funcionario());
+				f = funcionarioRepository.findBycpf(lista.get(i).getCpf());
 				if (f !=null) {
-					f.setCpf(lista.get(i).getCpf());
-					f.setDataadmissao(lista.get(i).getDataadmissao());
-					if (lista.get(i).getSituacao().contentEquals("S")) {
-						f.setSituacao("Ativo");
-					}else if (lista.get(i).getSituacao().contentEquals("N")) {
-						f.setSituacao("Inativo");
-					}else f.setSituacao("Afastado");
+					f.setMatricula(lista.get(i).getMatricula());
+					f.setNome(lista.get(i).getNome());
+					f.setNacionalidade(lista.get(i).getPais());
 					f.setRg(lista.get(i).getRg());
-					f.setUf(lista.get(i).getUfrg());
-					f.setDatanascimento(lista.get(i).getNascimento());
-					f.setPis(lista.get(i).getPis());
 					f.setCtps(lista.get(i).getCtps());
+					f.setSerie(lista.get(i).getSerieCTPS());
+					f.setFone(lista.get(i).getCelular());
+					f.setDatanascimento(lista.get(i).getNascimento());
 					f.setSexo(lista.get(i).getSexo());
-					Setor setor = getSetor(lista.get(i).getSetor());
-					if (setor == null) {
-						setor = new Setor();
-						setor.setNome(lista.get(i).getSetor());
-						setor = setorRepository.save(setor);
+					f.setDataadmissao(lista.get(i).getAdmissão());
+					f.setPis(lista.get(i).getPis());
+					Loja loja = lojaRepository.findById(3);
+					f.setLoja(loja);
+					Funcao funcao = funcaoRepository.getNome(lista.get(i).getCargo());
+					if (funcao!=null) {
+						f.setFuncao(funcao);
 					}
-					f.setSetor(setor);
+					Setor setor = setorRepository.getSetor(lista.get(i).getSetor());
+					if (setor != null) {
+						f.setSetor(setor);
+					}
 					funcionarioRepository.save(f);
-					planilhaRepository.delete(lista.get(i));
 					
-				}else {
-					f = new Funcionario();
-					f.setNome(lista.get(i).getNome_funcionario());
-					f.setRg(lista.get(i).getRg());
-					f.setUf(lista.get(i).getUfrg());
-					f.setDatanascimento(lista.get(i).getNascimento());
-					f.setPis(lista.get(i).getPis());
-					f.setCtps(lista.get(i).getCtps());
-					f.setSexo(lista.get(i).getSexo());
-					if (lista.get(i).getSituacao().contentEquals("S")) {
-						f.setSituacao("Ativo");
-					}else if (lista.get(i).getSituacao().contentEquals("N")) {
-						f.setSituacao("Inativo");
-					}else f.setSituacao("Afastado");
-					f.setLoja(getLoja(1));
-					f.setFuncao(getFuncao(lista.get(i).getCargo()));
-					Setor setor = getSetor(lista.get(i).getSetor());
-					if (setor == null) {
-						setor = new Setor();
-						setor.setNome(lista.get(i).getSetor());
-						setor = setorRepository.save(setor);
-					}
-					f.setSetor(setor);
-					funcionarioRepository.save(f);
-					planilhaRepository.delete(lista.get(i));
 				}
 			}
 		}
@@ -133,5 +123,140 @@ public class ImportarController {
 	
 	public Setor getSetor(String nome ) {
 		return setorRepository.getSetor(nome);
+	}
+	
+	
+	@GetMapping("/campeche/mask")
+	public ResponseEntity<String> aplicarMascaraCapeche() {
+		List<Campeche> lista = campecheRepository.findAll();
+		for(Campeche c :  lista) {
+			if (c.getCpf().length()==11) {
+				String cpf = c.getCpf();
+				String novo = cpf.substring(0,3) + "." + cpf.substring(3,6) + "." + cpf.substring(6,9) + "-" + cpf.substring(9,11);
+				c.setCpf(novo);
+			}
+			if (c.getCelular()!=null) {
+				String celular = c.getCelular();
+				if (celular.length()==12) {
+					String novo = "(" + celular.substring(0,2) + ")" + celular.substring(3,8) + "-" + celular.substring(8,12);
+					c.setCelular(novo);
+				}
+			}
+			if (c.getPis()!=null) {
+				if (c.getPis().length()==11) {
+					String pis = c.getPis();
+					String novo = pis.substring(0,3) + "." + pis.substring(3,8) + "." + pis.substring(8,10) + '.' + pis.substring(10,11);
+					c.setPis(novo);
+				}
+			}
+			if (c.getCbo()!=null) {
+				if (c.getCbo().length()==6) {
+					String cbo = c.getCbo();
+					String novo = cbo.substring(0,4) + "-" + cbo.substring(4,6);
+					c.setCbo(novo);
+				}
+			}
+			campecheRepository.save(c);
+		}
+		return ResponseEntity.ok("Terminou");
+	}
+	
+	@GetMapping("/lagoa/mask")
+	public ResponseEntity<String> aplicarMascaraLagoa() {
+		List<Lagoa> lista = lagoaRepository.findAll();
+		for(Lagoa c :  lista) {
+			if (c.getCpf().length()==11) {
+				String cpf = c.getCpf();
+				String novo = cpf.substring(0,3) + "." + cpf.substring(3,6) + "." + cpf.substring(6,9) + "-" + cpf.substring(9,11);
+				c.setCpf(novo);
+			}
+			if (c.getCelular()!=null) {
+				String celular = c.getCelular();
+				if (celular.length()==12) {
+					String novo = "(" + celular.substring(0,2) + ")" + celular.substring(3,8) + "-" + celular.substring(8,12);
+					c.setCelular(novo);
+				}
+			}
+			if (c.getPis()!=null) {
+				if (c.getPis().length()==11) {
+					String pis = c.getPis();
+					String novo = pis.substring(0,3) + "." + pis.substring(3,8) + "." + pis.substring(8,10) + '.' + pis.substring(10,11);
+					c.setPis(novo);
+				}
+			}
+			if (c.getCbo()!=null) {
+				if (c.getCbo().length()==6) {
+					String cbo = c.getCbo();
+					String novo = cbo.substring(0,4) + "-" + cbo.substring(4,6);
+					c.setCbo(novo);
+				}
+			}
+			lagoaRepository.save(c);
+		}
+		return ResponseEntity.ok("Terminou");
+	}
+	
+	@GetMapping("/riotavares/mask")
+	public ResponseEntity<String> aplicarMascaraRioTavares() {
+		List<Riotavares> lista = riotavaresRepository.findAll();
+		for(Riotavares c :  lista) {
+			if (c.getCpf().length()==11) {
+				String cpf = c.getCpf();
+				String novo = cpf.substring(0,3) + "." + cpf.substring(3,6) + "." + cpf.substring(6,9) + "-" + cpf.substring(9,11);
+				c.setCpf(novo);
+			}
+			if (c.getCelular()!=null) {
+				String celular = c.getCelular();
+				if (celular.length()==12) {
+					String novo = "(" + celular.substring(0,2) + ")" + celular.substring(3,8) + "-" + celular.substring(8,12);
+					c.setCelular(novo);
+				}
+			}
+			if (c.getPis()!=null) {
+				if (c.getPis().length()==11) {
+					String pis = c.getPis();
+					String novo = pis.substring(0,3) + "." + pis.substring(3,8) + "." + pis.substring(8,10) + '.' + pis.substring(10,11);
+					c.setPis(novo);
+				}
+			}
+			if (c.getCbo()!=null) {
+				if (c.getCbo().length()==6) {
+					String cbo = c.getCbo();
+					String novo = cbo.substring(0,4) + "-" + cbo.substring(4,6);
+					c.setCbo(novo);
+				}
+			}
+			riotavaresRepository.save(c);
+		}
+		return ResponseEntity.ok("Terminou");
+	}
+	
+	
+	@GetMapping("/funcionario/mask")
+	public ResponseEntity<String> aplicarMascaraFuncionario() {
+		List<Funcionario> lista = funcionarioRepository.findAllNome(" ", "Ativo", "Afastado").get();
+		boolean alterou = false;
+		for(Funcionario c :  lista) {
+			if (c.getCpf()!=null) {
+				if (c.getCpf().length()==11) {
+					String cpf = c.getCpf();
+					String novo = cpf.substring(0,3) + "." + cpf.substring(3,6) + "." + cpf.substring(6,9) + "-" + cpf.substring(9,11);
+					c.setCpf(novo);
+					alterou=true;
+				}
+			}
+			if (c.getPis()!=null) {
+				if (c.getPis().length()==11) {
+					String pis = c.getPis();
+					String novo = pis.substring(0,3) + "." + pis.substring(3,8) + "." + pis.substring(8,10) + '.' + pis.substring(10,11);
+					c.setPis(novo);
+					alterou=true;
+				}
+			}
+			if (alterou) {
+				this.funcionarioRepository.save(c);
+			}
+		}
+		return ResponseEntity.ok("Terminou");
 	}
 }
