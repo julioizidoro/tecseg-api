@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -63,6 +64,13 @@ public class Usuario implements Serializable{
 	private Acesso acesso;
 	@Column(name = "urlfoto")
 	private String urlfoto;
+	@Column(name = "urlassinatura")
+	private String urlassinatura;
+	@Column(name = "registromte")
+	private String registromte;
+	@JoinColumn(name = "funcao_idfuncao", referencedColumnName = "idfuncao")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Funcao funcao;
 	
 	
 	public Usuario() {
@@ -155,6 +163,30 @@ public class Usuario implements Serializable{
 
 	public void setUrlfoto(String urlfoto) {
 		this.urlfoto = urlfoto;
+	}
+
+	public String getUrlassinatura() {
+		return urlassinatura;
+	}
+
+	public void setUrlassinatura(String urlassinatura) {
+		this.urlassinatura = urlassinatura;
+	}
+
+	public String getRegistromte() {
+		return registromte;
+	}
+
+	public void setRegistromte(String registromte) {
+		this.registromte = registromte;
+	}
+
+	public Funcao getFuncao() {
+		return funcao;
+	}
+
+	public void setFuncao(Funcao funcao) {
+		this.funcao = funcao;
 	}
 
 	@Override

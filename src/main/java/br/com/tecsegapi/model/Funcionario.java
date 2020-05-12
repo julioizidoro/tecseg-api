@@ -326,6 +326,14 @@ public class Funcionario  {
 
 	
 
+	public String getNacionalidade() {
+		return nacionalidade;
+	}
+
+	public void setNacionalidade(String nacionalidade) {
+		this.nacionalidade = nacionalidade;
+	}
+
 	public String getFone() {
 		return fone;
 	}

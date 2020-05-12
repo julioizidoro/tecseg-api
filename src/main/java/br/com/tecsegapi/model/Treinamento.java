@@ -55,6 +55,8 @@ public class Treinamento implements Serializable {
     private Date datavencimento;
     @Column(name = "complementotitulo")
     private String complementotitulo;
+    @Column(name = "assinstrutor")
+    private boolean assinstrutor;
     @JoinColumn(name = "treinamentotipo_idtreinamentotipo", referencedColumnName = "idtreinamentotipo")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Treinamentotipo treinamentotipo;
@@ -172,6 +174,14 @@ public class Treinamento implements Serializable {
 
 	public void setComplementotitulo(String complementotitulo) {
 		this.complementotitulo = complementotitulo;
+	}
+
+	public boolean isAssinstrutor() {
+		return assinstrutor;
+	}
+
+	public void setAssinstrutor(boolean assinstrutor) {
+		this.assinstrutor = assinstrutor;
 	}
 
 	@Override

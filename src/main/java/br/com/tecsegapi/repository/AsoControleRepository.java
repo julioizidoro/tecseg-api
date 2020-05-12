@@ -136,7 +136,6 @@ public interface AsoControleRepository  extends JpaRepository<Asocontrole, Integ
 				List<Asocontrole> findFuncionarioLista(
 				@Param("idfuncionario") int idfuncionario);
 				
-				
 	
 				
 

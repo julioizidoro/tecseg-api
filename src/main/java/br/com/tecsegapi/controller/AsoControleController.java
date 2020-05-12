@@ -29,6 +29,7 @@ import br.com.tecsegapi.bean.PagSalutarBean;
 import br.com.tecsegapi.model.Asocontrole;
 import br.com.tecsegapi.model.Asotipo;
 import br.com.tecsegapi.model.Funcionario;
+import br.com.tecsegapi.model.Salutar;
 import br.com.tecsegapi.repository.AsoControleRepository;
 import br.com.tecsegapi.repository.AsoTipoRepository;
 import br.com.tecsegapi.repository.FuncionarioRepository;
@@ -385,4 +386,6 @@ public class AsoControleController {
 		}
 		return ResponseEntity.ok("Terminou");
 	}*/
+	
+	
 }

@@ -2,21 +2,23 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TreinamentoListaPresenca" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e5cb6bb-a46d-4966-8052-3c018589ea7c">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="95"/>
 	<property name="ireport.callouts" value="##Mon Dec 30 12:07:51 GMT-03:00 2019"/>
 	<parameter name="id" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="logo" class="java.awt.Image" isForPrompting="false"/>
 	<queryString>
-		<![CDATA[SELECT distinct t.data, t.hora, t.duracao, t.instrutor, t.conteudo, t.local, t.cidade, t.complementotitulo, l.nome as nomeloja, f.nome as nomefuncionario, fn.nome as nomefuncao, l.cnpj,
-tt.nome as nometipo
+		<![CDATA[SELECT distinct t.data, t.hora, t.duracao, t.instrutor, t.conteudo, t.local, t.cidade, t.complementotitulo, t.assinstrutor, l.nome as nomeloja, f.nome as nomefuncionario, fn.nome as nomefuncao, l.cnpj,
+tt.nome as nometipo, u.nome as nomeusuario, fnu.nome as nomefuncaousuario, u.registromte, u.urlassinatura
 from
 treinamento t join treinamentoparticipante p on t.idtreinamento = p.treinamento_idtreinamento
 join funcionario f on p.funcionario_idfuncionario = f.idfuncionario
 join loja l on p.loja_idloja = l.idloja
 join treinamentotipo tt on t.treinamentotipo_idtreinamentotipo = tt.idtreinamentotipo
 join funcao fn on f.funcao_idfuncao = fn.idfuncao
+join usuario u on t.usuario_idusuario = u.idusuario
+join funcao fnu on u.funcao_idfuncao = fnu.idfuncao
 where t.idtreinamento= $P{id}
 order by f.nome]]>
 	</queryString>
@@ -44,6 +46,9 @@ order by f.nome]]>
 	<field name="complementotitulo" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="assinstrutor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="nomeloja" class="java.lang.String"/>
 	<field name="nomefuncionario" class="java.lang.String"/>
 	<field name="nomefuncao" class="java.lang.String"/>
@@ -51,6 +56,14 @@ order by f.nome]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nometipo" class="java.lang.String"/>
+	<field name="nomeusuario" class="java.lang.String"/>
+	<field name="nomefuncaousuario" class="java.lang.String"/>
+	<field name="registromte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="urlassinatura" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<variable name="contador" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$V{contador}+1]]></variableExpression>
 		<initialValueExpression><![CDATA[1]]></initialValueExpression>
@@ -250,34 +263,28 @@ order by f.nome]]>
 	</detail>
 	<lastPageFooter>
 		<band height="116">
-			<staticText>
-				<reportElement x="134" y="78" width="236" height="15" uuid="f1d0c59d-3fea-4d74-95bd-3773e857730b"/>
-				<textElement textAlignment="Center">
-					<font isBold="true" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[Técnica em Segurança do Trabalho]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="134" y="62" width="236" height="15" uuid="85819fd3-6b79-41fc-b855-71bcb6dd583a"/>
-				<textElement textAlignment="Center">
-					<font isBold="true" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[Andrieli A. Welter]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="134" y="95" width="236" height="15" uuid="ca0d8df7-9c8f-4b7e-bdf4-de00b41c029c"/>
-				<textElement textAlignment="Center">
-					<font isBold="true" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[MTE SC 0034268 - Fona (48)99641-9026]]></text>
-			</staticText>
 			<line>
 				<reportElement x="134" y="61" width="236" height="1" uuid="2b0de26d-be30-45b3-94f3-e93003d97614"/>
 			</line>
 			<image scaleImage="FillFrame" hAlign="Left" vAlign="Middle" isUsingCache="true">
-				<reportElement mode="Opaque" x="233" y="10" width="56" height="50" uuid="54543f17-0cb2-4654-a4c5-930ed41a08f9"/>
-				<imageExpression><![CDATA["https://tecseg-img.s3.us-east-2.amazonaws.com/ass1.jpg"]]></imageExpression>
+				<reportElement mode="Opaque" x="134" y="10" width="236" height="50" uuid="54543f17-0cb2-4654-a4c5-930ed41a08f9"/>
+				<imageExpression><![CDATA[( $F{assinstrutor}.equals( 1 ) ? "https://tecseg-img.s3.us-east-2.amazonaws.com/ass0.jpg " : $F{urlassinatura} )]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement x="134" y="63" width="236" height="15" uuid="ae763e7b-fdd1-40b6-8feb-6415c1a6dfe9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[( $F{assinstrutor}.equals( 1 ) ? $F{instrutor} : $F{nomeusuario} )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="80" width="236" height="15" uuid="dabac62f-dd72-435f-8873-89777a92769f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[( $F{assinstrutor}.equals( 1 ) ? "Instrutor(a)" : $F{nomefuncaousuario} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="134" y="98" width="236" height="15" uuid="a3bae985-abbf-4fb0-8e60-fdb3b197c07b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[( $F{assinstrutor}.equals( 1 ) ? " " : $F{registromte} )]]></textFieldExpression>
+			</textField>
 		</band>
 	</lastPageFooter>
 </jasperReport>

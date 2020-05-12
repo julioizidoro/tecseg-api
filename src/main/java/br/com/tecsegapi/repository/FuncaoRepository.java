@@ -15,5 +15,8 @@ public interface FuncaoRepository extends JpaRepository<Funcao, Integer>{
 	
 	@Query("select f from Funcao f where f.nome= :nome")
 	Funcao getNome(@Param("nome") String nome);
+	
+	@Query("select f from Funcao f where f.cbo= :cbo")
+	Funcao getCBO(@Param("cbo") String cbo);
 
 }

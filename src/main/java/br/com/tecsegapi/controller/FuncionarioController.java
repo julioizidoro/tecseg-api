@@ -93,8 +93,8 @@ public class FuncionarioController {
 	}
 	
 	@GetMapping("cpf/{cpf}")
-	public ResponseEntity<Optional<Funcionario>> consultar(@PathVariable("cpf") String cpf) {
-		Optional<Funcionario> funcionario = funcionarioRepository.findBycpf(cpf);
+	public ResponseEntity<Funcionario> consultar(@PathVariable("cpf") String cpf) {
+		Funcionario funcionario = funcionarioRepository.findBycpf(cpf);
 		if (funcionario==null) {
 			return ResponseEntity.notFound().build();
 		}
