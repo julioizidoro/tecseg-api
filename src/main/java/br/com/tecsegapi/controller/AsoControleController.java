@@ -51,7 +51,7 @@ public class AsoControleController {
 	private AsoTipoRepository asoTipoRepository;
 	
 	@GetMapping("/datavencimento/{datavencimentostart}/{datavencimentoend}/{nome}")
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> findAllDataVencimento(@PathVariable("datavencimentostart") String datavencimentostart, 
 			@PathVariable("datavencimentoend") String datavencimentoend, @PathVariable("nome") String nome) {
 		Conversor c = new Conversor();
@@ -69,7 +69,7 @@ public class AsoControleController {
 	}
 	
 	@GetMapping("/datavencimento/{datavencimentostart}/{datavencimentoend}/{nome}/{idfuncao}")
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllDataVencimentoFuncao(@PathVariable("datavencimentostart") String datavencimentostart, 
 			@PathVariable("datavencimentoend") String datavencimentoend, @PathVariable("nome") String nome, @PathVariable("idfuncao") int idfuncao) {
 		Conversor c = new Conversor();
@@ -87,7 +87,7 @@ public class AsoControleController {
 	}
 	
 	@GetMapping("/datavencimento/{datavencimentostart}/{datavencimentoend}/{nome}/{idloja}")
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllDataVencimentoLoja(@PathVariable("datavencimentostart") String datavencimentostart, 
 			@PathVariable("datavencimentoend") String datavencimentoend, @PathVariable("nome") String nome, @PathVariable("idloja") int idloja) {
 		Conversor c = new Conversor();
@@ -105,7 +105,7 @@ public class AsoControleController {
 	}
 	
 	@GetMapping("/datavencimento/{datavencimentostart}/{datavencimentoend}/{nome}/{idasotipo}")
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllDataVencimentoTipo(@PathVariable("datavencimentostart") String datavencimentostart, 
 			@PathVariable("datavencimentoend") String datavencimentoend, @PathVariable("nome") String nome, @PathVariable("idasotipo") int idasotipo) {
 		Conversor c = new Conversor();
@@ -123,7 +123,7 @@ public class AsoControleController {
 	}
 	
 	@GetMapping("/funcaoTipo/{idfuncao}/{idtipo}/{nome}")
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllFuncaoTipo(@PathVariable("idfuncao") int idfuncao, 
 			@PathVariable("idtipo") int idtipo, @PathVariable("nome") String nome) {
 		if (nome.equalsIgnoreCase("@")) {
@@ -138,7 +138,7 @@ public class AsoControleController {
 	}
 	
 	@GetMapping("/funcaoloja/{idfuncao}/{idloja}/{nome}")
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllFuncaoLoja(@PathVariable("idfuncao") int idfuncao, 
 			@PathVariable("idtipo") int idtipo, @PathVariable("nome") String nome) {
 		if (nome.equalsIgnoreCase("@")) {
@@ -153,7 +153,7 @@ public class AsoControleController {
 	}
 	
 	@GetMapping("/lojatipo/{idloja}/{idtipo}/{nome}")
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllLojaTipo(@PathVariable("idloja") int idloja, 
 			@PathVariable("idtipo") int idtipo, @PathVariable("nome") String nome) {
 		if (nome.equalsIgnoreCase("@")) {
@@ -168,7 +168,7 @@ public class AsoControleController {
 	}
 	
 	@GetMapping("/loja/{idloja}/{nome}")
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllLoja(@PathVariable("idloja") int idloja, 
 			 @PathVariable("nome") String nome) {
 		if (nome.equalsIgnoreCase("@")) {
@@ -183,7 +183,7 @@ public class AsoControleController {
 	}
 		
 	@GetMapping("/funcao/{idfuncao}/{nome}")
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllFuncao(@PathVariable("idfuncao") int idfuncao, 
 			@PathVariable("nome") String nome) {
 		if (nome.equalsIgnoreCase("@")) {
@@ -198,7 +198,7 @@ public class AsoControleController {
 	}
 	
 	@GetMapping("/tipo/{idtipo}/{nome}")
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllTipo(@PathVariable("idtipo") int idtipo, 
 			@PathVariable("nome") String nome) {
 		if (nome.equalsIgnoreCase("@")) {
@@ -214,7 +214,7 @@ public class AsoControleController {
 	
 	
 	@GetMapping("/nome/{nome}")
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAllNome(@PathVariable("nome") String nome) {
 		if (nome.equalsIgnoreCase("@")) {
 			nome = " ";
@@ -228,7 +228,7 @@ public class AsoControleController {
 	}
 	
 	@GetMapping("/datavencimento/{datavencimentostart}/{datavencimentoend}/{nome}/{idloja}/{idfuncao}/{idtipo}")
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> finAll(@PathVariable("datavencimentostart") String datavencimentostart, 
 			@PathVariable("datavencimentoend") String datavencimentoend, @PathVariable("nome") String nome, 
 			@PathVariable("idloja") int idloja, @PathVariable("idfuncao") int idfuncao, @PathVariable("idtipo") int idtipo) {
@@ -273,7 +273,7 @@ public class AsoControleController {
 	
 	
 	@GetMapping
-	@Cacheable("consultaAsoControle")
+	//@Cacheable("consultaAsoControle")
 	public ResponseEntity<Optional<List<Asocontrole>>> listar() {
 		Conversor c = new Conversor();
 		Date data = c.SomarDiasData(new Date(), 60);
@@ -306,7 +306,7 @@ public class AsoControleController {
 	
 	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
-	@CachePut(value="consultaAsoControle", key="#asoControle.idasocontrole")
+	//@CachePut(value="consultaAsoControle", key="#asoControle.idasocontrole")
 	public Asocontrole salvar(@Valid @RequestBody Asocontrole asoControle) {
 		if (asoControle.getDatavencimento()== null) {
 			if (asoControle.getAsotipo().getPeriodicidade()==0) {
@@ -322,7 +322,7 @@ public class AsoControleController {
 	
 	@PostMapping("/atualizar")
 	@ResponseStatus(HttpStatus.CREATED)
-	@CacheEvict(value="consultaAsoControle", key="#asoControle.idasocontrole")
+	//@CacheEvict(value="consultaAsoControle", key="#asoControle.idasocontrole")
 	public Asocontrole atualizar(@Valid @RequestBody Asocontrole asoControle) {
 		return asoControleRepository.save(asoControle);
 	}

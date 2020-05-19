@@ -102,7 +102,7 @@ public class FuncionarioController {
 	}
 	
 	@GetMapping("funcao/{idfuncao}/{nome}/{sit}/{sexo}")
-	@Cacheable("consultaFuncionarioFuncao")
+	//@Cacheable("consultaFuncionarioFuncao")
 	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncionarioFuncao(@PathVariable("idfuncao") int idfuncao, 
 			@PathVariable("nome") String nome, @PathVariable("sit") String sit1, @PathVariable("sexo") String sexo) {
 		if (nome.equalsIgnoreCase("@")) {
@@ -123,7 +123,7 @@ public class FuncionarioController {
 	}
 	
 	@GetMapping("loja/{idloja}/{nome}/{sit}/{sexo}")
-	@Cacheable("consultaFuncionarioLoja")
+	//@Cacheable("consultaFuncionarioLoja")
 	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncinarioLoja(@PathVariable("idloja") int idloja, 
 			@PathVariable("nome") String nome, @PathVariable("sit") String sit1, @PathVariable("sexo") String sexo) {
 		if (nome.equalsIgnoreCase("@")) {
@@ -144,7 +144,7 @@ public class FuncionarioController {
 	}
 	
 	@GetMapping("{idloja}/{idfuncao}/{nome}/{sit}/{sexo}")
-	@Cacheable("consultaFuncionarioFuncaoLoja")
+	//@Cacheable("consultaFuncionarioFuncaoLoja")
 	public ResponseEntity<Optional<List<Funcionario>>> consultarFuncionarioLoja(
 			@PathVariable("idloja") int idloja, 
 			@PathVariable("idfuncao") int idfuncao, 
@@ -170,14 +170,14 @@ public class FuncionarioController {
 	
 	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
-	@CachePut("consultaFuncionario")
+	//@CachePut("consultaFuncionario")
 	public Funcionario salvar(@Valid @RequestBody Funcionario funcionario) {
 		return funcionarioRepository.save(funcionario);
 	}
 
 	@PutMapping("/atualizar")
 	@ResponseStatus(HttpStatus.CREATED)
-	@CachePut("consultaFuncionario")
+	//@CachePut("consultaFuncionario")
 	public Funcionario atualizar(@Valid @RequestBody Funcionario funcionario) {
 		return funcionarioRepository.save(funcionario);
 	}
