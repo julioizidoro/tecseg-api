@@ -333,6 +333,18 @@ public class FuncionarioController {
 		return ResponseEntity.ok(listaContrato);
 	}
 	
+	@GetMapping("contratos/todos")
+	public ResponseEntity<List<Funcionario>> findContratoTodos() {
+		Conversor c = new Conversor();
+		Date idata = new Date();
+		Date fdata = c.SomarDiasData(new Date(), 180) ;
+	    List<Funcionario> lista = funcionarioRepository.findContrato(idata, fdata);
+		if (lista.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(lista);
+	}
+	
 	@GetMapping("/tro/{id}/{local}/{cor}")
 	public void imprimirListaPresenca(@PathVariable("id") int id, @PathVariable("local") String local, @PathVariable("cor") String cor, HttpServletResponse response) throws JRException, IOException {
 		Map<String, Object> parametros = new HashMap<>();
