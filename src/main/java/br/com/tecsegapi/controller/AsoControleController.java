@@ -1,6 +1,5 @@
 package br.com.tecsegapi.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +23,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.tecsegapi.bean.AsoControleBean;
-import br.com.tecsegapi.bean.PagSalutarBean;
 import br.com.tecsegapi.model.Asocontrole;
 import br.com.tecsegapi.model.Asotipo;
 import br.com.tecsegapi.model.Funcionario;
-import br.com.tecsegapi.model.Salutar;
 import br.com.tecsegapi.repository.AsoControleRepository;
 import br.com.tecsegapi.repository.AsoTipoRepository;
 import br.com.tecsegapi.repository.FuncionarioRepository;

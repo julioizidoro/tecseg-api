@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tecsegapi.model.Epi;
 import br.com.tecsegapi.repository.EpiRepository;
-import br.com.tecsegapi.repository.ProdutoRepository;
 
 @CrossOrigin
 @RestController

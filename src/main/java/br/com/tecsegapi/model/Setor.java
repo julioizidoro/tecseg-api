@@ -10,10 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -33,7 +33,7 @@ public class Setor implements Serializable {
     @Column(name = "nome")
     private String nome;
 	@JoinColumn(name = "funcionario_idfuncionario", referencedColumnName = "idfuncionario")
-	@JsonIgnoreProperties("setor")
+	@JsonBackReference
     @ManyToOne(optional = false)
     private Funcionario funcionario;
 	

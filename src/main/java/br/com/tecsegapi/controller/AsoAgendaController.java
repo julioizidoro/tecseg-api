@@ -140,6 +140,7 @@ public class AsoAgendaController {
 	@ResponseStatus(HttpStatus.CREATED)
 	//@CachePut("consultaAsoAgenda")
 	public Asoagenda salvar(@Valid @RequestBody Asoagenda asoAgenda) {
+		System.out.println(asoAgenda.getFuncionario().getNome());
 		return asoAgendaRepository.save(asoAgenda);
 	}
 	
